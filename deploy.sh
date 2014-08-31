@@ -122,7 +122,7 @@ fi
 echo "installing bower packages"
 if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install bower
+  eval $NPM_CMD install bower -g
   exitWithMessageOnError "installing bower failed"
   ./node_modules/.bin/bower install
   exitWithMessageOnError "bower failed"
@@ -133,7 +133,7 @@ fi
 echo "installing gulp"
 if [ -e "$DEPLOYMENT_SOURCE/gulpfile.js" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install gulp
+  eval $NPM_CMD install gulp -g
   exitWithMessageOnError "installing gulp failed"
   ./node_modules/.bin/gulp --version
   exitWithMessageOnError "gulp failed"
