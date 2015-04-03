@@ -1,12 +1,16 @@
 {
-  "name": "AngularJS Modular Demo",
+  "name": "OpenCog Workbench",
   "version": "0.0.1",
-  "description": "AngularJS Modular Demo",
+  "description": "A tool to assist in the inspection and the manipulation of OpenCog state or dynamics",
+	"private": true,
   "authors": [
-    "John Papa"
+    "Aurélien Rainone"
   ],
-  "license": "MIT",
-  "homepage": "https://github.com/johnpapa/ng-demos",
+  "license": "GNU Affero General Public License Version 3",
+  "homepage": "...",
+  "keywords": [
+    "opencog"
+  ],
   "ignore": [
     "**/.*",
     "node_modules",
