@@ -60,8 +60,8 @@ gulp.task('welcome', function() {
     gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js/css : reload css files with browser-sync in serve-dev mode for fast styling');
     gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js/css : see an example here : https://gist.github.com/DESIGNfromWITHIN/11383339');
     gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js/sass : add sass compiling, example in previous line');
-    gutil.log(gutil.colors.yellow('TODO'), 'layout : add menu with controller in topnav, menu items coming from the modules, like the routes are already doing using routehelper.js');
     gutil.log(gutil.colors.yellow('TODO'), 'layout : USE TABS OPEN COMPONENTS (SUB-WEBAPP\'s) AND FASTER SWITCHING');
+    gutil.log(gutil.colors.yellow('TODO'), 'Get rid of bootstrap.js (since its not needed for angular-ui-bootstrap)');
 
 
     // DESIGN IDEAS

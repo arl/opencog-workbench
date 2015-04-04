@@ -12,24 +12,14 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+
+                <li dropdown>
+                    <a dropdown-toggle role="button">Modules <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="nlightblue fade-selection-animation" data-ng-class="tnVm.isCurrent(r)"
                             data-ng-repeat="r in tnVm.navRoutes">
-                            <a href="#{{r.originalPath}}"
-                            data-ng-bind-html="r.settings.content"></a>
+                            <a href="#{{r.originalPath}}" data-ng-bind-html="r.settings.content"></a>
                         </li>
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
             </ul>
