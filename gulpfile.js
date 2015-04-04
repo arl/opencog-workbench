@@ -7,6 +7,7 @@ var karma = require('karma').server;
 var merge = require('merge-stream');
 var paths = require('./gulp.config.json');
 var plato = require('plato');
+var gutil = require('gulp-util');
 var plug = require('gulp-load-plugins')();
 var reload = browserSync.reload;
 
@@ -19,7 +20,62 @@ var port = process.env.PORT || 7203;
  * List the available gulp tasks
  */
 gulp.task('help', plug.taskListing);
-gulp.task('default', ['help']);
+gulp.task('default', ['welcome', 'help']);
+
+
+
+
+gulp.task('welcome', function() {
+
+    var ocpic = Array('',
+'                                à"^``    ``"²ì',
+'                                Ñ            ╫',
+'                              =ª^             `"%═ ',
+'                           ="                      ª═ ',
+'                    =ªª«%%                           `≈%ª¬ª,',
+'                   Θ              -r²\'````"²%─             `═',
+'                  ╝            -²              ²=           `═',
+'                 ò           .²     .=o%«a=.     ╙,          ².',
+'                .Ñ          .^    ╓M        "»    ²>          ╫',
+'                :╗          ▒    ╔            ▒    ╠         .╝',
+'                   "H       ╡    ▒            ╚    j       ▒`',
+'                    ▒       ▒    ╚            ╩    ╠       ▒',
+'                    ╠       `.    ^═²       ╓º    ,M      .`',
+'                     ▒       `w     `²«>∞«²`     ╓┘       ╝',
+'                     `N        ^=              -²        ╝',
+'                      ╔\'          ^%=..  ..=≥²           9',
+'                     ó`                                  ╚┐',
+'                     `î.                                ╓M',
+'                       `ª┬                            ="',
+'                          "9╥. .à``"¬ªª%ªªª"\'`"=  .»M`',
+'                              "`                "`').join('\n');
+
+    // WELCOME MESSAGE
+    gutil.log(gutil.colors.cyan(ocpic));
+    gutil.log(gutil.colors.green('Welcome to the ocWorkbench development server'));
+
+    // TODO
+    gutil.log(gutil.colors.yellow('TODO'));
+    gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js : add comments to the tasks');
+    gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js/css : reload css files with browser-sync in serve-dev mode for fast styling');
+    gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js/css : see an example here : https://gist.github.com/DESIGNfromWITHIN/11383339');
+    gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js/sass : add sass compiling, example in previous line');
+    gutil.log(gutil.colors.yellow('TODO'), 'layout : add menu with controller in topnav, menu items coming from the modules, like the routes are already doing using routehelper.js');
+    gutil.log(gutil.colors.yellow('TODO'), 'layout : USE TABS OPEN COMPONENTS (SUB-WEBAPP\'s) AND FASTER SWITCHING');
+
+
+    // DESIGN IDEAS
+    gutil.log('idea design', 'I NEED TO UNDERSTAND WHERE THE CONNECTION IS DONE BETWEEN THE MODULES and THE HTML (shell or index.html?)');
+    gutil.log('idea design', 'an HELP or WIKI module linking to OpenCog wiki pages for example');
+});
+
+
+
+
+
+
+
+
 
 /**
  * Lint the code, create coverage report, and a visualizer
@@ -389,7 +445,7 @@ function serve(args) {
 
     return plug.nodemon(options)
         .on('start', function() {
-            startBrowserSync();
+            startBrowserSync(args.mode == 'dev');
         })
         //.on('change', tasks)
         .on('restart', function() {
@@ -403,28 +459,69 @@ function serve(args) {
 /**
  * Start BrowserSync
  */
-function startBrowserSync() {
-    if(!env.browserSync || browserSync.active) {
+function startBrowserSync(isDev) {
+
+log('to make autoreload work on the dev server, look line 502 of gulpfile.js.johnpapa.gulp-patterns.js');
+log('to make autoreload work on the dev server, look line 502 of gulpfile.js.johnpapa.gulp-patterns.js');
+log('to make autoreload work on the dev server, look line 502 of gulpfile.js.johnpapa.gulp-patterns.js');
+log('to make autoreload work on the dev server, look line 502 of gulpfile.js.johnpapa.gulp-patterns.js');
+
+    if(/*!env.browserSync ||*/ browserSync.active) {
         return;
     }
 
     log('Starting BrowserSync on port ' + port);
+    log('env.browserSync :' + env.browserSync);
+
+
+    // If build: watches the files, builds, and restarts browser-sync.
+    // If dev: watches less, compiles it to css, browser-sync handles reload
+    // if (isDev) {
+    //     log('Settings watches on : ' + paths.css.join(','));
+    //     gulp.watch(paths.css/*, ['styles']*/)
+    //         .on('change', changeEvent);
+    // }/* else {
+    /*    gulp.watch([config.less, config.js, config.html], ['optimize', browserSync.reload])
+            .on('change', changeEvent);
+    }*/
+
+
     browserSync({
         proxy: 'localhost:' + port,
         port: 3000,
-        files: [paths.client + '/**/*.*'],
+        // files: [paths.client + '/**/*.*'],
+
+
+        files: isDev ? paths.css : [],
+
+
         ghostMode: { // these are the defaults t,f,t,t
             clicks: true,
             location: false,
             forms: true,
             scroll: true
         },
+        injectChanges: true,
+//        logFileChanges: true,
         logLevel: 'debug',
-        logPrefix: 'gulp-patterns',
+        logPrefix: 'BS',
         notify: true,
-        reloadDelay: 5000
+        reloadDelay: 0 // 1000
     });
 }
+
+/**
+ * When files change, log it
+ * @param  {Object} event - event that fired
+ */
+function changeEvent(event) {
+    // originla code from gulp-patterns
+    // var srcPattern = new RegExp('/.*(?=/' + config.source + ')/');
+    // log('File ' + event.path.replace(srcPattern, '') + ' ' + event.type);
+
+    log('File ' + event.path + ' ' + event.type);
+}
+
 
 /**
  * Start Plato inspector and visualizer
