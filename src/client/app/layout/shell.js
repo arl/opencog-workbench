@@ -20,10 +20,10 @@
 
         function activate() {
             logger.success(config.appTitle + ' loaded!', null);
-//            Using a resolver on all routes or dataservice.ready in every controller
-//            dataservice.ready().then(function(){
-//                hideSplash();
-//            });
+            // Using a resolver on all routes or dataservice.ready in every controller
+            // dataservice.ready().then(function(){
+            //     hideSplash();
+            // });
             hideSplash();
         }
 
