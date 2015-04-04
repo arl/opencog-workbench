@@ -489,10 +489,14 @@ log('to make autoreload work on the dev server, look line 502 of gulpfile.js.joh
     browserSync({
         proxy: 'localhost:' + port,
         port: 3000,
+
+        // original code
         // files: [paths.client + '/**/*.*'],
 
+        // working in serve-dev
+        // files: isDev ? paths.css : [],
 
-        files: isDev ? paths.css : [],
+        files: isDev ? [paths.client + '/**/*.*'] : [],
 
 
         ghostMode: { // these are the defaults t,f,t,t
@@ -503,10 +507,10 @@ log('to make autoreload work on the dev server, look line 502 of gulpfile.js.joh
         },
         injectChanges: true,
 //        logFileChanges: true,
-        logLevel: 'debug',
+        logLevel: 'warn',
         logPrefix: 'BS',
-        notify: true,
-        reloadDelay: 0 // 1000
+//        notify: true,
+        reloadDelay: 500 // 1000
     });
 }
 
