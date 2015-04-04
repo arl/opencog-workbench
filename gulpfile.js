@@ -5,7 +5,7 @@ var del = require('del');
 var glob = require('glob');
 var karma = require('karma').server;
 var merge = require('merge-stream');
-var paths = require('./gulp.config.json');
+var config = require('./gulp.config.js')();
 var plato = require('plato');
 var gutil = require('gulp-util');
 var plug = require('gulp-load-plugins')();
@@ -67,14 +67,12 @@ gulp.task('welcome', function() {
     // DESIGN IDEAS
     gutil.log('idea design', 'I NEED TO UNDERSTAND WHERE THE CONNECTION IS DONE BETWEEN THE MODULES and THE HTML (shell or index.html?)');
     gutil.log('idea design', 'an HELP or WIKI module linking to OpenCog wiki pages for example');
+
+
+    gutil.log('BUGS', 'busy.gif is show in dev but not in build mode');
+
+
 });
-
-
-
-
-
-
-
 
 
 /**
@@ -84,8 +82,8 @@ gulp.task('welcome', function() {
 gulp.task('analyze', function() {
     log('Analyzing source with JSHint, JSCS, and Plato');
 
-    var jshint = analyzejshint([].concat(paths.js, paths.specs, paths.nodejs));
-    var jscs = analyzejscs([].concat(paths.js, paths.nodejs));
+    var jshint = analyzejshint([].concat(config.js, config.specs, config.nodejs));
+    var jscs = analyzejscs([].concat(config.js, config.nodejs));
 
     startPlatoVisualizer();
 
@@ -100,7 +98,7 @@ gulp.task('templatecache', function() {
     log('Creating an AngularJS $templateCache');
 
     return gulp
-        .src(paths.htmltemplates)
+        .src(config.htmltemplates)
         // .pipe(plug.bytediff.start())
         .pipe(plug.minifyHtml({
             empty: true
@@ -111,7 +109,7 @@ gulp.task('templatecache', function() {
             standalone: false,
             root: 'app/'
         }))
-        .pipe(gulp.dest(paths.build));
+        .pipe(gulp.dest(config.build));
 });
 
 /**
@@ -121,7 +119,7 @@ gulp.task('templatecache', function() {
 gulp.task('js', ['analyze', 'templatecache'], function() {
     log('Bundling, minifying, and copying the app\'s JavaScript');
 
-    var source = [].concat(paths.js, paths.build + 'templates.js');
+    var source = [].concat(config.js, config.build + 'templates.js');
     return gulp
         .src(source)
         // .pipe(plug.sourcemaps.init()) // get screwed up in the file rev process
@@ -136,7 +134,7 @@ gulp.task('js', ['analyze', 'templatecache'], function() {
         }))
         .pipe(plug.bytediff.stop(bytediffFormatter))
         // .pipe(plug.sourcemaps.write('./'))
-        .pipe(gulp.dest(paths.build));
+        .pipe(gulp.dest(config.build));
 });
 
 /**
@@ -146,12 +144,12 @@ gulp.task('js', ['analyze', 'templatecache'], function() {
 gulp.task('vendorjs', function() {
     log('Bundling, minifying, and copying the Vendor JavaScript');
 
-    return gulp.src(paths.vendorjs)
+    return gulp.src(config.vendorjs)
         .pipe(plug.concat('vendor.min.js'))
         .pipe(plug.bytediff.start())
         .pipe(plug.uglify())
         .pipe(plug.bytediff.stop(bytediffFormatter))
-        .pipe(gulp.dest(paths.build));
+        .pipe(gulp.dest(config.build));
 });
 
 /**
@@ -161,14 +159,14 @@ gulp.task('vendorjs', function() {
 gulp.task('css', function() {
     log('Bundling, minifying, and copying the app\'s CSS');
 
-    return gulp.src(paths.css)
+    return gulp.src(config.css)
         .pipe(plug.concat('all.min.css')) // Before bytediff or after
         .pipe(plug.autoprefixer('last 2 version', '> 5%'))
         .pipe(plug.bytediff.start())
         .pipe(plug.minifyCss({}))
         .pipe(plug.bytediff.stop(bytediffFormatter))
         //        .pipe(plug.concat('all.min.css')) // Before bytediff or after
-        .pipe(gulp.dest(paths.build + 'content'));
+        .pipe(gulp.dest(config.build + 'content'));
 });
 
 /**
@@ -180,13 +178,13 @@ gulp.task('vendorcss', function() {
 
     var vendorFilter = plug.filter(['**/*.css']);
 
-    return gulp.src(paths.vendorcss)
+    return gulp.src(config.vendorcss)
         .pipe(vendorFilter)
         .pipe(plug.concat('vendor.min.css'))
         .pipe(plug.bytediff.start())
         .pipe(plug.minifyCss({}))
         .pipe(plug.bytediff.stop(bytediffFormatter))
-        .pipe(gulp.dest(paths.build + 'content'));
+        .pipe(gulp.dest(config.build + 'content'));
 });
 
 /**
@@ -194,10 +192,10 @@ gulp.task('vendorcss', function() {
  * @return {Stream}
  */
 gulp.task('fonts', function() {
-    var dest = paths.build + 'fonts';
+    var dest = config.build + 'fonts';
     log('Copying fonts');
     return gulp
-        .src(paths.fonts)
+        .src(config.fonts)
         .pipe(gulp.dest(dest));
 });
 
@@ -206,10 +204,10 @@ gulp.task('fonts', function() {
  * @return {Stream}
  */
 gulp.task('images', function() {
-    var dest = paths.build + 'content/images';
+    var dest = config.build + 'content/images';
     log('Compressing, caching, and copying images');
     return gulp
-        .src(paths.images)
+        .src(config.images)
         .pipe(plug.cache(plug.imagemin({
             optimizationLevel: 3
         })))
@@ -224,8 +222,8 @@ gulp.task('images', function() {
 gulp.task('rev-and-inject', ['js', 'vendorjs', 'css', 'vendorcss'], function() {
     log('Rev\'ing files and building index.html');
 
-    var minified = paths.build + '**/*.min.*';
-    var index = paths.client + 'index.html';
+    var minified = config.build + '**/*.min.*';
+    var index = config.client + 'index.html';
     var minFilter = plug.filter(['**/*.min.*', '!**/*.map']);
     var indexFilter = plug.filter(['index.html']);
 
@@ -234,7 +232,7 @@ gulp.task('rev-and-inject', ['js', 'vendorjs', 'css', 'vendorcss'], function() {
         .src([].concat(minified, index)) // add all built min files and index.html
         .pipe(minFilter) // filter the stream to minified css and js
         .pipe(plug.rev()) // create files with rev's
-        .pipe(gulp.dest(paths.build)) // write the rev files
+        .pipe(gulp.dest(config.build)) // write the rev files
         .pipe(minFilter.restore()) // remove filter, back to original stream
 
     // inject the files into index.html
@@ -243,19 +241,19 @@ gulp.task('rev-and-inject', ['js', 'vendorjs', 'css', 'vendorcss'], function() {
         .pipe(inject('content/all.min.css'))
         .pipe(inject('vendor.min.js', 'inject-vendor'))
         .pipe(inject('all.min.js'))
-        .pipe(gulp.dest(paths.build)) // write the rev files
+        .pipe(gulp.dest(config.build)) // write the rev files
     .pipe(indexFilter.restore()) // remove filter, back to original stream
 
     // replace the files referenced in index.html with the rev'd files
     .pipe(plug.revReplace()) // Substitute in new filenames
-    .pipe(gulp.dest(paths.build)) // write the index.html file changes
+    .pipe(gulp.dest(config.build)) // write the index.html file changes
     .pipe(plug.rev.manifest()) // create the manifest (must happen last or we screw up the injection)
-    .pipe(gulp.dest(paths.build)); // write the manifest
+    .pipe(gulp.dest(config.build)); // write the manifest
 
     function inject(path, name) {
-        var pathGlob = paths.build + path;
+        var pathGlob = config.build + path;
         var options = {
-            ignorePath: paths.build.substring(1),
+            ignorePath: config.build.substring(1),
             read: false
         };
         if (name) {
@@ -290,9 +288,9 @@ gulp.task('stage', ['build'], function() {});
  * @return {Stream}
  */
 gulp.task('clean', function(cb) {
-    log('Cleaning: ' + plug.util.colors.blue(paths.build));
+    log('Cleaning: ' + plug.util.colors.blue(config.build));
 
-    var delPaths = [].concat(paths.build, paths.report);
+    var delPaths = [].concat(config.build, config.report);
     del(delPaths, cb);
 });
 
@@ -302,9 +300,9 @@ gulp.task('clean', function(cb) {
 gulp.task('watch', function() {
     log('Watching all files');
 
-    var css = ['gulpfile.js'].concat(paths.css, paths.vendorcss);
-    var images = ['gulpfile.js'].concat(paths.images);
-    var js = ['gulpfile.js'].concat(paths.js);
+    var css = ['gulpfile.js'].concat(config.css, config.vendorcss);
+    var images = ['gulpfile.js'].concat(config.images);
+    var js = ['gulpfile.js'].concat(config.js);
 
     gulp
         .watch(js, ['js', 'vendorjs'])
@@ -426,13 +424,13 @@ function analyzejscs(sources) {
  */
 function serve(args) {
     var options = {
-        script: paths.server + 'app.js',
+        script: config.server + 'app.js',
         delayTime: 1,
         env: {
             'NODE_ENV': args.mode,
             'PORT': port
         },
-        watch: [paths.server]
+        watch: [config.server]
     };
 
     var exec;
@@ -485,20 +483,32 @@ log('to make autoreload work on the dev server, look line 502 of gulpfile.js.joh
             .on('change', changeEvent);
     }*/
 
+    // If build: watches the files, builds, and restarts browser-sync.
+    // If dev: watches less, compiles it to css, browser-sync handles reload
+    if (isDev) {
+        // gulp.watch([config.less], ['styles'])
+        //     .on('change', changeEvent);
+        //
+        //
+        //     browser-sync watches everything and handles reload
+        //
+        //
+    } else {
+        // gulp.watch([config.less, config.js, config.html], ['optimize', browserSync.reload])
+        //     .on('change', changeEvent);
+        gulp.watch([config.client + '/**/*.css', config.js, config.html], ['optimize', browserSync.reload])
+            .on('change', changeEvent);
+    }
 
-    browserSync({
+    var options = {
         proxy: 'localhost:' + port,
         port: 3000,
-
-        // original code
-        // files: [paths.client + '/**/*.*'],
-
-        // working in serve-dev
-        // files: isDev ? paths.css : [],
-
-        files: isDev ? [paths.client + '/**/*.*'] : [],
-
-
+        files: isDev ? [
+            config.client + '**/*.*'/*,
+            '!' + config.less,
+            // config.temp + '**.css'
+            //*/
+        ] : [],
         ghostMode: { // these are the defaults t,f,t,t
             clicks: true,
             location: false,
@@ -506,12 +516,14 @@ log('to make autoreload work on the dev server, look line 502 of gulpfile.js.joh
             scroll: true
         },
         injectChanges: true,
-//        logFileChanges: true,
+        logFileChanges: true,
         logLevel: 'warn',
-        logPrefix: 'BS',
-//        notify: true,
-        reloadDelay: 500 // 1000
-    });
+        logPrefix: 'gulp-patterns',
+        notify: true,
+        reloadDelay: 0 //1000
+    };
+
+    browserSync(options);
 }
 
 /**

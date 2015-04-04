@@ -36,8 +36,8 @@ module.exports = function (config) {
             './src/client/test/lib/specHelper.js',
             './src/client/test/lib/mockData.js',
 
-            './src/client/test/basics/**/*.src.js',
-            './src/client/test/basics/**/*.spec.js',
+            // './src/client/test/basics/**/*.src.js',
+            // './src/client/test/basics/**/*.spec.js',
 
             // all specs ... comment out during early test training
             './src/client/test/**/*.spec.js'

@@ -391,7 +391,7 @@ a {
 .avenger-logo {
     height: 75px;
     width:80px;
-    background: url(images/avengersicon-xs.png) no-repeat left top !important;
+    background: url(./images/avengersicon-xs.png) no-repeat left top !important;
 }
 
 
