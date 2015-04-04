@@ -3,16 +3,17 @@
 
     angular
         .module('app.layout')
-        .controller('Sidebar', Sidebar);
+        .controller('Topnav', Topnav);
 
-    Sidebar.$inject = ['$route', 'routehelper'];
+    Topnav.$inject = ['$route', 'routehelper'];
 
-    function Sidebar($route, routehelper) {
+    function Topnav($route, routehelper) {
         /*jshint validthis: true */
         var vm = this;
         var routes = routehelper.getRoutes();
         vm.isCurrent = isCurrent;
-        vm.sidebarReady = function(){console.log('done animating menu')}; // example
+        console.log(vm.title); // example
+        //vm.sidebarReady = function(){console.log('done animating menu')}; // example
 
         activate();
 

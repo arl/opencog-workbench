@@ -1,5 +1,5 @@
-﻿<div data-ng-controller="Shell as vm">
-    <div id="splash-page" data-ng-show="vm.showSplash" class="dissolve-animation">
+﻿<div data-ng-controller="Shell as shVm">
+    <div id="splash-page" data-ng-show="shVm.showSplash" class="dissolve-animation">
         <div class="page-splash">
             <div class="page-splash-message">
                 OpenCog Workbench
@@ -21,7 +21,7 @@
              ngplus-overlay-animation="dissolve-animation">
             <img src="../../content/images/busy.gif"/>
 
-            <div class="page-spinner-message overlay-message">{{vm.busyMessage}}</div>
+            <div class="page-spinner-message overlay-message">{{shVm.busyMessage}}</div>
         </div>
     </section>
 </div>
