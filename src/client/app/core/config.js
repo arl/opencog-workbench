@@ -12,9 +12,9 @@
     }
 
     var config = {
-        appErrorPrefix: '[NG-Modular Error] ', //Configure the exceptionHandler decorator
-        appTitle: 'Angular Modular Demo',
-        version: '1.0.0'
+        appErrorPrefix: '[OC-Workbench Error] ', //Configure the exceptionHandler decorator
+        appTitle: 'OpenCog Workbench',
+        version: '0.0.1'
     };
 
     core.value('config', config);
@@ -30,7 +30,7 @@
 
         // Configure the common route provider
         routehelperConfigProvider.config.$routeProvider = $routeProvider;
-        routehelperConfigProvider.config.docTitle = 'NG-Modular: ';
+        routehelperConfigProvider.config.docTitle = 'OC-Workbench: ';
         var resolveAlways = { /* @ngInject */
             ready: function(dataservice) {
                 return dataservice.ready();

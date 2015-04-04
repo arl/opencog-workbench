@@ -19,6 +19,7 @@ var port = process.env.PORT || 7203;
  * List the available gulp tasks
  */
 gulp.task('help', plug.taskListing);
+gulp.task('default', ['help']);
 
 /**
  * Lint the code, create coverage report, and a visualizer

@@ -1,5 +1,5 @@
 {
-  "name": "OpenCog Workbench",
+  "name": "opencog-workbench",
   "version": "0.0.1",
   "description": "A tool to assist in the inspection and the manipulation of OpenCog state or dynamics",
 	"private": true,
