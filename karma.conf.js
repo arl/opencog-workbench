@@ -27,6 +27,7 @@ module.exports = function (config) {
             './bower_components/toastr/toastr.js',
             './bower_components/moment/moment.js',
             './bower_components/extras.angular.plus/ngplus-overlay.js',
+            './src/client/content/lib/js/ui-bootstrap-0.12.1.js',
 
             './src/client/app/app.module.js',
             './src/client/app/**/*.module.js',
@@ -46,9 +47,6 @@ module.exports = function (config) {
 
         // list of files to exclude
         exclude: [
-            // Excluding midway tests for now; comment this line out when you want to run them
-            './src/client/test/midway/**/*.spec.js',
-            './src/client/app/**/*spaghetti.js'
         ],
 
         proxies: {
