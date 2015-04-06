@@ -1,4 +1,9 @@
-﻿/*#region Override background color theme */
+﻿/* Include custom theme */
+
+@import "customtheme.scss";
+
+
+/*#region Override background color theme */
 
 /*For Bootstrap 3*/
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
@@ -638,3 +643,5 @@ a {
 }
 
 /*#endregion */
+
+

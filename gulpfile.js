@@ -22,9 +22,6 @@ var port = process.env.PORT || 7203;
 gulp.task('help', plug.taskListing);
 gulp.task('default', ['welcome', 'help']);
 
-
-
-
 gulp.task('welcome', function() {
 
     var ocpic = Array('',
@@ -57,9 +54,6 @@ gulp.task('welcome', function() {
     // TODO
     gutil.log(gutil.colors.yellow('TODO'));
     gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js : add comments to the tasks');
-    gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js/css : reload css files with browser-sync in serve-dev mode for fast styling');
-    gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js/css : see an example here : https://gist.github.com/DESIGNfromWITHIN/11383339');
-    gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js/sass : add sass compiling, example in previous line');
     gutil.log(gutil.colors.yellow('TODO'), 'layout : USE TABS OPEN COMPONENTS (SUB-WEBAPP\'s) AND FASTER SWITCHING');
     gutil.log(gutil.colors.yellow('TODO'), 'Get rid of bootstrap.js (since its not needed for angular-ui-bootstrap)');
 
@@ -152,22 +146,73 @@ gulp.task('vendorjs', function() {
         .pipe(gulp.dest(config.build));
 });
 
+
+/**
+ * Watch SCSS
+ * @return {Stream}
+ */
+gulp.task('scss-watcher', function() {
+    log('Watching for SCSS file changes');
+
+    // watch and compile into css
+    gulp.watch([config.scss.files], ['scss']);
+});
+
+
+/**
+ * Compile SCSS into CSS
+ * @return {Stream}
+ */
+gulp.task('scss', function() {
+    log('Compiling SCSS --> CSS');
+
+    return gulp
+        .src(config.scss.entrypoint)
+        .pipe(plug.plumber()) // exit gracefully if something fails after this
+        .pipe(plug.sass())
+        .on('error', errorLogger) // more verbose and dupe output. requires emit.
+        .pipe(plug.autoprefixer({browsers: ['last 2 version', '> 5%']}))
+        .pipe(plug.rename('all.css'))
+        .pipe(gulp.dest(config.tmpcss))
+
+//        .pipe(plug.autoprefixer('last 2 version', '> 5%'))
+        .pipe(plug.bytediff.start())
+        .pipe(plug.minifyCss({}))
+        .pipe(plug.bytediff.stop(bytediffFormatter))
+        .pipe(plug.rename('all.min.css'))
+        .pipe(gulp.dest(config.build));    
+
+});
+
+
+/**
+ * Remove all styles from the build and temp folders
+ * @param  {Function} done - callback when complete
+ */
+gulp.task('clean-styles', function(done) {
+    var files = [].concat(
+        config.tmpcss + '*.css',
+        config.build + 'content/**/*.css'
+    );
+    clean(files, done);
+});
+
 /**
  * Minify and bundle the CSS
  * @return {Stream}
  */
-gulp.task('css', function() {
-    log('Bundling, minifying, and copying the app\'s CSS');
+// gulp.task('css', function() {
+//     log('Bundling, minifying, and copying the app\'s CSS');
 
-    return gulp.src(config.css)
-        .pipe(plug.concat('all.min.css')) // Before bytediff or after
-        .pipe(plug.autoprefixer('last 2 version', '> 5%'))
-        .pipe(plug.bytediff.start())
-        .pipe(plug.minifyCss({}))
-        .pipe(plug.bytediff.stop(bytediffFormatter))
-        //        .pipe(plug.concat('all.min.css')) // Before bytediff or after
-        .pipe(gulp.dest(config.build + 'content'));
-});
+//     return gulp.src(config.tmpcss)
+//         .pipe(plug.rename('all.min.css')) // Before bytediff or after
+//         .pipe(plug.autoprefixer('last 2 version', '> 5%'))
+//         .pipe(plug.bytediff.start())
+//         .pipe(plug.minifyCss({}))
+//         .pipe(plug.bytediff.stop(bytediffFormatter))
+//         //        .pipe(plug.concat('all.min.css')) // Before bytediff or after
+//         .pipe(gulp.dest(config.build + 'content'));
+// });
 
 /**
  * Minify and bundle the Vendor CSS
@@ -219,7 +264,7 @@ gulp.task('images', function() {
  * rev, but no map
  * @return {Stream}
  */
-gulp.task('rev-and-inject', ['js', 'vendorjs', 'css', 'vendorcss'], function() {
+gulp.task('rev-and-inject', ['js', 'vendorjs', 'scss', 'vendorcss'], function() {
     log('Rev\'ing files and building index.html');
 
     var minified = config.build + '**/*.min.*';
@@ -238,7 +283,7 @@ gulp.task('rev-and-inject', ['js', 'vendorjs', 'css', 'vendorcss'], function() {
     // inject the files into index.html
     .pipe(indexFilter) // filter to index.html
     .pipe(inject('content/vendor.min.css', 'inject-vendor'))
-        .pipe(inject('content/all.min.css'))
+        .pipe(inject('all.min.css'))
         .pipe(inject('vendor.min.js', 'inject-vendor'))
         .pipe(inject('all.min.js'))
         .pipe(gulp.dest(config.build)) // write the rev files
@@ -276,10 +321,6 @@ gulp.task('build', ['rev-and-inject', 'images', 'fonts'], function() {
     }));
 });
 
-/**
- * Backwards compatible call to make stage and build equivalent
- */
-gulp.task('stage', ['build'], function() {});
 
 /**
  * Remove all files from the build folder
@@ -309,7 +350,7 @@ gulp.task('watch', function() {
         .on('change', logWatch);
 
     gulp
-        .watch(css, ['css', 'vendorcss'])
+        .watch(css, ['scss', 'vendorcss'])
         .on('change', logWatch);
 
     gulp
@@ -366,7 +407,7 @@ gulp.task('serve-dev-debug-brk', function() {
 /**
  * serve the dev environment
  */
-gulp.task('serve-dev', function() {
+gulp.task('serve-dev', ['scss', 'scss-watcher'], function() {
     serve({
         mode: 'dev'
     });
@@ -375,16 +416,11 @@ gulp.task('serve-dev', function() {
 /**
  * serve the build environment
  */
-gulp.task('serve-build', function() {
+gulp.task('serve-build', ['build', 'scss-watcher'], function() {
     serve({
         mode: 'build'
     });
 });
-
-/**
- * Backwards compatible call to make stage and build equivalent
- */
-gulp.task('serve-stage', ['serve-build'], function() {});
 
 ////////////////
 
@@ -459,44 +495,24 @@ function serve(args) {
  */
 function startBrowserSync(isDev) {
 
-log('to make autoreload work on the dev server, look line 502 of gulpfile.js.johnpapa.gulp-patterns.js');
-log('to make autoreload work on the dev server, look line 502 of gulpfile.js.johnpapa.gulp-patterns.js');
-log('to make autoreload work on the dev server, look line 502 of gulpfile.js.johnpapa.gulp-patterns.js');
-log('to make autoreload work on the dev server, look line 502 of gulpfile.js.johnpapa.gulp-patterns.js');
-
-    if(/*!env.browserSync ||*/ browserSync.active) {
+    if(browserSync.active) {
         return;
     }
 
     log('Starting BrowserSync on port ' + port);
-    log('env.browserSync :' + env.browserSync);
 
-
-    // If build: watches the files, builds, and restarts browser-sync.
-    // If dev: watches less, compiles it to css, browser-sync handles reload
-    // if (isDev) {
-    //     log('Settings watches on : ' + paths.css.join(','));
-    //     gulp.watch(paths.css/*, ['styles']*/)
-    //         .on('change', changeEvent);
-    // }/* else {
-    /*    gulp.watch([config.less, config.js, config.html], ['optimize', browserSync.reload])
-            .on('change', changeEvent);
-    }*/
-
-    // If build: watches the files, builds, and restarts browser-sync.
-    // If dev: watches less, compiles it to css, browser-sync handles reload
+    // places some watches before starting the browser
     if (isDev) {
-        // gulp.watch([config.less], ['styles'])
-        //     .on('change', changeEvent);
-        //
-        //
-        //     browser-sync watches everything and handles reload
-        //
-        //
+        // in dev mode : watch only scss files
+        // => trigger 'scss' task on change
+        // (browser-sync handles reload)
+        gulp.watch([config.scss.files], ['scss'])
+            .on('change', changeEvent);
     } else {
-        // gulp.watch([config.less, config.js, config.html], ['optimize', browserSync.reload])
-        //     .on('change', changeEvent);
-        gulp.watch([config.client + '/**/*.css', config.js, config.html], ['optimize', browserSync.reload])
+        // watch everything that can change
+        // => trigger the whole min/rev/inject process on change
+        // => restart browser-sync
+        gulp.watch([config.scss.files, config.js, config.html], ['rev-and-inject', browserSync.reload])
             .on('change', changeEvent);
     }
 
@@ -504,11 +520,10 @@ log('to make autoreload work on the dev server, look line 502 of gulpfile.js.joh
         proxy: 'localhost:' + port,
         port: 3000,
         files: isDev ? [
-            config.client + '**/*.*'/*,
-            '!' + config.less,
-            // config.temp + '**.css'
-            //*/
-        ] : [],
+            config.client + '**/*.*',
+            config.tmpcss + '*.css',
+            '!' + config.scss.files
+        ] : [config.build + '**/*.*'],
         ghostMode: { // these are the defaults t,f,t,t
             clicks: true,
             location: false,
@@ -518,9 +533,9 @@ log('to make autoreload work on the dev server, look line 502 of gulpfile.js.joh
         injectChanges: true,
         logFileChanges: true,
         logLevel: 'warn',
-        logPrefix: 'gulp-patterns',
+        logPrefix: 'ocWorkbench',
         notify: true,
-        reloadDelay: 0 //1000
+        reloadDelay: 1000
     };
 
     browserSync(options);
@@ -531,13 +546,8 @@ log('to make autoreload work on the dev server, look line 502 of gulpfile.js.joh
  * @param  {Object} event - event that fired
  */
 function changeEvent(event) {
-    // originla code from gulp-patterns
-    // var srcPattern = new RegExp('/.*(?=/' + config.source + ')/');
-    // log('File ' + event.path.replace(srcPattern, '') + ' ' + event.type);
-
     log('File ' + event.path + ' ' + event.type);
 }
-
 
 /**
  * Start Plato inspector and visualizer
@@ -605,6 +615,26 @@ function startTests(singleRun, done) {
         }
         done();
     }
+}
+
+/**
+ * Log an error message and emit the end of a task
+ */
+function errorLogger(error) {
+    log('*** Start of Error ***');
+    log(error);
+    log('*** End of Error ***');
+    this.emit('end');
+}
+
+/**
+ * Delete all files in a given path
+ * @param  {Array}   path - array of paths to delete
+ * @param  {Function} done - callback when complete
+ */
+function clean(path, done) {
+    log('Cleaning: ' + plug.util.colors.blue(path));
+    del(path, done);
 }
 
 /**
