@@ -1,4 +1,4 @@
-﻿<!-- Static navbar -->
+<!-- Static navbar -->
 <nav class="navbar navbar-fixed-top navbar-inverse" data-ng-controller="Topnav as tnVm">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -22,6 +22,22 @@
                         </li>
                     </ul>
                 </li>
+
+
+               <!-- <workbench-  -->
+
+
+               <!-- generated menus -->
+               <li dropdown data-ng-repeat="menu in tnVm.menus">
+                    <a dropdown-toggle role="button">{{menu.title}} <span class="caret"></span></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="subm in menu.items">
+                            <a href="#{{subm.url}}" data-ng-bind-html="subm.content"></a>
+                        </li>
+                    </ul>                 
+
+               </li> 
+                
             </ul>
         </div>
     </div>

@@ -17,6 +17,7 @@
         'app.core',
         'app.widgets',
 
+
         /*
          * Feature areas
          */
