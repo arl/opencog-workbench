@@ -45,6 +45,8 @@ module.exports = function (config) {
 
         ],
 
+				urlRoot: '__karma__',
+
         // list of files to exclude
         exclude: [
         ],
