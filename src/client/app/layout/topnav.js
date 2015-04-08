@@ -5,12 +5,12 @@
         .module('app.layout')
         .controller('Topnav', Topnav);
 
-    Topnav.$inject = ['$rootScope', '$state', 'routehelper', 'menuhelper', '_'];
+    Topnav.$inject = ['$rootScope', '$state', 'stateHelper', 'menuhelper', '_'];
 
-    function Topnav($rootScope, $state, routehelper, menuhelper) {
+    function Topnav($rootScope, $state, stateHelper, menuhelper) {
         /*jshint validthis: true */
         var vm = this;
-        var navRoutes = routehelper.getNavRoutes();
+        var navRoutes = stateHelper.getNavRoutes();
         var allMenus = menuhelper.getMenus();
         vm.isCurrent = isCurrent;
         console.log(vm.title); // example

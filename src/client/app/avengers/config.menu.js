@@ -5,7 +5,7 @@
         .module('app.avengers')
         .run(appRun);
 
-    // appRun.$inject = ['routehelper']
+    // appRun.$inject = ['stateHelper']
 
     /* @ngInject */
     function appRun(menuhelper) {

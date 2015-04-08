@@ -5,14 +5,14 @@
         .module('app.avengers')
         .run(appRun);
 
-    // appRun.$inject = ['routehelper']
+    // appRun.$inject = ['stateHelper']
 
     /* @ngInject */
-    function appRun(routehelper) {
-        routehelper.configureRoutes(getRoutes());
+    function appRun(stateHelper) {
+        stateHelper.configureStates(getStates());
     }
 
-    function getRoutes() {
+    function getStates() {
         return [
             {
                 state: 'avengers',

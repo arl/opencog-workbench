@@ -3,11 +3,11 @@
 
     angular
         .module('blocks.router')
-        .provider('routehelperConfig', routehelperConfig)
-        .factory('routehelper', routehelper);
+        .provider('stateHelperConfig', stateHelperConfig)
+        .factory('stateHelper', stateHelper);
 
-    // Must configure via the routehelperConfigProvider
-    function routehelperConfig() {
+    // Must configure via the stateHelperConfigProvider
+    function stateHelperConfig() {
         /* jshint validthis:true */
         this.config = {
             // These are the properties we need to set
@@ -24,21 +24,21 @@
     }
 
 
-    // routehelper.$inject = ['$location', '$rootScope', '$state', 'logger', 'routehelperConfig'];
+    // stateHelper.$inject = ['$location', '$rootScope', '$state', 'logger', 'stateHelperConfig'];
 
     /* @ngInject */
-    function routehelper($location, $rootScope, $state, logger, routehelperConfig) {
+    function stateHelper($location, $rootScope, $state, logger, stateHelperConfig) {
         var handlingRouteChangeError = false;
         var stateCounts = {
             errors: 0,
             changes: 0
         };
         var navRoutes = [];
-        var $stateProvider = routehelperConfig.config.$stateProvider;
-        var $urlRouterProvider = routehelperConfig.config.$urlRouterProvider;
+        var $stateProvider = stateHelperConfig.config.$stateProvider;
+        var $urlRouterProvider = stateHelperConfig.config.$urlRouterProvider;
 
         var service = {
-            configureRoutes: configureRoutes,
+            configureStates: configureStates,
             getNavRoutes: getNavRoutes,
             stateCounts: stateCounts
         };
@@ -48,10 +48,10 @@
         return service;
         ///////////////
 
-        function configureRoutes(routes) {
+        function configureStates(routes) {
             routes.forEach(function(route) {
                 route.config.resolve =
-                    angular.extend(route.config.resolve || {}, routehelperConfig.config.resolveAlways);
+                    angular.extend(route.config.resolve || {}, stateHelperConfig.config.resolveAlways);
                 $stateProvider.state(route.state, route.config);
             });
             $urlRouterProvider.otherwise('/');
@@ -119,7 +119,7 @@
                 function(event, toState, toParams, fromState, fromParams) {
                     stateCounts.changes++;
                     handlingRouteChangeError = false;
-                    var title = routehelperConfig.config.docTitle + ' ' + (toState.title || '');
+                    var title = stateHelperConfig.config.docTitle + ' ' + (toState.title || '');
                     $rootScope.title = title; // data bind to <title>
                 }
             );
