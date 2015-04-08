@@ -18,8 +18,13 @@
                     <ul class="dropdown-menu" role="menu">
                         <li class="nlightblue fade-selection-animation" data-ng-class="tnVm.isCurrent(r)"
                             data-ng-repeat="r in tnVm.navRoutes">
-                            <a href="#{{r.originalPath}}" data-ng-bind-html="r.settings.content"></a>
+                            <a data-ui-sref="{{r.name}}" data-ng-bind-html="r.data.content"></a>
                         </li>
+
+                        <!-- this is here to test state change errors -->
+                        <li class="nlightblue fade-selection-animation">
+                            <a data-ui-sref="badstate">Bad State</a>
+                        </li>                        
                     </ul>
                 </li>
 
@@ -32,7 +37,7 @@
                     <a dropdown-toggle role="button">{{menu.title}} <span class="caret"></span></a>
                       <ul class="dropdown-menu" role="menu">
                         <li data-ng-repeat="subm in menu.items">
-                            <a href="#{{subm.url}}" data-ng-bind-html="subm.content"></a>
+                            <a href="{{subm.url}}" data-ng-bind-html="subm.content"></a>
                         </li>
                     </ul>                 
 

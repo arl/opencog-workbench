@@ -15,16 +15,16 @@
     function getRoutes() {
         return [
             {
-                url: '/',
+                state: 'dashboard',
                 config: {
                     templateUrl: 'app/dashboard/dashboard.html',
-                    controller: 'Dashboard',
-                    controllerAs: 'vm',
-                    title: 'dashboard',
-                    settings: {
+                    controller: 'Dashboard as vm',
+                    url: '/',
+                    data: {
                         nav: 1,
                         content: '<i class="fa fa-dashboard"></i> Dashboard'
-                    }
+                    },
+                    title: 'Dashboard Component'                    
                 }
             }
         ];

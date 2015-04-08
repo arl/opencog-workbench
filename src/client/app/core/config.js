@@ -22,14 +22,15 @@
     core.config(configure);
 
     /* @ngInject */
-    function configure ($logProvider, $routeProvider, routehelperConfigProvider, exceptionHandlerProvider) {
+    function configure ($logProvider, $stateProvider, $urlRouterProvider, routehelperConfigProvider, exceptionHandlerProvider) {
         // turn debugging off/on (no info or warn)
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
         }
 
-        // Configure the common route provider
-        routehelperConfigProvider.config.$routeProvider = $routeProvider;
+        // Configure the common state and urlRouter providers
+        routehelperConfigProvider.config.$stateProvider = $stateProvider;
+        routehelperConfigProvider.config.$urlRouterProvider = $urlRouterProvider;
         routehelperConfigProvider.config.docTitle = 'OC-Workbench: ';
         var resolveAlways = { /* @ngInject */
             ready: function(dataservice) {

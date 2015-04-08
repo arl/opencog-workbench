@@ -5,12 +5,12 @@
         .module('app.layout')
         .controller('Topnav', Topnav);
 
-    Topnav.$inject = ['$rootScope', '$route', 'routehelper', 'menuhelper'];
+    Topnav.$inject = ['$rootScope', '$state', 'routehelper', 'menuhelper'];
 
-    function Topnav($rootScope, $route, routehelper, menuhelper) {
+    function Topnav($rootScope, $state, routehelper, menuhelper) {
         /*jshint validthis: true */
         var vm = this;
-        var routes = routehelper.getRoutes();
+        var navRoutes = routehelper.getNavRoutes();
         var menus = menuhelper.getMenus();
         vm.isCurrent = isCurrent;
         console.log(vm.title); // example
@@ -31,11 +31,11 @@
          * @return {[type]} [description]
          */
         function updateMenu() {
-            $rootScope.$on('$routeChangeSuccess',
-                function(event, current, previous) {
+            $rootScope.$on('$stateChangeSuccess',
+                function(event, toState, toParams, fromState, fromParams) {
 
                     angular.forEach(menus, function (m) {
-                        if (m.component == current.title)
+                        if (m.component == toState.name)
                             this.menus = m.menus;
                     }, vm);
                 }
@@ -43,10 +43,10 @@
         }
 
         function getNavRoutes() {
-            vm.navRoutes = routes.filter(function(r) {
-                return r.settings && r.settings.nav;
+            vm.navRoutes = navRoutes.filter(function(r) {
+                return r.data && r.data.nav;
             }).sort(function(r1, r2) {
-                return r1.settings.nav - r2.settings.nav;
+                return r1.data.nav - r2.data.nav;
             });
         }
 
@@ -57,7 +57,7 @@
          */
         function getMenus() {
 
-            var curComponent = $route.current.title;
+            var curComponent = $state.current.title;
 
             angular.forEach(menus, function (m) {
                 if (m.component == curComponent)
@@ -66,11 +66,11 @@
         }        
 
         function isCurrent(route) {
-            if (!route.title || !$route.current || !$route.current.title) {
+            if (!route.title || !$state.current || !$state.current.title) {
                 return '';
             }
             var menuName = route.title;
-            return $route.current.title.substr(0, menuName.length) === menuName ? 'current' : '';
+            return $state.current.title.substr(0, menuName.length) === menuName ? 'current' : '';
         }
     }
 })();

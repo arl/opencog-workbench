@@ -5,9 +5,9 @@
         .module('app.layout.topnavmenu')
         .factory('menuhelper', menuhelper);
 
-    menuhelper.$inject = ['$location', '$rootScope', '$route', 'logger'];
+    menuhelper.$inject = ['$location', '$rootScope', '$state', 'logger'];
 
-    function menuhelper($location, $rootScope, $route, logger, routehelperConfig) {
+    function menuhelper($location, $rootScope, $state, logger) {
         // var handlingRouteChangeError = false;
         // var routeCounts = {
         //     errors: 0,

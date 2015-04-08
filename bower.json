@@ -2,7 +2,7 @@
   "name": "opencog-workbench",
   "version": "0.0.1",
   "description": "A tool to assist in the inspection and the manipulation of OpenCog state or dynamics",
-	"private": true,
+  "private": true,
   "authors": [
     "Aurélien Rainone"
   ],
@@ -19,7 +19,8 @@
     "tests"
   ],
   "devDependencies": {
-    "angular-mocks": "~1.2.24"
+    "angular-mocks": "~1.2.24",
+    "angular-ui-router": "~0.2.13"
   },
   "dependencies": {
     "angular": "~1.2.24",
