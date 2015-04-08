@@ -27,7 +27,9 @@ module.exports = function (config) {
             './bower_components/toastr/toastr.js',
             './bower_components/moment/moment.js',
             './bower_components/extras.angular.plus/ngplus-overlay.js',
+            './bower_components/underscore/underscore.js',
             './src/client/content/lib/js/ui-bootstrap-tpls-0.12.1.js',
+            './src/client/content/lib/js/angular-underscore.js',
 
             './src/client/app/app.module.js',
             './src/client/app/**/*.module.js',
@@ -45,7 +47,7 @@ module.exports = function (config) {
 
         ],
 
-				urlRoot: '__karma__',
+		urlRoot: '__karma__',
 
         // list of files to exclude
         exclude: [

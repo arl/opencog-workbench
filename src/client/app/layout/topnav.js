@@ -5,13 +5,13 @@
         .module('app.layout')
         .controller('Topnav', Topnav);
 
-    Topnav.$inject = ['$rootScope', '$state', 'routehelper', 'menuhelper'];
+    Topnav.$inject = ['$rootScope', '$state', 'routehelper', 'menuhelper', '_'];
 
     function Topnav($rootScope, $state, routehelper, menuhelper) {
         /*jshint validthis: true */
         var vm = this;
         var navRoutes = routehelper.getNavRoutes();
-        var menus = menuhelper.getMenus();
+        var allMenus = menuhelper.getMenus();
         vm.isCurrent = isCurrent;
         console.log(vm.title); // example
         //vm.sidebarReady = function(){console.log('done animating menu')}; // example
@@ -20,8 +20,8 @@
 
         function activate() {
             getNavRoutes();
+            getMenus($state.current.name);
             updateMenu();
-//            getMenus();
         }
 
 
@@ -34,35 +34,39 @@
             $rootScope.$on('$stateChangeSuccess',
                 function(event, toState, toParams, fromState, fromParams) {
 
-                    angular.forEach(menus, function (m) {
-                        if (m.component == toState.name)
-                            this.menus = m.menus;
-                    }, vm);
+                    getMenus(toState.name);
                 }
             );
         }
 
+        /**
+         * get main navigation routes (i.e different oc-workbench components and their main routes)
+         *
+         * @return {[type]} [description]
+         */
         function getNavRoutes() {
             vm.navRoutes = navRoutes.filter(function(r) {
                 return r.data && r.data.nav;
             }).sort(function(r1, r2) {
                 return r1.data.nav - r2.data.nav;
             });
-        }
+        }       
 
         /**
-         * generate top nav menu for current route
+         * [get current composent menu items to be displayed]
          *
-         * @return {[type]} [description]
+         * @param  {[type]} currentComponent [currently active component]
+         *
+         * @return {[Array]}                 [menu elements to be displayed when component is active]
          */
-        function getMenus() {
+        function getMenus(currentComponent) {
 
-            var curComponent = $state.current.title;
-
-            angular.forEach(menus, function (m) {
-                if (m.component == curComponent)
-                    this.menus = m.menus;
-            }, vm);
+            // find menu defined for currently active component
+            var componentMenu = _.find(allMenus, function(m){ return m.component == currentComponent; });
+            if (componentMenu) {
+                // trigger the UI actual menu update
+                vm.menus = componentMenu.menus;
+            }
         }        
 
         function isCurrent(route) {

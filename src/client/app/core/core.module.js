@@ -13,6 +13,8 @@
         /*
          * 3rd Party modules
          */
-        'ngplus'
+        'ngplus',
+
+        'underscore'
     ]);
 })();

@@ -34,8 +34,9 @@ module.exports = function() {
       bower.dir + "toastr/toastr.min.js",
       bower.dir + "moment/min/moment.min.js",
       bower.dir + "extras.angular.plus/ngplus-overlay.js",
-      clientContent + "lib/js/ui-bootstrap-0.12.1.min.js",
-      clientContent + "lib/js/ui-bootstrap-tpls-0.12.1.min.js"
+      bower.dir + "underscore/underscore.js",
+      clientContent + "lib/js/ui-bootstrap-tpls-0.12.1.min.js",
+      clientContent + "lib/js/angular-underscore.js"
     ],
     vendorcss: [
       bower.dir + "bootstrap/dist/css/bootstrap.min.css",
