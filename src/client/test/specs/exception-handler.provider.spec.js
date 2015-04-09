@@ -9,7 +9,7 @@ describe('blocks.exception', function() {
     beforeEach(function() {
         module('blocks.exception', function($provide, _exceptionHandlerProvider_) {
             exceptionHandlerProvider = _exceptionHandlerProvider_;
-            specHelper.fakeRouteProvider($provide);
+            specHelper.fakeStateProvider($provide);
             specHelper.fakeLogger($provide);
         });
         specHelper.injector(function($rootScope) {});

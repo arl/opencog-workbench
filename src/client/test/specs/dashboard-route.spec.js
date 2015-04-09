@@ -5,25 +5,28 @@ describe('dashboard', function () {
 
         beforeEach(function() {
             module('app', specHelper.fakeLogger);
-            specHelper.injector(function($httpBackend, $location, $rootScope, $route) {});            
-            $httpBackend.expectGET('app/dashboard/dashboard.html').respond(200);
+            specHelper.injector(function($rootScope, $state, $templateCache, $location) {});
+            $templateCache.put('app/dashboard/dashboard.html', '');
         });
 
         it('should map / route to dashboard View template', function () {
-            expect($route.routes['/'].templateUrl).
+
+            var dashboardState = _.find($state.get(), function(s){ return s.url == '/';});
+
+            expect(dashboardState.templateUrl).
                 to.equal('app/dashboard/dashboard.html');
         });
 
         it('should route / to the dashboard View', function () {
             $location.path('/');
             $rootScope.$digest();
-            expect($route.current.templateUrl).to.equal('app/dashboard/dashboard.html');
+            expect($state.current.templateUrl).to.equal('app/dashboard/dashboard.html');
         });
 
         it('should route /invalid to the otherwise (dashboard) route', function () {
             $location.path('/invalid');
             $rootScope.$digest();
-            expect($route.current.templateUrl).to.equal('app/dashboard/dashboard.html');
+            expect($state.current.templateUrl).to.equal('app/dashboard/dashboard.html');
         });
     });
 });
