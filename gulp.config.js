@@ -29,7 +29,7 @@ module.exports = function() {
       bower.dir + "jquery/dist/jquery.min.js",
       bower.dir + "angular/angular.min.js",
       bower.dir + "angular-animate/angular-animate.min.js",
-      bower.dir + "angular-route/angular-ui-router/release/angular-ui-router.min.js",
+      bower.dir + "angular-ui-router/release/angular-ui-router.min.js",
       bower.dir + "angular-sanitize/angular-sanitize.min.js",
       bower.dir + "toastr/toastr.min.js",
       bower.dir + "moment/min/moment.min.js",

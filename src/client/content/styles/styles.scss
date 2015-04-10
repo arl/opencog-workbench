@@ -13,6 +13,14 @@ body {
     background-color: #FFF;
 }
 
+.busy-overlay {
+    display: block;
+    height: 128px;
+    width: 128px;
+    background: url(../images/busy.gif) no-repeat left top !important;
+}
+
+
 .navbar-inverse {
     background-color: #333;
 }
@@ -396,7 +404,7 @@ a {
 .avenger-logo {
     height: 75px;
     width:80px;
-    background: url(./images/avengersicon-xs.png) no-repeat left top !important;
+    background: url(../images/avengersicon-xs.png) no-repeat left top !important;
 }
 
 
