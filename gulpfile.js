@@ -8,9 +8,10 @@ var merge = require('merge-stream');
 var config = require('./gulp.config.js')();
 var plato = require('plato');
 var gutil = require('gulp-util');
+var chalk = require('chalk');
 var plug = require('gulp-load-plugins')();
 
-var colors = plug.util.colors;
+//var colors = chalk;
 var env = plug.util.env;
 var log = plug.util.log;
 var port = process.env.PORT || 7203;
@@ -52,20 +53,20 @@ gulp.task('welcome', function() {
 '                              "`                "`').join('\n');
 
     // WELCOME MESSAGE
-    gutil.log(gutil.colors.cyan(ocpic));
-    gutil.log(gutil.colors.green('Welcome to the ocWorkbench development server'));
+    gutil.log(chalk.blue.bold(ocpic));
+    gutil.log(chalk.red.bold('Welcome to the ocWorkbench development server'));
 
     // TODO
-    gutil.log(gutil.colors.yellow('TODO'));
-    gutil.log(gutil.colors.yellow('TODO'), 'gulpfile.js : add comments to the tasks');
-    gutil.log(gutil.colors.yellow('TODO'), 'layout : USE TABS OPEN COMPONENTS (SUB-WEBAPP\'s) AND FASTER SWITCHING');
-    gutil.log(gutil.colors.yellow('TODO'), 'Get rid of bootstrap.js (since its not needed for angular-ui-bootstrap)');
+    gutil.log(chalk.yellow('TODO'), 'gulpfile.js : add comments to the tasks');
+    gutil.log(chalk.yellow('TODO'), 'layout : USE TABS OPEN COMPONENTS (SUB-WEBAPP\'s) AND FASTER SWITCHING');
+    gutil.log(chalk.yellow('TODO'), 'Get rid of bootstrap.js (since its not needed for angular-ui-bootstrap)');
 
 
     // DESIGN IDEAS
     gutil.log('idea', 'a simple HELP or WIKI module linking to OpenCog wiki pages for example');
 
-    gutil.log(gutil.colors.yellow('BUG'), 'busy.gif is show in dev but not in build mode');
+    gutil.log(chalk.yellow('BUG'), 'busy.gif is show in dev but not in build mode');
+    log('normal log')
 });
 
 
@@ -313,7 +314,7 @@ gulp.task('build', ['rev-and-inject', 'images', 'fonts'], function() {
  * @return {Stream}
  */
 gulp.task('clean', function(cb) {
-    log('Cleaning: ' + plug.util.colors.blue(config.build));
+    log('Cleaning: ' + chalk.blue(config.build));
 
     var delPaths = [].concat(config.build, config.report);
     del(delPaths, cb);
@@ -493,7 +494,7 @@ function startBrowserSync(isDev) {
             // => on change: only compile scss to css 
             // (browser-sync handles reload)
             ['scss']
-            
+
         ).on('change', changeEvent);
 
     } else {
@@ -646,7 +647,7 @@ function errorLogger(error) {
  * @param  {Function} done - callback when complete
  */
 function clean(path, done) {
-    log('Cleaning: ' + plug.util.colors.blue(path));
+    log('Cleaning: ' + chalk.blue(path));
     del(path, done);
 }
 
