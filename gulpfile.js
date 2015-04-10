@@ -197,22 +197,6 @@ gulp.task('clean-styles', function(done) {
     clean(files, done);
 });
 
-/**
- * Minify and bundle the CSS
- * @return {Stream}
- */
-// gulp.task('css', function() {
-//     log('Bundling, minifying, and copying the app\'s CSS');
-
-//     return gulp.src(config.tmpcss)
-//         .pipe(plug.rename('all.min.css')) // Before bytediff or after
-//         .pipe(plug.autoprefixer('last 2 version', '> 5%'))
-//         .pipe(plug.bytediff.start())
-//         .pipe(plug.minifyCss({}))
-//         .pipe(plug.bytediff.stop(bytediffFormatter))
-//         //        .pipe(plug.concat('all.min.css')) // Before bytediff or after
-//         .pipe(gulp.dest(config.build + 'content'));
-// });
 
 /**
  * Minify and bundle the Vendor CSS
@@ -414,7 +398,7 @@ gulp.task('serve-dev', ['scss', 'scss-watcher'], function() {
 });
 
 /**
- * serve the build environment
+ * build and serve the build environment
  */
 gulp.task('serve-build', ['build', 'scss-watcher'], function() {
     serve({
@@ -456,7 +440,6 @@ function analyzejscs(sources) {
  * Start the node server using nodemon.
  * Optionally start the node debugging.
  * @param  {Object} args - debugging arguments
- * @return {Stream}
  */
 function serve(args) {
     var options = {
@@ -503,17 +486,29 @@ function startBrowserSync(isDev) {
 
     // places some watches before starting the browser
     if (isDev) {
-        // in dev mode : watch only scss files
-        // => trigger 'scss' task on change
-        // (browser-sync handles reload)
-        gulp.watch([config.scss.files], ['scss'])
-            .on('change', changeEvent);
+         
+        // in dev mode: watch only scss files
+        gulp.watch([config.scss.files],
+
+            // => on change: only compile scss to css 
+            // (browser-sync handles reload)
+            ['scss']
+            
+        ).on('change', changeEvent);
+
     } else {
-        // watch everything that can change
-        // => trigger the whole min/rev/inject process on change
-        // => restart browser-sync
-        gulp.watch([config.scss.files, config.js, config.html], ['rev-and-inject', bsClient.reload])
-            .on('change', changeEvent);
+        
+        gulp.watch(
+            // watch everything that can change
+            [config.scss.files, config.js, config.html],
+
+            // => trigger the whole min/rev/inject process on change
+            ['rev-and-inject',
+
+            // => restart browser-sync
+            bsClient.reload]
+
+        ).on('change', changeEvent);
     }
 
     var options = {
