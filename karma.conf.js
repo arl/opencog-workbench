@@ -66,7 +66,17 @@ module.exports = function (config) {
         // test results reporter to use
         // possible values: 'dots', 'progress', 'coverage'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress'],
+        reporters: ['progress', 'html'],
+
+			// the default configuration 
+			htmlReporter: {
+					outputDir: './report/karma/', // where to put the reports  
+					templatePath: null, // set if you moved jasmine_template.html 
+					focusOnFailures: true, // reports show failures on start 
+					namedFiles: true, // name files instead of creating sub-directories 
+					pageTitle: null, // page title for reports; browser info by default 
+					urlFriendlyName: true // simply replaces spaces with _ for files/dirs 
+			},
 
         coverageReporter: {
             type: 'lcov',

@@ -7,7 +7,7 @@
 
     Topnav.$inject = ['$rootScope', '$state', 'stateHelper', 'menuhelper', '_'];
 
-    function Topnav($rootScope, $state, stateHelper, menuhelper) {
+    function Topnav($rootScope, $state, stateHelper, menuhelper, _) {
         /*jshint validthis: true */
         var vm = this;
         var navRoutes = stateHelper.getNavRoutes();

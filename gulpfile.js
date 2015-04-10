@@ -9,12 +9,16 @@ var config = require('./gulp.config.js')();
 var plato = require('plato');
 var gutil = require('gulp-util');
 var plug = require('gulp-load-plugins')();
-var reload = browserSync.reload;
 
 var colors = plug.util.colors;
 var env = plug.util.env;
 var log = plug.util.log;
 var port = process.env.PORT || 7203;
+
+
+// create 2 browser-sync instances
+var bsClient = browserSync.create("bsClient");
+var bsKarmaRpt = browserSync.create("bsKarmaRpt");
 
 /**
  * List the available gulp tasks
@@ -59,13 +63,9 @@ gulp.task('welcome', function() {
 
 
     // DESIGN IDEAS
-    gutil.log('idea design', 'I NEED TO UNDERSTAND WHERE THE CONNECTION IS DONE BETWEEN THE MODULES and THE HTML (shell or index.html?)');
-    gutil.log('idea design', 'an HELP or WIKI module linking to OpenCog wiki pages for example');
+    gutil.log('idea', 'a simple HELP or WIKI module linking to OpenCog wiki pages for example');
 
-
-    gutil.log('BUGS', 'busy.gif is show in dev but not in build mode');
-
-
+    gutil.log(gutil.colors.yellow('BUG'), 'busy.gif is show in dev but not in build mode');
 });
 
 
@@ -485,7 +485,7 @@ function serve(args) {
         .on('restart', function() {
             log('restarted!');
             setTimeout(function () {
-                browserSync.reload({ stream: false });
+                bsClient.reload({ stream: false });
             }, 1000);
         });
 }
@@ -495,7 +495,7 @@ function serve(args) {
  */
 function startBrowserSync(isDev) {
 
-    if(browserSync.active) {
+    if(bsClient.active) {
         return;
     }
 
@@ -512,7 +512,7 @@ function startBrowserSync(isDev) {
         // watch everything that can change
         // => trigger the whole min/rev/inject process on change
         // => restart browser-sync
-        gulp.watch([config.scss.files, config.js, config.html], ['rev-and-inject', browserSync.reload])
+        gulp.watch([config.scss.files, config.js, config.html], ['rev-and-inject', bsClient.reload])
             .on('change', changeEvent);
     }
 
@@ -522,7 +522,8 @@ function startBrowserSync(isDev) {
         files: isDev ? [
             config.client + '**/*.*',
             config.tmpcss + '*.css',
-            '!' + config.scss.files
+            '!' + config.scss.files,
+            '!' + config.test + '**/*.*'
         ] : [config.build + '**/*.*'],
         ghostMode: { // these are the defaults t,f,t,t
             clicks: true,
@@ -538,7 +539,7 @@ function startBrowserSync(isDev) {
         reloadDelay: 1000
     };
 
-    browserSync(options);
+    bsClient.init(options);
 }
 
 /**
@@ -580,7 +581,7 @@ function startPlatoVisualizer() {
  */
 function startTests(singleRun, done) {
     var child;
-    var excludeFiles = ['./src/client/app/**/*spaghetti.js'];
+    var excludeFiles = [];
     var fork = require('child_process').fork;
 
     if (env.startServers) {
@@ -591,6 +592,23 @@ function startTests(singleRun, done) {
         child = fork('src/server/app.js', childProcessCompleted);
     } else {
         excludeFiles.push('./src/client/test/midway/**/*.spec.js');
+    }
+
+
+    // in autotest mode, karma tests reports are auto-reloaded
+    if (!singleRun) {
+
+         bsKarmaRpt.init({
+                server: {
+                    baseDir: './report/karma/',
+                    directory: true
+                },
+                ghostMode: false,
+                logLevel: 'info',
+                logPrefix: 'ocWorkbench-test',
+            });
+
+        gulp.watch('./report/karma/**/*.html').on("change", bsKarmaRpt.reload);
     }
 
     karma.start({
