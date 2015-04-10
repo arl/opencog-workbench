@@ -11,7 +11,7 @@ describe('dashboard', function () {
 
         it('should map / route to dashboard View template', function () {
 
-            var dashboardState = _.find($state.get(), function(s){ return s.url == '/';});
+            var dashboardState = _.find($state.get(), function(s){ return s.url === '/';});
 
             expect(dashboardState.templateUrl).
                 to.equal('app/dashboard/dashboard.html');

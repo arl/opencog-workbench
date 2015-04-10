@@ -23,7 +23,6 @@
         };
     }
 
-
     // stateHelper.$inject = ['$location', '$rootScope', '$state', 'logger', 'stateHelperConfig'];
 
     /* @ngInject */
@@ -68,10 +67,10 @@
                     }
                     stateCounts.errors++;
                     handlingRouteChangeError = true;
-                    var destination = (current && (current.title || current.name || current.loadedTemplateUrl)) ||
+                    var destination = (toState && (toState.title || toState.name || toState.loadedTemplateUrl)) ||
                         'unknown target';
-                    var msg = 'Error routing to ' + destination + '. ' + (rejection.msg || '');
-                    logger.warning(msg, [current]);
+                    var msg = 'Error routing to ' + destination + '. ' + (error.msg || '');
+                    logger.warning(msg, [toState]);
                     $location.path('/');
                 }
             );
@@ -90,9 +89,6 @@
                     $location.path('/');
                 }
             );
-
-
-
         }
 
         function init() {
@@ -126,10 +122,6 @@
         }
     }
 })();
-
-
-
-
 
 /*
 myApp.config(function($stateProvider, $urlRouterProvider) {

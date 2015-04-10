@@ -11,7 +11,7 @@
         /*jshint validthis: true */
         var vm = this;
         var routes = stateHelper.getNavRoutes();
-        vm.isCurrent = isCurrent;
+        //vm.isCurrent = isCurrent;
         vm.sidebarReady = function() {console.log('done animating menu'); }; // example
 
         activate();

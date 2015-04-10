@@ -22,12 +22,14 @@
             
         }
 
+        function closeTab() {
+            
+        }
+
         function getAllTabs() {
             var count = 0;
             return tabs();
         }
-
-
 
     }
 })();

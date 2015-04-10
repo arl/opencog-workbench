@@ -24,7 +24,6 @@
             updateMenu();
         }
 
-
         /**
          * [updateMenu listen for route changes to update TopNav menu]
          *
@@ -62,7 +61,7 @@
         function getMenus(currentComponent) {
 
             // find menu defined for currently active component
-            var componentMenu = _.find(allMenus, function(m){ return m.component == currentComponent; });
+            var componentMenu = _.find(allMenus, function(m) { return m.component === currentComponent; });
             if (componentMenu) {
                 // trigger the UI actual menu update
                 vm.menus = componentMenu.menus;

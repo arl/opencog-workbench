@@ -10,14 +10,10 @@
     function Shell($timeout, config, logger) {
         /*jshint validthis: true */
         var vm = this;
-
-
         vm.tabs = [
-            { title:'Dynamic Title 1', content:'Dynamic content 1' },
-            { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
+            {title:'Dynamic Title 1', content:'Dynamic content 1'},
+            {title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true}
         ];
-
-
 
         vm.title = config.appTitle;
         vm.busyMessage = 'Please wait ...';

@@ -43,7 +43,7 @@
         function configureMenus(component, menus) {
             _menus.push({'component':component, 'menus': menus});
         }
-/*
+        /*
         function handleRoutingErrors() {
             // Route cancellation:
             // On routing error, go to the dashboard.
@@ -68,7 +68,7 @@
             handleRoutingErrors();
             updateDocTitle();
         }
-*/
+        */
         /**
          * [getMenus get all configured menus]
          *

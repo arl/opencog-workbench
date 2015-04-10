@@ -22,7 +22,8 @@
     core.config(configure);
 
     /* @ngInject */
-    function configure ($logProvider, $stateProvider, $urlRouterProvider, stateHelperConfigProvider, exceptionHandlerProvider) {
+    function configure ($logProvider, $stateProvider, $urlRouterProvider,
+				stateHelperConfigProvider, exceptionHandlerProvider) {
         // turn debugging off/on (no info or warn)
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
