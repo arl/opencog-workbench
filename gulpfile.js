@@ -407,7 +407,8 @@ gulp.task('serve-dev-debug-brk', function() {
 });
 
 /**
- * serve the dev environment
+ * serve the dev environment,
+ * compile scss and watch them
  */
 gulp.task('serve-dev', ['scss', 'scss-watcher'], function() {
     serve({
@@ -424,35 +425,22 @@ gulp.task('serve-build', ['scss-watcher'], function() {
     });
 });
 
-////////////////
 
 /**
- * Execute JSHint on given source files
- * @param  {Array} sources
- * @param  {String} overrideRcFile
- * @return {Stream}
+ * build and serve the distribution (no watchers)
  */
-function analyzejshint(sources, overrideRcFile) {
-    var jshintrcFile = overrideRcFile || './.jshintrc';
-    log('Running JSHint');
-    log(sources);
-    return gulp
-        .src(sources)
-        .pipe(plug.jshint(jshintrcFile))
-        .pipe(plug.jshint.reporter());
-}
+gulp.task('serve-dist', function() {
 
-/**
- * Execute JSCS on given source files
- * @param  {Array} sources
- * @return {Stream}
- */
-function analyzejscs(sources) {
-    log('Running JSCS');
-    return gulp
-        .src(sources)
-        .pipe(plug.jscs('./.jscsrc'));
-}
+    return gulp.src('').pipe(plug.notify({
+        title: "OcWorkbench Error",
+        onLast: true,
+        message: 'gulp serve-dist is not implemented'
+    }));
+    // serve({
+    //     mode: 'dist'
+    // });
+});
+
 
 /**
  * Start the node server using nodemon.
@@ -500,26 +488,13 @@ function startBrowserSync(isDev) {
         return;
     }
 
-
-
     log('Starting BrowserSync on port ' + port);
 
     // places some watches before starting the browser
-    if (isDev) {
-         
-        // in dev mode: watch only scss files
-        gulp.watch([config.scss.files],
-
-            // => on change: only compile scss to css 
-            // (browser-sync handles reload)
-            ['scss']
-
-        ).on('change', changeEvent);
-
-    } else {
+    if (isDev == false) {
         
         gulp.watch(
-            // watch everything that can change
+            // watch everything that could change in the dev part
             [config.scss.files, config.js, config.html],
 
             // => trigger the whole min/inject process on change
@@ -649,6 +624,38 @@ function startTests(singleRun, done) {
         done();
     }
 }
+
+////////////////
+
+/**
+ * Execute JSHint on given source files
+ * @param  {Array} sources
+ * @param  {String} overrideRcFile
+ * @return {Stream}
+ */
+function analyzejshint(sources, overrideRcFile) {
+    var jshintrcFile = overrideRcFile || './.jshintrc';
+    log('Running JSHint');
+    log(sources);
+    return gulp
+        .src(sources)
+        .pipe(plug.jshint(jshintrcFile))
+        .pipe(plug.jshint.reporter());
+}
+
+/**
+ * Execute JSCS on given source files
+ * @param  {Array} sources
+ * @return {Stream}
+ */
+function analyzejscs(sources) {
+    log('Running JSCS');
+    return gulp
+        .src(sources)
+        .pipe(plug.jscs('./.jscsrc'));
+}
+
+////////////////
 
 /**
  * Log an error message and emit the end of a task

@@ -15,12 +15,16 @@
  
             <section id="dashboard-view" class="mainbar">
                 
-                <tabset>
+            <tabs data="shVm.tabs" type="pills" justified="true" template-url="app/layout/tabs/tabs.html"
+                  auto-select-default-tab="false"></tabs>
+
+
+<!--                 <tabset>
                    <tab heading="Static title">Static content</tab>
                     <tab ng-repeat="tab in shVm.tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
                       {{tab.content}}
                     </tab>                   
-                </tabset>
+                </tabset> -->
                 <section class="matter">
                     <div class="container shuffle-animation" data-ui-view>
                     </div>
