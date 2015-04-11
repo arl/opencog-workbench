@@ -5,7 +5,12 @@
         /*
          * Angular modules
          */
-        'ngAnimate', 'ui.router', 'ngSanitize',
+        'ngAnimate', 'ngSanitize',
+        /*
+         * Angular UI modules
+         */
+        
+        'ui.router', 'ui.bootstrap',
         /*
          * Our reusable cross app code modules
          */
@@ -13,8 +18,6 @@
         /*
          * 3rd Party modules
          */
-        'ngplus',
-
-        'underscore'
+        'ngplus', 'underscore', 'ui.router.tabs'
     ]);
 })();

@@ -59,6 +59,7 @@ gulp.task('welcome', function() {
     // TODO
     log(chalk.yellow('TODO'), 'gulpfile.js : add comments to the tasks');
     log(chalk.yellow('TODO'), 'layout : USE TABS OPEN COMPONENTS (SUB-WEBAPP\'s) AND FASTER SWITCHING');
+    log(chalk.blue('TODO'), 'BOWER : js libs in src/app/content/js can ALSO be managed with bower, see http://bower.io/');
 
     // IDEA
     log(chalk.green('IDEA'), 'a simple HELP or WIKI module linking to OpenCog wiki pages for example');
@@ -690,3 +691,4 @@ function bytediffFormatter(data) {
 function formatPercent(num, precision) {
     return (num * 100).toFixed(precision);
 }
+
