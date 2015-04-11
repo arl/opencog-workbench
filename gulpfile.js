@@ -7,13 +7,11 @@ var karma = require('karma').server;
 var merge = require('merge-stream');
 var config = require('./gulp.config.js')();
 var plato = require('plato');
-var gutil = require('gulp-util');
-var chalk = require('chalk');
 var plug = require('gulp-load-plugins')();
 
-//var colors = chalk;
 var env = plug.util.env;
 var log = plug.util.log;
+var chalk = plug.util.colors;
 var port = process.env.PORT || 7203;
 
 
@@ -27,46 +25,50 @@ var bsKarmaRpt = browserSync.create("bsKarmaRpt");
 gulp.task('help', plug.taskListing);
 gulp.task('default', ['welcome', 'help']);
 
+
 gulp.task('welcome', function() {
 
-    var ocpic = Array('',
-'                                à"^``    ``"²ì',
-'                                Ñ            ╫',
-'                              =ª^             `"%═ ',
-'                           ="                      ª═ ',
-'                    =ªª«%%                           `≈%ª¬ª,',
-'                   Θ              -r²\'````"²%─             `═',
-'                  ╝            -²              ²=           `═',
-'                 ò           .²     .=o%«a=.     ╙,          ².',
-'                .Ñ          .^    ╓M        "»    ²>          ╫',
-'                :╗          ▒    ╔            ▒    ╠         .╝',
-'                   "H       ╡    ▒            ╚    j       ▒`',
-'                    ▒       ▒    ╚            ╩    ╠       ▒',
-'                    ╠       `.    ^═²       ╓º    ,M      .`',
-'                     ▒       `w     `²«>∞«²`     ╓┘       ╝',
-'                     `N        ^=              -²        ╝',
-'                      ╔\'          ^%=..  ..=≥²           9',
-'                     ó`                                  ╚┐',
-'                     `î.                                ╓M',
-'                       `ª┬                            ="',
-'                          "9╥. .à``"¬ªª%ªªª"\'`"=  .»M`',
-'                              "`                "`').join('\n');
+    var ocLogo = Array('',
+        '                                à"^``    ``"²ì',
+        '                                Ñ            ╫',
+        '                              =ª^             `"%═ ',
+        '                           ="                      ª═ ',
+        '                    =ªª«%%                           `≈%ª¬ª,',
+        '                   Θ              -r²\'````"²%─             `═',
+        '                  ╝            -²              ²=           `═',
+        '                 ò           .²     .=o%«a=.     ╙,          ².',
+        '                .Ñ          .^    ╓M        "»    ²>          ╫',
+        '                :╗          ▒    ╔            ▒    ╠         .╝',
+        '                   "H       ╡    ▒            ╚    j       ▒`',
+        '                    ▒       ▒    ╚            ╩    ╠       ▒',
+        '                    ╠       `.    ^═²       ╓º    ,M      .`',
+        '                     ▒       `w     `²«>∞«²`     ╓┘       ╝',
+        '                     `N        ^=              -²        ╝',
+        '                      ╔\'          ^%=..  ..=≥²           9',
+        '                     ó`                                  ╚┐',
+        '                     `î.                                ╓M',
+        '                       `ª┬                            ="',
+        '                          "9╥. .à``"¬ªª%ªªª"\'`"=  .»M`',
+        '                              "`                "`',
+        '');
 
     // WELCOME MESSAGE
-    gutil.log(chalk.blue.bold(ocpic));
-    gutil.log(chalk.red.bold('Welcome to the ocWorkbench development server'));
+    log(chalk.blue.bold(ocLogo.join('\n')));
+    log(chalk.red.bold('Welcome to the ocWorkbench development server'));
 
     // TODO
-    gutil.log(chalk.yellow('TODO'), 'gulpfile.js : add comments to the tasks');
-    gutil.log(chalk.yellow('TODO'), 'layout : USE TABS OPEN COMPONENTS (SUB-WEBAPP\'s) AND FASTER SWITCHING');
-    gutil.log(chalk.yellow('TODO'), 'Get rid of bootstrap.js (since its not needed for angular-ui-bootstrap)');
+    log(chalk.yellow('TODO'), 'gulpfile.js : add comments to the tasks');
+    log(chalk.yellow('TODO'), 'layout : USE TABS OPEN COMPONENTS (SUB-WEBAPP\'s) AND FASTER SWITCHING');
 
+    // DESIGN IDEA
+    log(chalk.green('IDEA'), 'a simple HELP or WIKI module linking to OpenCog wiki pages for example');
 
-    // DESIGN IDEAS
-    gutil.log('idea', 'a simple HELP or WIKI module linking to OpenCog wiki pages for example');
+    // BUG
+    log(chalk.yellow('BUG'), 'busy overlay not shown in build mode');
+    log(chalk.red('BUG'), 'look for ng-strict-di in gulpfile, this is not working because of that :');
+    log(chalk.red('BUG'), 'https://github.com/gulpjs/gulp/blob/master/docs/recipes/running-tasks-in-series.md');
+    log(chalk.cyan('BUG'), 'replace null in bower.json');
 
-    gutil.log(chalk.yellow('BUG'), 'busy.gif is show in dev but not in build mode');
-    log('normal log')
 });
 
 
@@ -290,6 +292,15 @@ gulp.task('images', function() {
         .pipe(gulp.dest(dest));
 });
 
+gulp.task('blah', function() {
+    // Uncomment code enabling ng-strict-di
+    gulp.src(config.build + 'index.html', { base : './' } )
+        .pipe(plug.replace(/.*begin@uncomment.*\s/, ''))
+        .pipe(plug.replace(/.*end@uncomment.*\s/, ''))
+        .pipe(gulp.dest('./'));
+});
+
+
 
 /**
  * Build the optimized app
@@ -297,6 +308,13 @@ gulp.task('images', function() {
  */
 gulp.task('build', ['inject', 'images', 'fonts'], function() {
     log('Building the optimized app');
+    log('Enabling ng-strict-di');
+
+    // Uncomment code enabling ng-strict-di
+    gulp.src(config.build + 'index.html', { base : './' } )
+        .pipe(plug.replace(/.*begin@uncomment.*\s/, ''))
+        .pipe(plug.replace(/.*end@uncomment.*\s/, ''))
+        .pipe(gulp.dest('./'));
 
     return gulp.src('').pipe(plug.notify({
         onLast: true,
@@ -420,7 +438,7 @@ function analyzejshint(sources, overrideRcFile) {
     return gulp
         .src(sources)
         .pipe(plug.jshint(jshintrcFile))
-        .pipe(plug.jshint.reporter('jshint-stylish'));
+        .pipe(plug.jshint.reporter());
 }
 
 /**
@@ -480,6 +498,8 @@ function startBrowserSync(isDev) {
     if(bsClient.active) {
         return;
     }
+
+
 
     log('Starting BrowserSync on port ' + port);
 

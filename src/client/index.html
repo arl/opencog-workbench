@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html data-ng-app="app" ng-strict-di>
+<html data-ng-app="app">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -108,5 +108,16 @@
     <script src="/src/client/app/avengers/config.menu.js"></script>
     <script src="/src/client/app/avengers/avengers.js"></script>
     <!-- endinject -->
+
+    <!--    automatically uncommented in build mode
+            to enable Angular Strict Dependency Injection -->
+    <!-- begin@uncomment
+    <script>
+        angular.bootstrap(document, ['app'], {
+          strictDi: true
+        });
+    </script>
+    end@uncomment -->
+
 </body>
 </html>
