@@ -60,13 +60,11 @@ gulp.task('welcome', function() {
     log(chalk.yellow('TODO'), 'gulpfile.js : add comments to the tasks');
     log(chalk.yellow('TODO'), 'layout : USE TABS OPEN COMPONENTS (SUB-WEBAPP\'s) AND FASTER SWITCHING');
 
-    // DESIGN IDEA
+    // IDEA
     log(chalk.green('IDEA'), 'a simple HELP or WIKI module linking to OpenCog wiki pages for example');
 
     // BUG
     log(chalk.yellow('BUG'), 'busy overlay not shown in build mode');
-    log(chalk.red('BUG'), 'look for ng-strict-di in gulpfile, this is not working because of that :');
-    log(chalk.red('BUG'), 'https://github.com/gulpjs/gulp/blob/master/docs/recipes/running-tasks-in-series.md');
     log(chalk.cyan('BUG'), 'replace null in bower.json');
 
 });
@@ -231,7 +229,7 @@ gulp.task('inject', ['js', 'vendorjs', 'scss', 'vendorcss'], function() {
     var minCssFilter = plug.filter(['**/*.min.css', '!**/*.map']);
     var indexFilter = plug.filter(['index.html']);
 
-    var stream = gulp
+    return gulp
     
         .src([].concat(minifiedJs, minifiedCss, index)) // add all built min files and index.html
 
@@ -272,6 +270,7 @@ gulp.task('inject', ['js', 'vendorjs', 'scss', 'vendorcss'], function() {
 gulp.task('fonts', function() {
     var dest = config.build + 'fonts/';
     log('Copying fonts');
+
     return gulp
         .src(config.fonts)
         .pipe(gulp.dest(dest));
@@ -283,7 +282,9 @@ gulp.task('fonts', function() {
  */
 gulp.task('images', function() {
     var dest = config.build + 'images/';
+
     log('Compressing, caching, and copying images');
+
     return gulp
         .src(config.images)
         .pipe(plug.cache(plug.imagemin({
@@ -292,29 +293,28 @@ gulp.task('images', function() {
         .pipe(gulp.dest(dest));
 });
 
-gulp.task('blah', function() {
-    // Uncomment code enabling ng-strict-di
-    gulp.src(config.build + 'index.html', { base : './' } )
-        .pipe(plug.replace(/.*begin@uncomment.*\s/, ''))
-        .pipe(plug.replace(/.*end@uncomment.*\s/, ''))
+/*
+ * Build all (index.html & injection, images and fonts)
+ * @return {Stream}
+ */
+gulp.task('build-all', ['inject', 'images', 'fonts'], function() {
+
+    log('Building All')
+    log('Enabling ng-strict-di');
+
+    // add ng-strict-di to ng-app
+    return gulp.src(config.build + 'index.html', { base : './' } )
+        .pipe(plug.replace('html data-ng-app=\"app\"', 'html data-ng-app=\"app\" ng-strict-di'))
         .pipe(gulp.dest('./'));
 });
-
 
 
 /**
  * Build the optimized app
  * @return {Stream}
  */
-gulp.task('build', ['inject', 'images', 'fonts'], function() {
+gulp.task('build', ['build-all'], function() {
     log('Building the optimized app');
-    log('Enabling ng-strict-di');
-
-    // Uncomment code enabling ng-strict-di
-    gulp.src(config.build + 'index.html', { base : './' } )
-        .pipe(plug.replace(/.*begin@uncomment.*\s/, ''))
-        .pipe(plug.replace(/.*end@uncomment.*\s/, ''))
-        .pipe(gulp.dest('./'));
 
     return gulp.src('').pipe(plug.notify({
         onLast: true,
@@ -417,7 +417,7 @@ gulp.task('serve-dev', ['scss', 'scss-watcher'], function() {
 /**
  * build and serve the build environment
  */
-gulp.task('serve-build', ['build', 'scss-watcher'], function() {
+gulp.task('serve-build', ['scss-watcher'], function() {
     serve({
         mode: 'build'
     });
