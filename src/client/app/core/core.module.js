@@ -18,6 +18,6 @@
         /*
          * 3rd Party modules
          */
-        'ngplus', 'underscore', 'ui.router.tabs'
+        'ngplus', 'underscore', 'ct.ui.router.extras.sticky'
     ]);
 })();

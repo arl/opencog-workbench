@@ -23,11 +23,13 @@
 
     /* @ngInject */
     function configure ($logProvider, $stateProvider, $urlRouterProvider,
-				stateHelperConfigProvider, exceptionHandlerProvider) {
+				stateHelperConfigProvider, exceptionHandlerProvider, $stickyStateProvider) {
         // turn debugging off/on (no info or warn)
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
         }
+
+        $stickyStateProvider.enableDebug(true);
 
         // Configure the common state and urlRouter providers
         stateHelperConfigProvider.config.$stateProvider = $stateProvider;

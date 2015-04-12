@@ -1,6 +1,29 @@
+<!-- the tabs themselves -->
 <div>
-	  <tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">
-	      <tab id="{{tab.id}}" class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" active="tab.active" ng-click="go(tab)">
-	          </tab>
-		    </tabset>
-	    </div>
+  <tabset class="tab-container" type="tabs" justified="false">
+      <tab id="{{tab.id}}" class="tab" ng-repeat="tab in tVm.tabs" heading="{{tab.heading}}" active="tab.active" ng-click="tVm.gotoTab(tab)">
+          </tab>
+    </tabset>
+</div>
+
+<!--  tab content -->
+<section class="matter">
+    <div class="container shuffle-animation" data-ui-view>
+    </div>
+
+
+
+    <!-- voir ici si on peut renommer _tab en tab (possible conflit avec tabset plus haut??) -->
+    <!-- dans la definitiond des tabs, ici on se sert de :
+        -cle par default dans views (state declaration)
+        -name du state (name dans state declaration) (on s'en sert dans la fonction shvm.showTab)
+
+
+     -->
+     <!-- ICI il faudra faire un ng-repeat pour gneration automatique des vues 
+ ng-repeat="_tab in tVm.tabs"
+     -->
+    <div class="container shuffle-animation" ui-view="dashboard" ng-show="tVm.showTab('tab.dashboard')"></div>
+    <div class="container shuffle-animation" ui-view="avengers" ng-show="tVm.showTab('tab.avengers')"></div>
+
+</section>

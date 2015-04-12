@@ -15,16 +15,28 @@
     function getStates() {
         return [
             {
-                state: 'avengers',
+                state: 'tab.avengers',            
                 config: {
-                    templateUrl: 'app/avengers/avengers.html',
-                    controller: 'Avengers as vm',
-                    url: '/avengers',
+                    url: 'avengers',
+                    views: {
+                        'avengers@tab': {
+                            templateUrl: 'app/avengers/avengers.html',
+                            controller: 'Avengers as vm'
+                        }
+                    },
                     data: {
                         nav: 2,
                         content: '<i class="fa fa-lock"></i> Avengers'
                     },
-                    title: 'Avenger Component'
+                    resolve: {
+                        foo: function() {
+                            console.log("resolving 'foo' for tab.avengers...");
+                            return "foo";
+                        }
+                    },
+                    title: 'Avenger Component',
+                    deepStateRedirect: true,
+                    sticky: true
                 }
             }
         ];
