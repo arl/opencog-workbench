@@ -60,6 +60,7 @@ gulp.task('welcome', function() {
     log(chalk.yellow('TODO'), 'gulpfile.js : add comments to the tasks');
     log(chalk.yellow('TODO'), 'layout : USE TABS OPEN COMPONENTS (SUB-WEBAPP\'s) AND FASTER SWITCHING');
     log(chalk.blue('TODO'), 'BOWER : js libs in src/app/content/js can ALSO be managed with bower, see http://bower.io/');
+    log(chalk.green('TODO'), 'create a sublime project, add it and screenrc to git');
 
     // IDEA
     log(chalk.green('IDEA'), 'a simple HELP or WIKI module linking to OpenCog wiki pages for example');
@@ -67,6 +68,8 @@ gulp.task('welcome', function() {
     // BUG
     log(chalk.yellow('BUG'), 'busy overlay not shown in build mode');
     log(chalk.cyan('BUG'), 'replace null in bower.json');
+    log(chalk.cyan('BUG'), 'gulp test/autotest --startServers crash :\n\tsee ==>\t\thttps://bitbucket.org/panty79/ocworkbench/issue/4');
+
 
 });
 

@@ -1,0 +1,22 @@
+# general settings
+
+# set base directory
+chdir /home/panty/Documents/dev/ocWorkbench
+
+# name screen session
+sessionname workbench
+
+# command bindings
+bind ' ' windowlist -b 
+
+# screen : gulp serve-dev
+screen -t "serv"
+stuff "gulp serve-dev"
+
+# screen : open sublime text
+screen -t "bash"
+stuff "subl ."
+
+# status line (TODO : set this globally)
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d-%m %{W}%c %{g}]'
