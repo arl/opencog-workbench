@@ -17,7 +17,7 @@
                     <a dropdown-toggle role="button">Modules <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="nlightblue fade-selection-animation" data-ng-class="tnVm.isCurrent(r)"
-                            data-ng-repeat="r in tnVm.navRoutes">
+                            data-ng-repeat="r in tnVm.mainNavStates">
                             <a data-ui-sref="{{r.name}}" data-ng-bind-html="r.data.content"></a>
                         </li>
 

@@ -12,11 +12,16 @@
         stateHelper.configureStates(getStates());
     }
 
-
+    // module state definition
     function getStates() {
         return [
             {
-                state: 'tab.dashboard',             
+                /**
+                 * main state (module parent state),
+                 * in case the module uses various states, parent state
+                 * should be declarexd first
+                 */
+                state: 'tab.dashboard',
                 config: {
                     url: 'dashboard',
                     views: {

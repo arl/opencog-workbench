@@ -10,7 +10,7 @@
     function Topnav($rootScope, $state, stateHelper, menuhelper, _) {
         /*jshint validthis: true */
         var vm = this;
-        var navRoutes = stateHelper.getNavRoutes();
+        var mainNavStates = stateHelper.getMainNavStates();
         var allMenus = menuhelper.getMenus();
         vm.isCurrent = isCurrent;
         console.log(vm.title); // example
@@ -19,7 +19,7 @@
         activate();
 
         function activate() {
-            getNavRoutes();
+            getMainNavStates();
             getMenus($state.current.name);
             updateMenu();
         }
@@ -43,8 +43,8 @@
          *
          * @return {[type]} [description]
          */
-        function getNavRoutes() {
-            vm.navRoutes = navRoutes.filter(function(r) {
+        function getMainNavStates() {
+            vm.mainNavStates = mainNavStates.filter(function(r) {
                 return r.data && r.data.nav;
             }).sort(function(r1, r2) {
                 return r1.data.nav - r2.data.nav;

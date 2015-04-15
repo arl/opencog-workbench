@@ -15,7 +15,7 @@
     function getStates() {
         return [
             {
-                state: 'tab.avengers',            
+                state: 'tab.avengers',
                 config: {
                     url: 'avengers',
                     views: {

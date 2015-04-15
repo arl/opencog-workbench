@@ -32,13 +32,13 @@
             errors: 0,
             changes: 0
         };
-        var navRoutes = [];
+        var mainNavStates = [];
         var $stateProvider = stateHelperConfig.config.$stateProvider;
         var $urlRouterProvider = stateHelperConfig.config.$urlRouterProvider;
 
         var service = {
             configureStates: configureStates,
-            getNavRoutes: getNavRoutes,
+            getMainNavStates: getMainNavStates,
             stateCounts: stateCounts
         };
 
@@ -96,18 +96,26 @@
             updateDocTitle();
         }
 
-        function getNavRoutes() {
+        /**
+         * [getMainNavStates description]
+         *
+         * @return {[type]} [description]
+         */
+        function getMainNavStates() {
+
+console.log('CHANGE THIS FUNCTION, IT SHOULD TAKE THE FIRST DECLARED STATES OF EACH DECLARED MODULE')
+
             var states = $state.get();
             for (var prop in states) {
                 if (states.hasOwnProperty(prop)) {
                     var state = states[prop];
                     var isNavRoute = !!state.title;
                     if (isNavRoute) {
-                        navRoutes.push(state);
+                        mainNavStates.push(state);
                     }
                 }
             }
-            return navRoutes;
+            return mainNavStates;
         }
 
         function updateDocTitle() {

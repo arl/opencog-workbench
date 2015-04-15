@@ -10,7 +10,7 @@
     function Sidebar($route, stateHelper) {
         /*jshint validthis: true */
         var vm = this;
-        var routes = stateHelper.getNavRoutes();
+        var routes = stateHelper.getMainNavStates();
         //vm.isCurrent = isCurrent;
         vm.sidebarReady = function() {console.log('done animating menu'); }; // example
 
