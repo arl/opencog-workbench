@@ -32,14 +32,13 @@
         function updateMenu() {
             $rootScope.$on('$stateChangeSuccess',
                 function(event, toState, toParams, fromState, fromParams) {
-
                     getMenus(toState.name);
                 }
             );
         }
 
         /**
-         * get main navigation routes (i.e different oc-workbench components and their main routes)
+         * get main navigation routes (i.e different oc-workbench modules and their main routes)
          *
          * @return {[type]} [description]
          */

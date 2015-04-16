@@ -13,6 +13,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 
+                <!-- permanent menu : list of Modules-->
                 <li dropdown>
                     <a dropdown-toggle role="button">Modules <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -28,21 +29,15 @@
                     </ul>
                 </li>
 
-
-               <!-- <workbench-  -->
-
-
-               <!-- generated menus -->
+               <!-- generated menus : active module specific menus -->
                <li dropdown data-ng-repeat="menu in tnVm.menus">
                     <a dropdown-toggle role="button">{{menu.title}} <span class="caret"></span></a>
                       <ul class="dropdown-menu" role="menu">
                         <li data-ng-repeat="subm in menu.items">
                             <a href="{{subm.url}}" data-ng-bind-html="subm.content"></a>
                         </li>
-                    </ul>                 
-
-               </li> 
-                
+                    </ul>
+               </li>
             </ul>
         </div>
     </div>

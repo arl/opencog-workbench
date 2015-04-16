@@ -33,12 +33,15 @@
             changes: 0
         };
         var mainNavStates = [];
+        var stateChangesListeners = [];
         var $stateProvider = stateHelperConfig.config.$stateProvider;
         var $urlRouterProvider = stateHelperConfig.config.$urlRouterProvider;
+        var $stickyStateProvider = stateHelperConfig.config.$stickyStateProvider; 
 
         var service = {
             configureStates: configureStates,
             getMainNavStates: getMainNavStates,
+            notifyStateChanges: notifyStateChanges, 
             stateCounts: stateCounts
         };
 
@@ -46,6 +49,35 @@
 
         return service;
         ///////////////
+
+
+        /**
+         * [getMainNavStates return the 'main navigation' states, i.e the workbench module states]
+         *
+         * @return {[type]} [description]
+         */
+        function getMainNavStates() {
+
+console.log('CHANGE THIS FUNCTION, IT SHOULD TAKE THE FIRST DECLARED STATES OF EACH DECLARED MODULE')
+
+            if (mainNavStates.length == 0) {
+                var states = $state.get();
+                for (var prop in states) {
+                    if (states.hasOwnProperty(prop)) {
+                        var state = states[prop];
+                        var isNavRoute = !!state.title;
+                        if (isNavRoute) {
+                            mainNavStates.push(state);
+                        }
+                    }
+                }
+            }
+            return mainNavStates;
+        }
+
+        function notifyStateChanges(callback) {
+            stateChangesListeners.push(callback);
+        }
 
         function configureStates(routes) {
             routes.forEach(function(route) {
@@ -56,7 +88,7 @@
             $urlRouterProvider.otherwise('/');
         }
 
-        function handleRoutingErrors() {
+        function handleStateErrors() {
             // Route cancellation:
             // On routing error, go to the dashboard.
             // Provide an exit clause if it tries to do it twice.
@@ -91,75 +123,31 @@
             );
         }
 
-        function init() {
-            handleRoutingErrors();
-            updateDocTitle();
-        }
-
-        /**
-         * [getMainNavStates description]
-         *
-         * @return {[type]} [description]
-         */
-        function getMainNavStates() {
-
-console.log('CHANGE THIS FUNCTION, IT SHOULD TAKE THE FIRST DECLARED STATES OF EACH DECLARED MODULE')
-
-            var states = $state.get();
-            for (var prop in states) {
-                if (states.hasOwnProperty(prop)) {
-                    var state = states[prop];
-                    var isNavRoute = !!state.title;
-                    if (isNavRoute) {
-                        mainNavStates.push(state);
-                    }
-                }
-            }
-            return mainNavStates;
-        }
-
-        function updateDocTitle() {
+        function handleStateChanges() {
             $rootScope.$on('$stateChangeSuccess',
                 function(event, toState, toParams, fromState, fromParams) {
+
+                    // update state change count
                     stateCounts.changes++;
                     handlingRouteChangeError = false;
-                    var title = stateHelperConfig.config.docTitle + ' ' + (toState.title || '');
-                    $rootScope.title = title; // data bind to <title>
+
+                    setDocTitle(stateHelperConfig.config.docTitle + ' ' + (toState.title || ''));
+
+                    // notify the registered state change callbacks
+                    angular.forEach(stateChangesListeners, function (listener) {
+                        listener(toState, toParams, fromState, fromParams);
+                    });
                 }
             );
         }
+
+        function setDocTitle(title) {
+            $rootScope.title = title; // data bind to <title>
+        }
+
+        function init() {
+            handleStateErrors();
+            handleStateChanges();
+        }
     }
 })();
-
-/*
-myApp.config(function($stateProvider, $urlRouterProvider) {
-  //
-  // For any unmatched url, redirect to /state1
-  $urlRouterProvider.otherwise("/state1");
-  //
-  // Now set up the states
-  $stateProvider
-    .state('state1', {
-      url: "/state1",
-      templateUrl: "partials/state1.html"
-    })
-    .state('state1.list', {
-      url: "/list",
-      templateUrl: "partials/state1.list.html",
-      controller: function($scope) {
-        $scope.items = ["A", "List", "Of", "Items"];
-      }
-    })
-    .state('state2', {
-      url: "/state2",
-      templateUrl: "partials/state2.html"
-    })
-    .state('state2.list', {
-      url: "/list",
-      templateUrl: "partials/state2.list.html",
-      controller: function($scope) {
-        $scope.things = ["A", "Set", "Of", "Things"];
-      }
-    });
-});
-*/

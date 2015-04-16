@@ -1,7 +1,7 @@
 <!-- the tabs themselves -->
 <div>
   <tabset class="tab-container" type="tabs" justified="false">
-      <tab id="{{tab.id}}" class="tab" ng-repeat="tab in tVm.tabs" heading="{{tab.heading}}" active="tab.active" ng-click="tVm.gotoTab(tab)">
+      <tab class="tab" ng-repeat="tab in tVm.getTabs()" heading="{{tab.heading}}" active="tab.active" data-ui-sref="{{tab.state}}">
           </tab>
     </tabset>
 </div>

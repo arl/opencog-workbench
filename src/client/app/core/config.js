@@ -34,6 +34,7 @@
         // Configure the common state and urlRouter providers
         stateHelperConfigProvider.config.$stateProvider = $stateProvider;
         stateHelperConfigProvider.config.$urlRouterProvider = $urlRouterProvider;
+        stateHelperConfigProvider.config.$stickyStateProvider = $stickyStateProvider;        
         stateHelperConfigProvider.config.docTitle = 'OC-Workbench: ';
         var resolveAlways = { /* @ngInject */
             ready: function(dataservice) {

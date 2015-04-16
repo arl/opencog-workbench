@@ -8,22 +8,14 @@
     // Tabs.$inject = ['$scope', 'config', 'logger', '$state'];
 
     /* @ngInject */
-    function Tabs($scope, config, logger, $state) {
+    function Tabs($scope, config, logger, $state, TabMgr) {
         /*jshint validthis: true */
         var vm = this;
         // vm.tabs = [
         //     {title:'Dynamic Title 1', content:'Dynamic content 1'},
         //     {title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true}
         // ];
-        vm.tabs = [{
-            heading: 'Dashboard',
-            route: 'dashboard',
-            id: 'dashboardTab'
-        }, {
-            heading:'Avengers',
-            route: 'avengers',
-            id: 'avengersTab'
-        }];
+
 
 
         if ($state.current.name === 'tab')
@@ -59,6 +51,13 @@
             var shouldShowTab = $state.includes(tab);
             return shouldShowTab;
         };
+
+        // get all tabs
+        vm.getTabs = function(tab) {
+
+            return TabMgr.getAllTabs();
+        };
+
 
         // activate();
 
