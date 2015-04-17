@@ -11,27 +11,17 @@
     function Tabs($scope, config, logger, $state, TabMgr) {
         /*jshint validthis: true */
         var vm = this;
-        // vm.tabs = [
-        //     {title:'Dynamic Title 1', content:'Dynamic content 1'},
-        //     {title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true}
-        // ];
 
-
-
-        if ($state.current.name === 'tab')
-          $state.go(".dashboard");
-
+        if ($state.current.name === 'tab') {
+            $state.go('.dashboard');
+        }
 
         $scope.$on('$stateChangeSuccess', function(toState) {
         
-          if ($state.current.name === 'tab')
-            $state.go(".dashboard");
-          // else if ($state.includes("top") && !$state.is("top")) {
-          //   ctrl.selected = $state.current.name.split(".").slice(1, 2).pop();
-          // }
+            if ($state.current.name === 'tab') {
+                $state.go('.dashboard');
+            }
         })
-
-
 
         vm.gotoTab = function(tab) {
 
@@ -57,7 +47,6 @@
 
             return TabMgr.getAllTabs();
         };
-
 
         // activate();
 

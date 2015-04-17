@@ -50,7 +50,6 @@
         return service;
         ///////////////
 
-
         /**
          * [getMainNavStates return the 'main navigation' states, i.e the workbench module states]
          *
@@ -58,9 +57,9 @@
          */
         function getMainNavStates() {
 
-console.log('CHANGE THIS FUNCTION, IT SHOULD TAKE THE FIRST DECLARED STATES OF EACH DECLARED MODULE')
+            console.log('CHANGE THIS FUNCTION, IT SHOULD TAKE THE FIRST DECLARED STATES OF EACH DECLARED MODULE');
 
-            if (mainNavStates.length == 0) {
+            if (mainNavStates.length === 0) {
                 var states = $state.get();
                 for (var prop in states) {
                     if (states.hasOwnProperty(prop)) {

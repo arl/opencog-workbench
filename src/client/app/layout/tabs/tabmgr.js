@@ -6,14 +6,11 @@
         .factory('TabMgr', TabMgr)
         .run(appRun);
 
-
-
     /* @ngInject */
     function appRun(stateHelper) {
         // register the tab state (parent of the main state of every module)
         stateHelper.configureStates(getStates());
     }
-
 
     function getStates() {
         return [
@@ -41,22 +38,7 @@
             
             createTabs();
         });
-
-// remove this when getAllTabs will be working
-
-
-/*
-        _tabs = [{
-            heading: 'Dashboard',
-            route: 'dashboard',
-            id: 'dashboardTab'
-        }, {
-            heading:'Avengers',
-            route: 'avengers',
-            id: 'avengersTab'
-        }];
-
-*/
+        
         var service = {
             addTab: addTab,
             getAllTabs: getAllTabs,
@@ -73,15 +55,15 @@
             
         }
 
-        function createTabs() {
-             
+        function createTabs() {    
             tabs.length = 0;
-            for (var idx in allStates) {
+            for (var idx = 0; idx < allStates.length; idx++) {
+
                 var state = allStates[idx];
                 if (!!state.status) {
                     tabs.push({
                         'heading': state.name,
-                        'active': state.status == "active",
+                        'active': state.status === 'active',
                         'state': state.name
                     });
                 }
@@ -90,8 +72,9 @@
         }
 
         function getAllTabs() {
-            if (tabs.length == 0)
+            if (tabs.length === 0) {
                 createTabs();
+            }
             return tabs;
         }
 

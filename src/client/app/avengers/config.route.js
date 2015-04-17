@@ -30,8 +30,8 @@
                     },
                     resolve: {
                         foo: function() {
-                            console.log("resolving 'foo' for tab.avengers...");
-                            return "foo";
+                            console.log('resolving "foo" for tab.avengers...');
+                            return 'foo';
                         }
                     },
                     title: 'Avenger Component',

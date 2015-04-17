@@ -36,8 +36,8 @@
                     },
                     resolve: {
                         bar: function() {
-                            console.log("resolving 'bar' for tab.dashboard...");
-                            return "bar";
+                            console.log('resolving "bar" for tab.dashboard...');
+                            return 'bar';
                         }
                     },
                     title: 'Dashboard Component',
