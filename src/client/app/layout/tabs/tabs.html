@@ -2,7 +2,9 @@
 <div>
   <tabset type="pills">
       <tab ng-repeat="tab in tVm.getTabs()" active="tab.active" data-ui-sref="{{tab.state}}">
-      <tab-heading>{{tab.heading}}</tab-heading>
+
+            <tab-heading><i class="fa {{tab.faIcon}}"></i> {{tab.heading}} <a ng-click="removeTab($index)" href=''><i class="fa fa-times"></i></a></tab-heading>
+
       </tab>
     </tabset>
 </div>

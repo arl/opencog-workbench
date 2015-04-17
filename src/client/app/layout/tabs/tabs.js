@@ -5,8 +5,6 @@
         .module('app.layout.tabs')
         .controller('Tabs', Tabs);
 
-    // Tabs.$inject = ['$scope', 'config', 'logger', '$state'];
-
     /* @ngInject */
     function Tabs($scope, config, logger, $state, TabMgr) {
         /*jshint validthis: true */
@@ -21,18 +19,7 @@
             if ($state.current.name === 'tab') {
                 $state.go('.dashboard');
             }
-        })
-
-        vm.gotoTab = function(tab) {
-
-            var defineHereStateToGoWithTheHelpOfTabVariable = '';
-            $state.go(defineHereStateToGoWithTheHelpOfTabVariable);
-
-            // taken from sticky example : top.html
-            // <li ng-class="{active: $state.includes('top.people')}" ><a ui-sref="top.people">Personnel</a></li>
-            // <li ng-class="{active: $state.includes('top.inv')}" ><a ui-sref="top.inv">Inventory</a></li>
-            // <li ng-class="{active: $state.includes('top.cust')}" ><a ui-sref="top.cust">Customers</a></li>
-        };
+        });
 
         // should return if we show this tab or not (maybe we can directly do it
         // in the expression ng-show in template?)
@@ -45,7 +32,7 @@
         // get all tabs
         vm.getTabs = function(tab) {
 
-            return TabMgr.getAllTabs();
+            return TabMgr.getTabs();
         };
 
         // activate();

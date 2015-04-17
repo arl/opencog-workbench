@@ -8,6 +8,8 @@
     /* @ngInject */
     function appRun(routeHelper, dashboardConstants) {
 
+        var moduleConstants = dashboardConstants;
+
         // module routes definition
         var routes = [
             {
@@ -16,9 +18,9 @@
                  * in case the module uses various states, parent state
                  * should be declared first
                  */
-                state: 'tab.' + dashboardConstants.id,
+                state: 'tab.' + moduleConstants.id,
                 config: {
-                    url: dashboardConstants.id,
+                    url: moduleConstants.id,
                     views: {
                         'dashboard@tab': {
                             templateUrl: 'app/dashboard/dashboard.html',
@@ -27,7 +29,8 @@
                     },
                     data: {
                         nav: 1,
-                        content: '<i class="fa fa-dashboard"></i> Dashboard'
+                        faIcon: moduleConstants.faIcon,                        
+                        content: '<i class="fa ' + moduleConstants.faIcon  + '"></i> ' + moduleConstants.name
                     },
                     resolve: {
                         bar: function() {
@@ -35,7 +38,7 @@
                             return 'bar';
                         }
                     },
-                    title: dashboardConstants.name,
+                    title: moduleConstants.name,
                     deepStateRedirect: true,
                     sticky: true
                 }

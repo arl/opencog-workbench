@@ -8,6 +8,8 @@
     /* @ngInject */
     function appRun(routeHelper, avengersConstants) {
 
+        var moduleConstants = avengersConstants;
+
         // module routes definition
         var routes = [
             {
@@ -16,9 +18,9 @@
                  * in case the module uses various states, parent state
                  * should be declared first
                  */                
-                state: 'tab.' + avengersConstants.id,
+                state: 'tab.' + moduleConstants.id,
                 config: {
-                    url: avengersConstants.id,
+                    url: moduleConstants.id,
                     views: {
                         'avengers@tab': {
                             templateUrl: 'app/avengers/avengers.html',
@@ -27,7 +29,8 @@
                     },
                     data: {
                         nav: 2,
-                        content: '<i class="fa fa-lock"></i> Avengers'
+                        faIcon: moduleConstants.faIcon,
+                        content: '<i class="fa ' + moduleConstants.faIcon  + '"></i> ' + moduleConstants.name
                     },
                     resolve: {
                         foo: function() {
@@ -35,7 +38,7 @@
                             return 'foo';
                         }
                     },
-                    title: avengersConstants.name,
+                    title: moduleConstants.name,
                     deepStateRedirect: true,
                     sticky: true
                 }

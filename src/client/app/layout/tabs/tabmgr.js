@@ -8,7 +8,7 @@
 
     /* @ngInject */
     function appRun(routeHelper) {
-        // register the tab state (parent of the main state of every module)
+        // register the tab state (parent state of every module main state)
         routeHelper.configureRoutes(getStates());
     }
 
@@ -40,19 +40,18 @@
         });
         
         var service = {
-            addTab: addTab,
-            getAllTabs: getAllTabs,
+            getTabs: getTabs,
             closeTab: closeTab
         };
 
         return service;
 
-        function addTab() {
-            
-        }
-
         function closeTab() {
             
+
+            // FOR THE CLOSE TABS FEATURE AND ALSO TO ADD ICON TO TABS, LOOK AT this:
+            // http://jsfiddle.net/alfrescian/ZE9cE/
+            // IF WE SEPARATE 
         }
 
         function createTabs() {    
@@ -62,16 +61,17 @@
                 var route = mainRoutes[idx];
                 if (!!route.status) {
                     tabs.push({
-                        'heading': route.title,
                         'active': route.status === 'active',
-                        'state': route.name
+                        'state': route.name,
+                        'heading': route.title,
+                        'faIcon': route.data.faIcon
                     });
                 }
 
             }          
         }
 
-        function getAllTabs() {
+        function getTabs() {
             if (tabs.length === 0) {
                 createTabs();
             }
