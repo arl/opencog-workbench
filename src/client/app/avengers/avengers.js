@@ -6,11 +6,11 @@
         .controller('Avengers', Avengers);
 
     /* @ngInject */
-    function Avengers(dataservice, logger) {
+    function Avengers(dataservice, logger, avengersConstants) {
         /*jshint validthis: true */
         var vm = this;
         vm.avengers = [];
-        vm.title = 'Avengers';
+        vm.title = avengersConstants.name;
 
         activate();
 

@@ -5,25 +5,20 @@
         .module('app.dashboard')
         .run(appRun);
 
-    // appRun.$inject = ['stateHelper'];
-
     /* @ngInject */
-    function appRun(stateHelper) {
-        stateHelper.configureStates(getStates());
-    }
+    function appRun(routeHelper, dashboardConstants) {
 
-    // module state definition
-    function getStates() {
-        return [
+        // module routes definition
+        var routes = [
             {
                 /**
                  * main state (module parent state),
                  * in case the module uses various states, parent state
-                 * should be declarexd first
+                 * should be declared first
                  */
-                state: 'tab.dashboard',
+                state: 'tab.' + dashboardConstants.id,
                 config: {
-                    url: 'dashboard',
+                    url: dashboardConstants.id,
                     views: {
                         'dashboard@tab': {
                             templateUrl: 'app/dashboard/dashboard.html',
@@ -40,11 +35,14 @@
                             return 'bar';
                         }
                     },
-                    title: 'Dashboard Component',
+                    title: dashboardConstants.name,
                     deepStateRedirect: true,
                     sticky: true
                 }
             }
         ];
+
+        routeHelper.configureRoutes(routes);
     }
+
 })();

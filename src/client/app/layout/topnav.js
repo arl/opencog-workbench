@@ -5,12 +5,12 @@
         .module('app.layout')
         .controller('Topnav', Topnav);
 
-    Topnav.$inject = ['$rootScope', '$state', 'stateHelper', 'menuhelper', '_'];
+    Topnav.$inject = ['$rootScope', '$state', 'routeHelper', 'menuhelper', '_'];
 
-    function Topnav($rootScope, $state, stateHelper, menuhelper, _) {
+    function Topnav($rootScope, $state, routeHelper, menuhelper, _) {
         /*jshint validthis: true */
         var vm = this;
-        var mainNavStates = stateHelper.getMainNavStates();
+        var mainRoutes = routeHelper.getMainRoutes();
         var allMenus = menuhelper.getMenus();
         vm.isCurrent = isCurrent;
         console.log(vm.title); // example
@@ -19,7 +19,7 @@
         activate();
 
         function activate() {
-            getMainNavStates();
+            getMainRoutes();
             getMenus($state.current.name);
             updateMenu();
         }
@@ -32,7 +32,7 @@
         function updateMenu() {
             $rootScope.$on('$stateChangeSuccess',
                 function(event, toState, toParams, fromState, fromParams) {
-                    getMenus(toState.name);
+                    getMenus(toState.title);
                 }
             );
         }
@@ -42,8 +42,8 @@
          *
          * @return {[type]} [description]
          */
-        function getMainNavStates() {
-            vm.mainNavStates = mainNavStates.filter(function(r) {
+        function getMainRoutes() {
+            vm.mainRoutes = mainRoutes.filter(function(r) {
                 return r.data && r.data.nav;
             }).sort(function(r1, r2) {
                 return r1.data.nav - r2.data.nav;

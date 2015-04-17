@@ -5,19 +5,20 @@
         .module('app.avengers')
         .run(appRun);
 
-    // appRun.$inject = ['stateHelper']
-
     /* @ngInject */
-    function appRun(stateHelper) {
-        stateHelper.configureStates(getStates());
-    }
+    function appRun(routeHelper, avengersConstants) {
 
-    function getStates() {
-        return [
+        // module routes definition
+        var routes = [
             {
-                state: 'tab.avengers',
+                /**
+                 * main state (module parent state),
+                 * in case the module uses various states, parent state
+                 * should be declared first
+                 */                
+                state: 'tab.' + avengersConstants.id,
                 config: {
-                    url: 'avengers',
+                    url: avengersConstants.id,
                     views: {
                         'avengers@tab': {
                             templateUrl: 'app/avengers/avengers.html',
@@ -34,12 +35,13 @@
                             return 'foo';
                         }
                     },
-                    title: 'Avenger Component',
+                    title: avengersConstants.name,
                     deepStateRedirect: true,
                     sticky: true
                 }
             }
         ];
+        routeHelper.configureRoutes(routes);
     }
 
 })();

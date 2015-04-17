@@ -16,7 +16,7 @@
         //     
         // };
         var _menus = [];
-        // var $routeProvider = stateHelperConfig.config.$routeProvider;
+        // var $routeProvider = routeHelperConfig.config.$routeProvider;
 
         var service = {
             configureMenus: configureMenus,
@@ -92,7 +92,7 @@
         //         function(event, current, previous) {
         //             routeCounts.changes++;
         //             handlingRouteChangeError = false;
-        //             var title = stateHelperConfig.config.docTitle + ' ' + (current.title || '');
+        //             var title = routeHelperConfig.config.docTitle + ' ' + (current.title || '');
         //             $rootScope.title = title; // data bind to <title>
         //         }
         //     );

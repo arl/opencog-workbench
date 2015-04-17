@@ -23,7 +23,7 @@
 
     /* @ngInject */
     function configure ($logProvider, $stateProvider, $urlRouterProvider,
-				stateHelperConfigProvider, exceptionHandlerProvider, $stickyStateProvider) {
+				routeHelperConfigProvider, exceptionHandlerProvider, $stickyStateProvider) {
         // turn debugging off/on (no info or warn)
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
@@ -32,10 +32,10 @@
         $stickyStateProvider.enableDebug(true);
 
         // Configure the common state and urlRouter providers
-        stateHelperConfigProvider.config.$stateProvider = $stateProvider;
-        stateHelperConfigProvider.config.$urlRouterProvider = $urlRouterProvider;
-        stateHelperConfigProvider.config.$stickyStateProvider = $stickyStateProvider;        
-        stateHelperConfigProvider.config.docTitle = 'OC-Workbench: ';
+        routeHelperConfigProvider.config.$stateProvider = $stateProvider;
+        routeHelperConfigProvider.config.$urlRouterProvider = $urlRouterProvider;
+        routeHelperConfigProvider.config.$stickyStateProvider = $stickyStateProvider;        
+        routeHelperConfigProvider.config.docTitle = 'OC-Workbench: ';
         var resolveAlways = { /* @ngInject */
             ready: function(dataservice) {
                 return dataservice.ready();
@@ -44,7 +44,7 @@
             //    return dataservice.ready();
             // }]
         };
-        stateHelperConfigProvider.config.resolveAlways = resolveAlways;
+        routeHelperConfigProvider.config.resolveAlways = resolveAlways;
 
         // Configure the common exception handler
         exceptionHandlerProvider.configure(config.appErrorPrefix);

@@ -5,9 +5,8 @@
         .module('app.dashboard')
         .controller('Dashboard', Dashboard);
 
-    Dashboard.$inject = ['$q', 'dataservice', 'logger'];
-
-    function Dashboard($q, dataservice, logger) {
+    /* @ngInject  */
+    function Dashboard($q, dataservice, logger, dashboardConstants) {
 
         /*jshint validthis: true */
         var vm = this;
@@ -18,7 +17,7 @@
         };
         vm.avengerCount = 0;
         vm.avengers = [];
-        vm.title = 'Dashboard';
+        vm.title = dashboardConstants.name;
 
         activate();
 

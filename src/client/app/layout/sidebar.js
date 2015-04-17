@@ -5,12 +5,12 @@
         .module('app.layout')
         .controller('Sidebar', Sidebar);
 
-    Sidebar.$inject = ['$state', 'stateHelper'];
+    Sidebar.$inject = ['$state', 'routeHelper'];
 
-    function Sidebar($route, stateHelper) {
+    function Sidebar($route, routeHelper) {
         /*jshint validthis: true */
         var vm = this;
-        var routes = stateHelper.getMainNavStates();
+        var routes = routeHelper.getMainRoutes();
         //vm.isCurrent = isCurrent;
         vm.sidebarReady = function() {console.log('done animating menu'); }; // example
 

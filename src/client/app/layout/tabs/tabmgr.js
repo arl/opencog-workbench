@@ -7,9 +7,9 @@
         .run(appRun);
 
     /* @ngInject */
-    function appRun(stateHelper) {
+    function appRun(routeHelper) {
         // register the tab state (parent of the main state of every module)
-        stateHelper.configureStates(getStates());
+        routeHelper.configureRoutes(getStates());
     }
 
     function getStates() {
@@ -30,11 +30,11 @@
     }
 
     /* @ngInject */
-    function TabMgr($http, $location, $q, exception, logger, stateHelper) {
+    function TabMgr($http, $location, $q, exception, logger, routeHelper) {
 
-        var allStates = stateHelper.getMainNavStates();
+        var mainRoutes = routeHelper.getMainRoutes();
         var tabs = [];
-        stateHelper.notifyStateChanges(function () {
+        routeHelper.notifyStateChanges(function () {
             
             createTabs();
         });
@@ -57,14 +57,14 @@
 
         function createTabs() {    
             tabs.length = 0;
-            for (var idx = 0; idx < allStates.length; idx++) {
+            for (var idx = 0; idx < mainRoutes.length; idx++) {
 
-                var state = allStates[idx];
-                if (!!state.status) {
+                var route = mainRoutes[idx];
+                if (!!route.status) {
                     tabs.push({
-                        'heading': state.name,
-                        'active': state.status === 'active',
-                        'state': state.name
+                        'heading': route.title,
+                        'active': route.status === 'active',
+                        'state': route.name
                     });
                 }
 

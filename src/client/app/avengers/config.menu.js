@@ -5,12 +5,9 @@
         .module('app.avengers')
         .run(appRun);
 
-    // appRun.$inject = ['stateHelper']
-
     /* @ngInject */
-    function appRun(menuhelper) {
-        // first parameter
-        menuhelper.configureMenus('avengers', getMenus());
+    function appRun(menuhelper, avengersConstants) {
+        menuhelper.configureMenus(avengersConstants.name, getMenus());
     }
 
     function getMenus() {

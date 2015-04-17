@@ -1,8 +1,9 @@
 <!-- the tabs themselves -->
 <div>
-  <tabset class="tab-container" type="tabs" justified="false">
-      <tab class="tab" ng-repeat="tab in tVm.getTabs()" heading="{{tab.heading}}" active="tab.active" data-ui-sref="{{tab.state}}">
-          </tab>
+  <tabset type="pills">
+      <tab ng-repeat="tab in tVm.getTabs()" active="tab.active" data-ui-sref="{{tab.state}}">
+      <tab-heading>{{tab.heading}}</tab-heading>
+      </tab>
     </tabset>
 </div>
 

@@ -3,11 +3,11 @@
 
     angular
         .module('blocks.router')
-        .provider('stateHelperConfig', stateHelperConfig)
-        .factory('stateHelper', stateHelper);
+        .provider('routeHelperConfig', routeHelperConfig)
+        .factory('routeHelper', routeHelper);
 
-    // Must configure via the stateHelperConfigProvider
-    function stateHelperConfig() {
+    // Must configure via the routeHelperConfigProvider
+    function routeHelperConfig() {
         /* jshint validthis:true */
         this.config = {
             // These are the properties we need to set
@@ -23,24 +23,22 @@
         };
     }
 
-    // stateHelper.$inject = ['$location', '$rootScope', '$state', 'logger', 'stateHelperConfig'];
-
     /* @ngInject */
-    function stateHelper($location, $rootScope, $state, logger, stateHelperConfig) {
+    function routeHelper($location, $rootScope, $state, logger, routeHelperConfig) {
         var handlingRouteChangeError = false;
         var stateCounts = {
             errors: 0,
             changes: 0
         };
-        var mainNavStates = [];
+        var mainRoutes = [];
         var stateChangesListeners = [];
-        var $stateProvider = stateHelperConfig.config.$stateProvider;
-        var $urlRouterProvider = stateHelperConfig.config.$urlRouterProvider;
-        var $stickyStateProvider = stateHelperConfig.config.$stickyStateProvider; 
+        var $stateProvider = routeHelperConfig.config.$stateProvider;
+        var $urlRouterProvider = routeHelperConfig.config.$urlRouterProvider;
+        var $stickyStateProvider = routeHelperConfig.config.$stickyStateProvider; 
 
         var service = {
-            configureStates: configureStates,
-            getMainNavStates: getMainNavStates,
+            configureRoutes: configureRoutes,
+            getMainRoutes: getMainRoutes,
             notifyStateChanges: notifyStateChanges, 
             stateCounts: stateCounts
         };
@@ -51,37 +49,37 @@
         ///////////////
 
         /**
-         * [getMainNavStates return the 'main navigation' states, i.e the workbench module states]
+         * [getMainRoutes return the 'main navigation' states, i.e the workbench module states]
          *
          * @return {[type]} [description]
          */
-        function getMainNavStates() {
+        function getMainRoutes() {
 
             console.log('CHANGE THIS FUNCTION, IT SHOULD TAKE THE FIRST DECLARED STATES OF EACH DECLARED MODULE');
 
-            if (mainNavStates.length === 0) {
+            if (mainRoutes.length === 0) {
                 var states = $state.get();
                 for (var prop in states) {
                     if (states.hasOwnProperty(prop)) {
                         var state = states[prop];
                         var isNavRoute = !!state.title;
                         if (isNavRoute) {
-                            mainNavStates.push(state);
+                            mainRoutes.push(state);
                         }
                     }
                 }
             }
-            return mainNavStates;
+            return mainRoutes;
         }
 
         function notifyStateChanges(callback) {
             stateChangesListeners.push(callback);
         }
 
-        function configureStates(routes) {
+        function configureRoutes(routes) {
             routes.forEach(function(route) {
                 route.config.resolve =
-                    angular.extend(route.config.resolve || {}, stateHelperConfig.config.resolveAlways);
+                    angular.extend(route.config.resolve || {}, routeHelperConfig.config.resolveAlways);
                 $stateProvider.state(route.state, route.config);
             });
             $urlRouterProvider.otherwise('/');
@@ -130,7 +128,7 @@
                     stateCounts.changes++;
                     handlingRouteChangeError = false;
 
-                    setDocTitle(stateHelperConfig.config.docTitle + ' ' + (toState.title || ''));
+                    setDocTitle(routeHelperConfig.config.docTitle + ' ' + (toState.title || ''));
 
                     // notify the registered state change callbacks
                     angular.forEach(stateChangesListeners, function (listener) {
