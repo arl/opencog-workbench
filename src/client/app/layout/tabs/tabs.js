@@ -10,17 +10,6 @@
         /*jshint validthis: true */
         var vm = this;
 
-        if ($state.current.name === 'tab') {
-            $state.go('.dashboard');
-        }
-
-        $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-        
-            if ($state.current.name === 'tab') {
-                $state.go('.dashboard');
-            }
-        });
-
         // should return if we show this tab or not (maybe we can directly do it
         // in the expression ng-show in template?)
         vm.showTab = function(tab) {
@@ -41,17 +30,27 @@
             TabMgr.closeTab(tab);
         };
 
-        // activate();
+        activate();
 
-        // function activate() {
-        //     logger.success(config.appTitle + ' loaded!', null);
-        //     // Using a resolver on all routes or dataservice.ready in every controller
-        //     // dataservice.ready().then(function(){
-        //     //     hideSplash();
-        //     // });
-        //     hideSplash();
-        //     getTabs();
-        // }
+        function activate() {
+
+            // redirect to dashboard if trying to load root url
+            if ($state.current.name === 'tab') {
+                $state.go('.dashboard');
+            }
+
+            // monitor state changes to update tabs
+            $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+
+                var current = $state.current;
+    
+                if (!!current.sticky) {
+                    if (!TabMgr.isTabOpen(current)) {
+                        TabMgr.addTab(current);                    
+                    }
+                }
+            });
+        }
 
     }
 })();

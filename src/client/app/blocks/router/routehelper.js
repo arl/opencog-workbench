@@ -31,7 +31,6 @@
             changes: 0
         };
         var mainRoutes = [];
-        var stateChangesListeners = [];
         var $stateProvider = routeHelperConfig.config.$stateProvider;
         var $urlRouterProvider = routeHelperConfig.config.$urlRouterProvider;
         var $stickyStateProvider = routeHelperConfig.config.$stickyStateProvider; 
@@ -39,7 +38,6 @@
         var service = {
             configureRoutes: configureRoutes,
             getMainRoutes: getMainRoutes,
-            notifyStateChanges: notifyStateChanges, 
             stateCounts: stateCounts
         };
 
@@ -70,10 +68,6 @@
                 }
             }
             return mainRoutes;
-        }
-
-        function notifyStateChanges(callback) {
-            stateChangesListeners.push(callback);
         }
 
         function configureRoutes(routes) {
@@ -129,11 +123,6 @@
                     handlingRouteChangeError = false;
 
                     setDocTitle(routeHelperConfig.config.docTitle + ' ' + (toState.title || ''));
-
-                    // notify the registered state change callbacks
-                    angular.forEach(stateChangesListeners, function (listener) {
-                        listener(toState, toParams, fromState, fromParams);
-                    });
                 }
             );
         }
