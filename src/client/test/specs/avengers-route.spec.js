@@ -11,9 +11,9 @@ describe('avengers', function () {
 
         it('should map /avengers route to avengers View template', function () {
 
-            var dashboardState = _.find($state.get(), function(s){ return s.url === '/avengers';});
+            var avengersState = _.find($state.get(), function(s){ return s.url === 'avengers';});
 
-            expect(dashboardState.templateUrl).
+            expect(avengersState.templateUrl).
                 to.equal('app/avengers/avengers.html');
         });
 

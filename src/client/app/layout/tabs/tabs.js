@@ -14,7 +14,7 @@
             $state.go('.dashboard');
         }
 
-        $scope.$on('$stateChangeSuccess', function(toState) {
+        $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
         
             if ($state.current.name === 'tab') {
                 $state.go('.dashboard');
@@ -35,6 +35,12 @@
             return TabMgr.getTabs();
         };
 
+        // close tab
+        vm.closeTab = function(tab) {
+
+            TabMgr.closeTab(tab);
+        };
+
         // activate();
 
         // function activate() {
@@ -45,22 +51,6 @@
         //     // });
         //     hideSplash();
         //     getTabs();
-        // }
-
-        // function hideSplash() {
-        //     //Force a 1 second delay so we can see the splash.
-        //     $timeout(function() {
-        //         vm.showSplash = false;
-        //     }, 1000);
-        // }
-
-        // /**
-        //  * get tabs from the tabs manager
-        //  *
-        //  * @return {[type]} [description]
-        //  */
-        // function getTabs() {
-        //     vm.tabs = tabs;
         // }
 
     }

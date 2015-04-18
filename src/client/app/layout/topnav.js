@@ -20,7 +20,7 @@
 
         function activate() {
             getMainRoutes();
-            getMenus($state.current.name);
+            getMenus($state.current.title);
             updateMenu();
         }
 
