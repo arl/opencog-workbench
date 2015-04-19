@@ -133,7 +133,7 @@
 
         function init() {
             handleStateErrors();
-            handleStateChanges();
+            handleStateChanges();         
         }
     }
 })();

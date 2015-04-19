@@ -32,7 +32,7 @@
     /* @ngInject */
     function TabMgr($http, $location, $q, exception, logger, routeHelper, $stickyState, _) {
 
-        var mainRoutes = routeHelper.getMainRoutes();
+        // var mainRoutes = routeHelper.getMainRoutes();
         var tabs = [];
 
         // routeHelper.notifyStateChanges(function (toState, toParams, fromState, fromParams) {            
@@ -41,6 +41,7 @@
         
         var service = {
             addTab: addTab,
+            setActiveTab: setActiveTab,
             isTabOpen: isTabOpen,
             getTabs: getTabs,
             closeTab: closeTab
@@ -55,81 +56,48 @@
             // 2. we are closing another tab 
 
             console.error('there is something else to do here...!');
-            //$stickyState.reset(tab.state);
-            var test = true;
+            
+
+//             $stickyState.reset(tab.state);
+//             tabs.
+// _.filter(data, function(item) { return !!item.weight; });
+//             var test = true;
         }
 
         function isTabOpen(state) {
 
             // check that this state has not already his tab
             return _.some(tabs, function(t) {
-                return t.state === state.name
-                });
+                return t.state.name === state.name
+            });
         }
 
+        /**
+         * set as active the tab corresponding to state given as argument
+         *
+         * @param  {Object} state [state which tab will be activated]
+         */
+        function setActiveTab(state) {
+            _.each(tabs, function(t) {
+                t.active = (t.state.name == state.name);
+            });
+        }
+
+        /**
+         * add a new Tab
+         *
+         * @param {Object} state state representing the tab to open
+         */
         function addTab(state) {
 
-                   tabs.push({
-                    'active': _.contains(['active', 'entered'], state.status),
-                    'state': state.name,
-                    'heading': state.title,
-                    'faIcon': state.data.faIcon,
-                    'url': state.url
-                });  
-
-            // OLD VERSION
-            /*
-            var prevTabs = angular.copy(tabs);
-            tabs.length = 0;
-            for (var idx = 0; idx < mainRoutes.length; idx++) {
-
-                var route = mainRoutes[idx];
-                if (!!route.status) {
-                    tabs.push({
-                        'active': _.contains(['active', 'entered'], route.status),
-                        'state': route.name,
-                        'heading': route.title,
-                        'faIcon': route.data.faIcon,
-                        'url': route.url
-                    });
-                }
-            }  
-            */        
+           tabs.push({'state' : state, 'active' : true});
         }
 
-        function createTabs(toState, toParams, fromState, fromParams) {
-/*
-            if (!!toState.status) {
-                // check that this state has not already his tab
-                if (_.every(tabs, function(t) { t.state != toState.name })) {
-                   tabs.push({
-                    'active': _.contains(['active', 'entered'], route.status),
-                    'state': route.name,
-                    'heading': route.title,
-                    'faIcon': route.data.faIcon,
-                    'url': route.url
-                });                
-               }
-           }
-*/
-            // OLD VERSION
-            var prevTabs = angular.copy(tabs);
-            tabs.length = 0;
-            for (var idx = 0; idx < mainRoutes.length; idx++) {
-
-                var route = mainRoutes[idx];
-                if (!!route.status) {
-                    tabs.push({
-                        'active': _.contains(['active', 'entered'], route.status),
-                        'state': route.name,
-                        'heading': route.title,
-                        'faIcon': route.data.faIcon,
-                        'url': route.url
-                    });
-                }
-            }          
-        }
-
+        /**
+         * return all opened tabs
+         *
+         * @return {[type]} [description]
+         */
         function getTabs() {
 
             return tabs;

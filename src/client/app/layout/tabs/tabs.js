@@ -13,20 +13,17 @@
         // should return if we show this tab or not (maybe we can directly do it
         // in the expression ng-show in template?)
         vm.showTab = function(tab) {
-
             var shouldShowTab = $state.includes(tab);
             return shouldShowTab;
         };
 
         // get all tabs
         vm.getTabs = function(tab) {
-
             return TabMgr.getTabs();
         };
 
         // close tab
         vm.closeTab = function(tab) {
-
             TabMgr.closeTab(tab);
         };
 
@@ -34,23 +31,22 @@
 
         function activate() {
 
-            // redirect to dashboard if trying to load root url
-            if ($state.current.name === 'tab') {
-                $state.go('.dashboard');
-            }
+            // // redirect to dashboard if trying to load root url
+            // if ($state.current.name === 'tab') {
+            //     $state.go('.dashboard');
+            // }
 
             // monitor state changes to update tabs
             $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-
                 var current = $state.current;
-    
                 if (!!current.sticky) {
-                    if (!TabMgr.isTabOpen(current)) {
-                        TabMgr.addTab(current);                    
+                    if (TabMgr.isTabOpen(current)) {
+                        TabMgr.setActiveTab(current);
+                    } else {
+                        TabMgr.addTab(current);
                     }
                 }
             });
         }
-
     }
 })();

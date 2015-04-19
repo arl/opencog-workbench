@@ -3,9 +3,9 @@
   <tabset type="pills">
       <tab
         ng-repeat="tab in tVm.getTabs()"
-        active="tab.active" data-ui-sref="{{tab.state}}">
-        <tab-heading>{{tab.heading}}
-          <i class="fa {{tab.faIcon}}"></i>  <a ng-click="$parent.tVm.closeTab(tab)" href>
+        active="tab.active" data-ui-sref="{{tab.state.name}}">
+        <tab-heading>{{tab.state.title}}
+          <i class="fa {{tab.state.data.faIcon}}"></i>  <a ng-click="$parent.tVm.closeTab(tab.state)" href>
             <i class="fa fa-times"></i></a>
         </tab-heading>
       </tab>
