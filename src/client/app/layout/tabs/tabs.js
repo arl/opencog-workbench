@@ -23,7 +23,8 @@
         };
 
         // close tab
-        vm.closeTab = function(tab) {
+        vm.closeTab = function($event, tab) {
+            $event.stopPropagation();
             TabMgr.closeTab(tab);
         };
 
@@ -38,13 +39,8 @@
 
             // monitor state changes to update tabs
             $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-                var current = $state.current;
-                if (!!current.sticky) {
-                    if (TabMgr.isTabOpen(current)) {
-                        TabMgr.setActiveTab(current);
-                    } else {
-                        TabMgr.addTab(current);
-                    }
+                if (!!$state.current.sticky) {
+                    TabMgr.openTab($state.current);
                 }
             });
         }

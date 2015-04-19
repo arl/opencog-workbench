@@ -40,14 +40,40 @@
         // });
         
         var service = {
-            addTab: addTab,
-            setActiveTab: setActiveTab,
-            isTabOpen: isTabOpen,
+            openTab: openTab,
             getTabs: getTabs,
             closeTab: closeTab
         };
 
         return service;
+        ///////////////
+
+        /**
+         * open a tab corresponding to given state
+         *
+         *  if tab is present, set it as active
+         *  or open a new tab and activate it
+         *
+         * @param {Object} state state representing the tab to open
+         */
+        function openTab(state) {
+
+            if (isTabPresent(state)) {
+                setTabActive(state);
+            } else {
+                tabs.push({'state' : state, 'active' : true});
+            }
+        }
+
+        /**
+         * return all opened tabs
+         *
+         * @return {[type]} [description]
+         */
+        function getTabs() {
+
+            return tabs;
+        }
 
         function closeTab(tab) {
             
@@ -55,16 +81,28 @@
             // 1. we are closing the active tabs 
             // 2. we are closing another tab 
 
-            console.error('there is something else to do here...!');
-            
+            console.info('BEFORE CLOSING TAB :' + tab.state.name);
 
-//             $stickyState.reset(tab.state);
-//             tabs.
-// _.filter(data, function(item) { return !!item.weight; });
-//             var test = true;
+            $stickyState.reset(tab.state.name);
+            removeTab(tab.state);
+            if (tab.active) {
+                // close tab and set another one as active
+            } else {
+                // just close tab
+            }
+            console.info('AFTER CLOSING TAB :' + tab.state.name);
         }
 
-        function isTabOpen(state) {
+        ///////////////
+
+        /**
+         * check if given state already has a tab 
+         *
+         * @param  {Object}  state 
+         *
+         * @return {Boolean}       tab present?
+         */
+        function isTabPresent(state) {
 
             // check that this state has not already his tab
             return _.some(tabs, function(t) {
@@ -77,31 +115,22 @@
          *
          * @param  {Object} state [state which tab will be activated]
          */
-        function setActiveTab(state) {
+        function setTabActive(state) {
             _.each(tabs, function(t) {
                 t.active = (t.state.name == state.name);
             });
         }
 
         /**
-         * add a new Tab
+         * remove tab corresponding to state given as argument
          *
-         * @param {Object} state state representing the tab to open
+         * @param  {Object} state [state which tab will be removed]
          */
-        function addTab(state) {
-
-           tabs.push({'state' : state, 'active' : true});
-        }
-
-        /**
-         * return all opened tabs
-         *
-         * @return {[type]} [description]
-         */
-        function getTabs() {
-
-            return tabs;
-        }
+        function removeTab(state) {
+            tabs = _.filter(tabs, function(t) {
+                return t.state.name !== state.name;
+            });
+        }        
 
     }
 })();

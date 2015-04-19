@@ -6,7 +6,7 @@
         .run(appRun);
 
     /* @ngInject */
-    function appRun(routeHelper, avengersConstants) {
+    function appRun(routeHelper, avengersConstants, logger) {
 
         var moduleConstants = avengersConstants;
 
@@ -41,6 +41,16 @@
                     title: moduleConstants.name,
                     deepStateRedirect: true,
                     sticky: true
+
+                    // uncomment for state debugging
+                    ,onEnter: function() {
+
+                        logger.info('Entering Avengers View');
+                    },
+
+                    onExit: function() {
+                        logger.info('Exiting Avengers View');
+                    } //*/
                 }
             }
         ];

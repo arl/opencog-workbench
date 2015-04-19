@@ -6,7 +6,7 @@
         .run(appRun);
 
     /* @ngInject */
-    function appRun(routeHelper, dashboardConstants) {
+    function appRun(routeHelper, dashboardConstants, logger) {
 
         var moduleConstants = dashboardConstants;
 
@@ -41,6 +41,16 @@
                     title: moduleConstants.name,
                     deepStateRedirect: true,
                     sticky: true
+
+                    // uncomment for state debugging
+                    ,onEnter: function() {
+
+                        logger.info('Entering Dashboard View');
+                    },
+
+                    onExit: function() {
+                        logger.info('Exiting Dashboard View');
+                    } //*/
                 }
             }
         ];

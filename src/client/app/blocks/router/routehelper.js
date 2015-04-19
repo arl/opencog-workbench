@@ -79,6 +79,8 @@
             $urlRouterProvider.otherwise('/');
         }
 
+        ///////////////        
+
         function handleStateErrors() {
             // Route cancellation:
             // On routing error, go to the dashboard.
