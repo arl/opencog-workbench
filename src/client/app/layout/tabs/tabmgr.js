@@ -30,18 +30,14 @@
     }
 
     /* @ngInject */
-    function TabMgr($http, $location, $q, exception, logger, routeHelper, $stickyState, _) {
+    function TabMgr($http, $location, $q, exception, routeHelper, $state, _) {
 
-        // var mainRoutes = routeHelper.getMainRoutes();
         var tabs = [];
 
-        // routeHelper.notifyStateChanges(function (toState, toParams, fromState, fromParams) {            
-        //     createTabs(toState, toParams, fromState, fromParams);
-        // });
-        
         var service = {
             openTab: openTab,
             getTabs: getTabs,
+            getActiveTab: getActiveTab,
             closeTab: closeTab
         };
 
@@ -57,11 +53,12 @@
          * @param {Object} state state representing the tab to open
          */
         function openTab(state) {
-
             if (isTabPresent(state)) {
-                setTabActive(state);
+                setActiveTab(state);
             } else {
+                // as we now have more than one tab, anyone can be closed
                 tabs.push({'state' : state, 'active' : true});
+                updateTabClosing();
             }
         }
 
@@ -71,26 +68,44 @@
          * @return {[type]} [description]
          */
         function getTabs() {
-
             return tabs;
         }
 
         function closeTab(tab) {
             
-            // 2 cases : 
-            // 1. we are closing the active tabs 
-            // 2. we are closing another tab 
-
-            console.info('BEFORE CLOSING TAB :' + tab.state.name);
-
-            $stickyState.reset(tab.state.name);
-            removeTab(tab.state);
-            if (tab.active) {
-                // close tab and set another one as active
-            } else {
-                // just close tab
+            function deleteTab(tab) {
+                removeTab(tab.state);
+                routeHelper.resetState(tab.state.name);
+                updateTabClosing();
             }
-            console.info('AFTER CLOSING TAB :' + tab.state.name);
+
+            if (tab.active) {
+                // force transition to the first inactive tab we find
+                var newState = _.find(tabs, function(t) { return !t.active});
+                $state.go(newState.state.name).then(
+                    function (result) {
+                        // promise resolved, we can delete the tab
+                        deleteTab(tab);
+                    },
+                    function (error) {
+                        console.error(error);
+                    });
+            } else {
+                // we can directly delete the tab
+                deleteTab(tab);
+            }
+        }
+
+        /**
+         * get active tab, if any
+         *
+         * @return {Object}     active tab or undefined
+         */
+        function getActiveTab() {
+            // check that this state has not already his tab
+            return _.find(tabs, function(t) {
+                return t.active
+            });
         }
 
         ///////////////
@@ -103,7 +118,6 @@
          * @return {Boolean}       tab present?
          */
         function isTabPresent(state) {
-
             // check that this state has not already his tab
             return _.some(tabs, function(t) {
                 return t.state.name === state.name
@@ -115,7 +129,7 @@
          *
          * @param  {Object} state [state which tab will be activated]
          */
-        function setTabActive(state) {
+        function setActiveTab(state) {
             _.each(tabs, function(t) {
                 t.active = (t.state.name == state.name);
             });
@@ -124,12 +138,26 @@
         /**
          * remove tab corresponding to state given as argument
          *
-         * @param  {Object} state [state which tab will be removed]
+         * @param  {Object} state state which tab will be removed
          */
         function removeTab(state) {
             tabs = _.filter(tabs, function(t) {
                 return t.state.name !== state.name;
             });
+        }
+
+        /**
+         * update closeEnabled flag, depending on tab count
+         */
+        function updateTabClosing() {
+            // if only tab, disable closing
+            if (tabs.length == 1) {
+                tabs[0].closeEnabled = false;
+            } else {
+                _.each(tabs, function(t) {
+                    t.closeEnabled = true;
+                });                
+            }
         }        
 
     }

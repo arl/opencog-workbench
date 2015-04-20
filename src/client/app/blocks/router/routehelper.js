@@ -24,7 +24,7 @@
     }
 
     /* @ngInject */
-    function routeHelper($location, $rootScope, $state, logger, routeHelperConfig) {
+    function routeHelper($location, $rootScope, $state, $stickyState, logger, routeHelperConfig) {
         var handlingRouteChangeError = false;
         var stateCounts = {
             errors: 0,
@@ -38,13 +38,23 @@
         var service = {
             configureRoutes: configureRoutes,
             getMainRoutes: getMainRoutes,
-            stateCounts: stateCounts
+            stateCounts: stateCounts,
+            resetState: resetState
         };
 
         init();
 
         return service;
         ///////////////
+
+        /**
+         * reset (clear) state
+         *
+         * @param  {String} stateName name of state to reset
+         */
+        function resetState(stateName) {
+            $stickyState.reset(stateName);
+        }
 
         /**
          * [getMainRoutes return the 'main navigation' states, i.e the workbench module states]
@@ -123,7 +133,6 @@
                     // update state change count
                     stateCounts.changes++;
                     handlingRouteChangeError = false;
-
                     setDocTitle(routeHelperConfig.config.docTitle + ' ' + (toState.title || ''));
                 }
             );

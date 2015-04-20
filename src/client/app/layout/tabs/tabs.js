@@ -12,9 +12,14 @@
 
         // should return if we show this tab or not (maybe we can directly do it
         // in the expression ng-show in template?)
-        vm.showTab = function(tab) {
-            var shouldShowTab = $state.includes(tab);
-            return shouldShowTab;
+        vm.isActive = function(stateName) {
+
+            return $state.includes(stateName);
+            var active = false;
+            var activeTab = TabMgr.getActiveTab();
+            if (activeTab)
+                active = (activeTab.state.name === stateName);
+            return active;
         };
 
         // get all tabs
@@ -25,7 +30,9 @@
         // close tab
         vm.closeTab = function($event, tab) {
             $event.stopPropagation();
-            TabMgr.closeTab(tab);
+            if (tab.closeEnabled) {
+                TabMgr.closeTab(tab);
+            }
         };
 
         activate();

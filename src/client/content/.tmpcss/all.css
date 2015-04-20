@@ -869,6 +869,9 @@ form {
   border-color: #000000;
   background-color: #111111; }
 
+.not-allowed {
+  cursor: not-allowed; }
+
 /*
 <a href="/" class="navbar-brand">
 <div style="display: flex;">
