@@ -12,8 +12,41 @@
   border: 1px solid #888888;
 }
 
+.navbar-brand div {
+
+	display: flex;
+	& img {
+		display: block;
+		height: 40px;
+		width: 40px;
+		  margin-top: -10px;
+		content:url('../images/oclogo.png')
+	}
+	& span {
+    width: 140px;
+    padding-left: 30px;
+    margin-top: -10px;		
+	}
+
+}​
+
 /* hover tab color */
 .nav-tabs>li>a:hover {
   border-color: #000000;
   background-color: #111111;
 }
+
+
+/*
+<a href="/" class="navbar-brand">
+<div style="display: flex;">
+                <img alt="OpenCog Workbench" class="oclogo">
+                <span class="brand-title" style="
+    width: 140px;
+    padding-left: 30px;
+    margin-top: -10px;
+">OpenCog<br>Workbench</span>
+</div>
+            </a>
+
+ */

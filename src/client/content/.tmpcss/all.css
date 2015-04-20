@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Include custom theme */
 * {
   /*-webkit-box-shadow: none !important;
@@ -849,11 +850,38 @@ form {
   background-color: #666;
   border: 1px solid #888888; }
 
-/* hover tab color */
-.nav-tabs > li > a:hover {
+.navbar-brand div {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  .navbar-brand div img {
+    display: block;
+    height: 40px;
+    width: 40px;
+    margin-top: -10px;
+    content: url('../images/oclogo.png'); }
+  .navbar-brand div span {
+    width: 140px;
+    padding-left: 30px;
+    margin-top: -10px; }
+
+​ .nav-tabs > li > a:hover {
   border-color: #000000;
   background-color: #111111; }
 
+/*
+<a href="/" class="navbar-brand">
+<div style="display: flex;">
+                <img alt="OpenCog Workbench" class="oclogo">
+                <span class="brand-title" style="
+    width: 140px;
+    padding-left: 30px;
+    margin-top: -10px;
+">OpenCog<br>Workbench</span>
+</div>
+            </a>
+
+ */
 /*#region Override background color theme */
 /*For Bootstrap 3*/
 .nav, .pagination, .carousel, .panel-title a {
