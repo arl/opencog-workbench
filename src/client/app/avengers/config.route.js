@@ -40,17 +40,13 @@
                     },
                     title: moduleConstants.name,
                     deepStateRedirect: true,
-                    sticky: true
-
-                    // uncomment for state debugging
-                    ,onEnter: function() {
-
+                    sticky: true,
+                    onEnter: function() {
                         logger.info('Entering Avengers View');
                     },
-
                     onExit: function() {
                         logger.info('Exiting Avengers View');
-                    } //*/
+                    }
                 }
             }
         ];

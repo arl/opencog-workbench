@@ -15,11 +15,6 @@
         vm.isActive = function(stateName) {
 
             return $state.includes(stateName);
-            var active = false;
-            var activeTab = TabMgr.getActiveTab();
-            if (activeTab)
-                active = (activeTab.state.name === stateName);
-            return active;
         };
 
         // get all tabs

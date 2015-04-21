@@ -3,9 +3,9 @@
 
     angular
         .module('app.dashboard', [])
-        .constant("dashboardConstants", {
-            "name": "Dashboard",
-            "id": "dashboard",
+        .constant('dashboardConstants', {
+            'name': 'Dashboard',
+            'id': 'dashboard',
             'faIcon': 'fa-dashboard'            
         });
 

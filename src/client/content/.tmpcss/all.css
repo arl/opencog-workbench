@@ -850,6 +850,7 @@ form {
   background-color: #666;
   border: 1px solid #888888; }
 
+/* opencog workbench logo and title (top-left) */
 .navbar-brand div {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -863,7 +864,8 @@ form {
   .navbar-brand div span {
     width: 140px;
     padding-left: 30px;
-    margin-top: -10px; }
+    margin-top: -10px;
+    text-align: center; }
 
 ​ .nav-tabs > li > a:hover {
   border-color: #000000;

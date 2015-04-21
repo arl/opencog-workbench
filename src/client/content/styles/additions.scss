@@ -12,22 +12,22 @@
   border: 1px solid #888888;
 }
 
+/* opencog workbench logo and title (top-left) */
 .navbar-brand div {
-
-	display: flex;
-	& img {
-		display: block;
-		height: 40px;
-		width: 40px;
-		  margin-top: -10px;
-		content:url('../images/oclogo.png')
-	}
-	& span {
+  display: flex;
+  & img {
+    display: block;
+    height: 40px;
+    width: 40px;
+    margin-top: -10px;
+    content:url('../images/oclogo.png')
+  }
+  & span {
     width: 140px;
     padding-left: 30px;
-    margin-top: -10px;		
-	}
-
+    margin-top: -10px;    
+    text-align: center
+  }
 }​
 
 /* hover tab color */

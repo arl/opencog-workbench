@@ -81,7 +81,7 @@
 
             if (tab.active) {
                 // force transition to the first inactive tab we find
-                var newState = _.find(tabs, function(t) { return !t.active});
+                var newState = _.find(tabs, function(t) { return !t.active; });
                 $state.go(newState.state.name).then(
                     function (result) {
                         // promise resolved, we can delete the tab
@@ -104,7 +104,7 @@
         function getActiveTab() {
             // check that this state has not already his tab
             return _.find(tabs, function(t) {
-                return t.active
+                return t.active;
             });
         }
 
@@ -120,7 +120,7 @@
         function isTabPresent(state) {
             // check that this state has not already his tab
             return _.some(tabs, function(t) {
-                return t.state.name === state.name
+                return t.state.name === state.name;
             });
         }
 
@@ -131,7 +131,7 @@
          */
         function setActiveTab(state) {
             _.each(tabs, function(t) {
-                t.active = (t.state.name == state.name);
+                t.active = (t.state.name === state.name);
             });
         }
 
@@ -151,7 +151,7 @@
          */
         function updateTabClosing() {
             // if only tab, disable closing
-            if (tabs.length == 1) {
+            if (tabs.length === 1) {
                 tabs[0].closeEnabled = false;
             } else {
                 _.each(tabs, function(t) {

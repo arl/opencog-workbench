@@ -3,7 +3,7 @@
 
     angular
         .module('app.avengers', [])
-        .constant("avengersConstants", {
+        .constant('avengersConstants', {
             'name': 'Avengers',
             'id': 'avengers',
             'faIcon': 'fa-lock'
