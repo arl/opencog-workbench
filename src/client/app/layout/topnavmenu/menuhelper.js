@@ -8,24 +8,11 @@
     menuhelper.$inject = ['$location', '$rootScope', '$state', 'logger'];
 
     function menuhelper($location, $rootScope, $state, logger) {
-        // var handlingRouteChangeError = false;
-        // var routeCounts = {
-        //     errors: 0,
-        //     
-        //     changes: 0
-        //     
-        // };
         var _menus = [];
-        // var $routeProvider = routeHelperConfig.config.$routeProvider;
-
         var service = {
             configureMenus: configureMenus,
-            getMenus: getMenus/*,
-            //menuCounts: menuCounts
-            //*/
+            getMenus: getMenus
         };
-
-        //init();
 
         return service;
         ///////////////
@@ -43,32 +30,7 @@
         function configureMenus(component, menus) {
             _menus.push({'component':component, 'menus': menus});
         }
-        /*
-        function handleRoutingErrors() {
-            // Route cancellation:
-            // On routing error, go to the dashboard.
-            // Provide an exit clause if it tries to do it twice.
-            $rootScope.$on('$routeChangeError',
-                function(event, current, previous, rejection) {
-                    if (handlingRouteChangeError) {
-                        return;
-                    }
-                    routeCounts.errors++;
-                    handlingRouteChangeError = true;
-                    var destination = (current && (current.title || current.name || current.loadedTemplateUrl)) ||
-                        'unknown target';
-                    var msg = 'Error routing to ' + destination + '. ' + (rejection.msg || '');
-                    logger.warning(msg, [current]);
-                    $location.path('/');
-                }
-            );
-        }
 
-        function init() {
-            handleRoutingErrors();
-            updateDocTitle();
-        }
-        */
         /**
          * [getMenus get all configured menus]
          *
@@ -86,16 +48,5 @@
             // }
             return _menus;
         }
-
-        // function updateDocTitle() {
-        //     $rootScope.$on('$routeChangeSuccess',
-        //         function(event, current, previous) {
-        //             routeCounts.changes++;
-        //             handlingRouteChangeError = false;
-        //             var title = routeHelperConfig.config.docTitle + ' ' + (current.title || '');
-        //             $rootScope.title = title; // data bind to <title>
-        //         }
-        //     );
-        // }
     }
 })();
