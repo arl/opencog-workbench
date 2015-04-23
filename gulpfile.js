@@ -73,22 +73,6 @@ gulp.task('welcome', function() {
 
 });
 
-
-/**
- * Lint the code, create coverage report, and a visualizer
- * @return {Stream}
- */
-gulp.task('analyze', function() {
-    log('Analyzing source with JSHint, JSCS, and Plato');
-
-    var jshint = analyzejshint([].concat(config.js, config.specs, config.nodejs));
-    var jscs = analyzejscs([].concat(config.js, config.nodejs));
-
-    startPlatoVisualizer();
-
-    return merge(jshint, jscs);
-});
-
 /**
  * Create $templateCache from the html templates
  * @return {Stream}
@@ -629,6 +613,21 @@ function startTests(singleRun, done) {
 }
 
 ////////////////
+
+/**
+ * Lint the code, create coverage report, and a visualizer
+ * @return {Stream}
+ */
+gulp.task('analyze', ['jshint'], function() {
+    log('Analyzing source with JSHint, JSCS, and Plato');
+
+    var jshint = analyzejshint([].concat(config.js, config.specs, config.nodejs));
+    var jscs = analyzejscs([].concat(config.js, config.nodejs));
+
+    startPlatoVisualizer();
+
+    return merge(jshint, jscs);
+});
 
 /**
  * Execute JSHint on given source files
