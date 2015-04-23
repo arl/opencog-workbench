@@ -618,7 +618,7 @@ function startTests(singleRun, done) {
  * Lint the code, create coverage report, and a visualizer
  * @return {Stream}
  */
-gulp.task('analyze', ['jshint'], function() {
+gulp.task('analyze', function() {
     log('Analyzing source with JSHint, JSCS, and Plato');
 
     var jshint = analyzejshint([].concat(config.js, config.specs, config.nodejs));
