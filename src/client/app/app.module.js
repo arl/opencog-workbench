@@ -16,13 +16,15 @@
          */ 
         'app.core',
         'app.widgets',
+        'app.layout',
 
         /*
-         * Feature areas
+         * workbench components
          */
         'app.avengers',
         'app.dashboard',
-        'app.layout'
+        'app.atomviewer',
+        'app.dummymodule'
     ]);
 
 })();
