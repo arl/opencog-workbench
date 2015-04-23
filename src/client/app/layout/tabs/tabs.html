@@ -5,8 +5,8 @@
         ng-repeat="tab in tVm.getTabs()"
         ui-sref="{{tab.state.name}}"
         active="tab.active">
-        <tab-heading>{{tab.state.title}}
-          <i class="fa {{tab.state.data.faIcon}}"></i>  <a ng-class="{'not-allowed': !tab.closeEnabled}" ng-click="$parent.tVm.closeTab($event, tab)" href>
+        <tab-heading><i class="fa {{tab.state.data.faIcon}}"></i> {{tab.state.title}}
+            <a ng-class="{'not-allowed': !tab.closeEnabled}" ng-click="$parent.tVm.closeTab($event, tab)" href>
             <i class="fa fa-times"></i></a>
         </tab-heading>
       </tab>
@@ -23,5 +23,7 @@
     -->
     <div class="container shuffle-animation" ui-view="dashboard" ng-show="tVm.isActive('tab.dashboard')"></div>
     <div class="container shuffle-animation" ui-view="avengers" ng-show="tVm.isActive('tab.avengers')"></div>
+    <div class="container shuffle-animation" ui-view="atomviewer" ng-show="tVm.isActive('tab.atomviewer')"></div>
+    <div class="container shuffle-animation" ui-view="dummymodule" ng-show="tVm.isActive('tab.dummymodule')"></div>
 
 </section>
