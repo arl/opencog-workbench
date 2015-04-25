@@ -14,7 +14,15 @@
 	
 ## Requirements
 
-- Install Node
+- Install Latest Node from source or binaries (or at least node > 12.1)
+
+	go to https://nodejs.org/download/
+	then create NODE_PATH envvar and add $NODE_PATH/bin and $NODE_PATH/lib/node_modules to path
+
+	then npm install -g node-inspector bower gulp
+
+and finally npm install
+
 	- on OSX install [home brew](http://brew.sh/) and type `brew install node`
 	- on Windows install [chocolatey](https://chocolatey.org/) and type `choco install nodejs`
 - On OSX you can alleviate the need to run as sudo by [following these instructions](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md). I highly recommend this step on OSX
