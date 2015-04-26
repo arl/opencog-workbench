@@ -9,7 +9,9 @@
     /* @ngInject */
     function dummymenus(dummymoduleConstants) {
         var moduleConstants = dummymoduleConstants;
-        var _callDummyCb = angular.noop;
+
+        // set to noop the menu handler delegate, in case nobody is interested by it...
+        var callDummyDelegate = angular.noop;
         var menus = [
             {
                 title: 'dummymodule menu',
@@ -17,7 +19,7 @@
                     {   
                         menuid: moduleConstants.id + 'item1.1',
                         content: 'call Dummy',
-                        action: callDummy
+                        action: function() { callDummyDelegate(); }
                     }
                 ]
             }
@@ -25,18 +27,14 @@
         var service = {
             getModuleMenus: getModuleMenus,
 
-            // call dummy menu click handling
-            onCallDummy: function(cb) {
-                _callDummyCb = cb;
+            // set 'call dummy' delegate
+            onCallDummy: function(delegate) {
+                callDummyDelegate = delegate;
             }
         };
 
         return service;
         ///////////////
-
-        function callDummy() {
-            _callDummyCb();
-        }
 
         function getModuleMenus() {
             return menus;
