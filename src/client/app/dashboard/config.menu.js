@@ -7,11 +7,8 @@
 
     /* @ngInject */
     function appRun(menuhelper, dashboardConstants) {
-        menuhelper.configureMenus(dashboardConstants.name, getMenus());
-    }
-
-    function getMenus() {
-        return [
+        var moduleConstants = dashboardConstants;
+        var menus = [
             {
                 title: 'dashboard menu',
                 items: [
@@ -31,5 +28,7 @@
 
             }
         ];
+        menuhelper.configureMenus(dashboardConstants.name, menus);
     }
+
 })();

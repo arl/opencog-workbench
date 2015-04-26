@@ -7,21 +7,39 @@
 
     /* @ngInject */
     function appRun(menuhelper, atomviewerConstants) {
-        menuhelper.configureMenus(atomviewerConstants.name, getMenus());
-    }
-
-    function getMenus() {
-        return [
+        var moduleConstants = atomviewerConstants;
+        var menus = [
             {
-                title: 'atomviewer menu',
+                title: '<i class="fa fa-file"></i> File <span class="caret">',
                 items: [
                     {
-                        content: 'subitem1.1',
+                        content: '<i class="fa fa-exchange"></i> Import',
+                        url: ''                    
+                    },
+                    {
+                        content: '<i class="fa fa-exchange"></i> Export',
                         url: ''                    
                     }
                 ]
 
-            }
+            },
+            {
+                title: '<i class="fa fa-eye"></i> View <span class="caret">',
+                items: [
+                    {
+                        content: '<i class="fa fa-exchange"></i> Import',
+                        url: ''                    
+                    },
+                    {
+                        content: '<i class="fa fa-exchange"></i> Export',
+                        url: ''                    
+                    }
+                ]
+
+            }            
         ];
+
+        menuhelper.configureMenus(moduleConstants.name, menus);
     }
+
 })();

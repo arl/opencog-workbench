@@ -7,11 +7,8 @@
 
     /* @ngInject */
     function appRun(menuhelper, avengersConstants) {
-        menuhelper.configureMenus(avengersConstants.name, getMenus());
-    }
-
-    function getMenus() {
-        return [
+        var moduleConstants = avengersConstants;
+        var menus = [
             {
                 title: 'avengers menu1',
                 items: [
@@ -44,20 +41,7 @@
                 ]
             }            
         ];
+        menuhelper.configureMenus(moduleConstants.name, menus);
     }
+
 })();
-
-/*
-
-                <li dropdown>
-                    <a dropdown-toggle role="button">Modules <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li class="nlightblue fade-selection-animation" data-ng-class="tnVm.isCurrent(r)"
-                            data-ng-repeat="r in tnVm.navRoutes">
-                            <a href="#{{r.originalPath}}" data-ng-bind-html="r.settings.content"></a>
-                        </li>
-                    </ul>
-                </li>
-
-
- */

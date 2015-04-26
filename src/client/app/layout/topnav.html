@@ -36,10 +36,15 @@
 
                <!-- generated menus : menus specific to active module -->
                <li dropdown data-ng-repeat="menu in tnVm.menus">
-                    <a dropdown-toggle role="button">{{menu.title}} <span class="caret"></span></a>
+                    <a dropdown-toggle role="button" data-ng-bind-html="menu.title"></span></a>
                       <ul class="dropdown-menu" role="menu">
                         <li data-ng-repeat="subm in menu.items">
-                            <a href="{{subm.url}}" data-ng-bind-html="subm.content"></a>
+                            <!-- <a href="{{subm.url}}" data-ng-bind-html="subm.content"></a> -->
+
+                            <!-- test -->
+                            <a data-ng-click="subm.action()" data-ng-bind-html="subm.content"></a>
+                            <!-- this works with rootscope.broadcast method -->
+<!--                             <a data-ng-click="tnVm.clickMenu(subm.menuid)" data-ng-bind-html="subm.content"></a> -->
                         </li>
                     </ul>
                </li>

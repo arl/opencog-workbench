@@ -11,16 +11,25 @@
         /*jshint validthis: true */
         var vm = this;
         var mainRoutes = routeHelper.getMainRoutes();
-        var allMenus = menuhelper.getMenus();
+        var allMenus = menuhelper.getAllMenus();
         vm.isCurrent = isCurrent;
         console.log(vm.title); // example
         //vm.sidebarReady = function(){console.log('done animating menu')}; // example
+
+        /**
+         * click menu handler
+         *
+         * @param  {String} menuid unique menuid of clicked menu
+         */
+        vm.clickMenu = function (menuid) {
+            $rootScope.$broadcast('clickMenu', menuid);
+        }
 
         activate();
 
         function activate() {
             getMainRoutes();
-            getMenus($state.current.title);
+            getAllMenus($state.current.title);
             updateMenu();
         }
 
@@ -32,7 +41,7 @@
         function updateMenu() {
             $rootScope.$on('$stateChangeSuccess',
                 function(event, toState, toParams, fromState, fromParams) {
-                    getMenus(toState.title);
+                    getAllMenus(toState.title);
                 }
             );
         }
@@ -57,7 +66,7 @@
          *
          * @return {[Array]}                 [menu elements to be displayed when component is active]
          */
-        function getMenus(currentComponent) {
+        function getAllMenus(currentComponent) {
 
             // find menu defined for currently active component
             var componentMenu = _.find(allMenus, function(m) { return m.component === currentComponent; });

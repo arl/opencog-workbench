@@ -5,13 +5,13 @@
         .module('app.layout.topnavmenu')
         .factory('menuhelper', menuhelper);
 
-    menuhelper.$inject = ['$location', '$rootScope', '$state', 'logger'];
-
-    function menuhelper($location, $rootScope, $state, logger) {
+    /* @ngInject */
+    function menuhelper() {
         var _menus = [];
         var service = {
             configureMenus: configureMenus,
-            getMenus: getMenus
+            getAllMenus: getAllMenus,
+            
         };
 
         return service;
@@ -32,20 +32,11 @@
         }
 
         /**
-         * [getMenus get all configured menus]
+         * [getAllMenus get all configured menus]
          *
          * @return {[type]} [description]
          */
-        function getMenus() {
-            // for (var prop in $route.routes) {
-            //     if ($route.routes.hasOwnProperty(prop)) {
-            //         var route = $route.routes[prop];
-            //         var isRoute = !!route.title;
-            //         if (isRoute) {
-            //             routes.push(route);
-            //         }
-            //     }
-            // }
+        function getAllMenus() {
             return _menus;
         }
     }
