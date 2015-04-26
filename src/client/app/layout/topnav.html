@@ -39,10 +39,9 @@
                     <a dropdown-toggle role="button" data-ng-bind-html="menu.title"></span></a>
                       <ul class="dropdown-menu" role="menu">
                         <li data-ng-repeat="subm in menu.items">
-                            <!-- <a href="{{subm.url}}" data-ng-bind-html="subm.content"></a> -->
 
-                            <!-- test -->
-                            <a data-ng-click="subm.action()" data-ng-bind-html="subm.content"></a>
+                            <input type="checkbox" data-ng-if="subm.type === 'checkbox'" data-ng-model="subm.model" data-ng-change="subm.handler ? subm.handler(subm.model) : noop()">
+                            <a data-ng-if="subm.type == 'simple'" data-ng-click="subm.handler()" data-ng-bind-html="subm.content"></a>
                             <!-- this works with rootscope.broadcast method -->
 <!--                             <a data-ng-click="tnVm.clickMenu(subm.menuid)" data-ng-bind-html="subm.content"></a> -->
                         </li>

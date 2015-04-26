@@ -18,10 +18,16 @@
         vm.title = dummymoduleConstants.name;
 
         // define menu click handler
-        dummymenus.onCallDummy(function() {
+        dummymenus.onClickDummy(function() {
 
-            console.log('dummymenus.onClickDummy');
+            console.log('Dummy Clicked');
         });
+
+        // define checkbox change handler
+        dummymenus.onChangeDummyChk(function(newval) {
+
+            console.log('Dummy Check : ' + newval);
+        });        
 
         activate();
 
