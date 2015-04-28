@@ -10,19 +10,23 @@
         var moduleConstants = dashboardConstants;
         var menus = [
             {
+                id: 'dashboardmenu',
                 title: 'dashboard menu',
                 items: [
                     {
-                        content: 'subitem1.1',
-                        url: ''                    
+                        id: 'stuff1',
+                        content: 'Stuff 1',
+                        handler: angular.noop
                     },
                     {
-                        content: 'subitem1.2',
-                        url: ''                    
+                        id: 'stuff2',
+                        content: 'Stuff 2',
+                        handler: angular.noop
                     },
                     {
-                        content: 'subitem1.3',
-                        url: ''                    
+                        id: 'stuff3',
+                        content: 'Stuff 3',
+                        handler: angular.noop
                     }
                 ]
 

@@ -3,7 +3,8 @@
 
     angular
         .module('app.layout.topnavmenu')
-        .factory('menuhelper', menuhelper);
+        .factory('menuhelper', menuhelper)
+        .directive('checkboxMenuitem', checkboxMenuitem);
 
     /* @ngInject */
     function menuhelper() {
@@ -22,10 +23,7 @@
          *
          * @param  {String} component component which menu is being configured
          *                            (should be the same as title of the title element set in config.route.js
-         *                            TODO : maybe create a module constant that could be used for this
          * @param  {Array} menus      menu description
-         *
-         * @return {[type]}           [description]
          */
         function configureMenus(component, menus) {
             _menus.push({'component':component, 'menus': menus});
@@ -38,6 +36,27 @@
          */
         function getAllMenus() {
             return _menus;
+        }
+    }
+
+    /* @ngInject */
+    function checkboxMenuitem () {
+        var directive = {
+            restrict: 'A',
+            replace: true,
+            scope : {
+                'model': '='
+            },
+            template : getTemplate()
+        };
+        return directive;
+
+        function getTemplate() {
+            return new Array(
+                '<a ng-click="model = !model"><i ng-class="model?',
+                '\'fa fa-check-square-o\'', ':', '\'fa fa-square-o\'',
+                '"></i> Test</a>'
+                ).join('');
         }
     }
 })();

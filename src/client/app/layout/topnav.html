@@ -40,10 +40,12 @@
                       <ul class="dropdown-menu" role="menu">
                         <li data-ng-repeat="subm in menu.items">
 
-                            <input type="checkbox" data-ng-if="subm.type === 'checkbox'" data-ng-model="subm.model" data-ng-change="subm.handler ? subm.handler(subm.model) : noop()">
-                            <a data-ng-if="subm.type == 'simple'" data-ng-click="subm.handler()" data-ng-bind-html="subm.content"></a>
-                            <!-- this works with rootscope.broadcast method -->
-<!--                             <a data-ng-click="tnVm.clickMenu(subm.menuid)" data-ng-bind-html="subm.content"></a> -->
+                            <!-- simple menu item withn click handling -->
+                            <a data-ng-if="!subm.type || subm.type === 'simple'" data-ng-click="subm.handler()" data-ng-bind-html="subm.content"></a>
+
+                            <!-- checkbox menu item (using directive)-->
+                            <a data-checkbox-menuitem data-ng-if="subm.type === 'checkbox'" model="subm.model"></a>
+
                         </li>
                     </ul>
                </li>

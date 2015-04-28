@@ -16,15 +16,6 @@
         console.log(vm.title); // example
         //vm.sidebarReady = function(){console.log('done animating menu')}; // example
 
-        /**
-         * click menu handler
-         *
-         * @param  {String} menuid unique menuid of clicked menu
-         */
-        vm.clickMenu = function (menuid) {
-            $rootScope.$broadcast('clickMenu', menuid);
-        }
-
         activate();
 
         function activate() {

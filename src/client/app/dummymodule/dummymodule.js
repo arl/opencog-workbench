@@ -21,13 +21,9 @@
         dummymenus.onClickDummy(function() {
 
             console.log('Dummy Clicked');
-        });
-
-        // define checkbox change handler
-        dummymenus.onChangeDummyChk(function(newval) {
-
-            console.log('Dummy Check : ' + newval);
-        });        
+            var chkval = dummymenus.getDummyChkValue();
+            console.log('chkval:' + chkval);
+        });   
 
         activate();
 

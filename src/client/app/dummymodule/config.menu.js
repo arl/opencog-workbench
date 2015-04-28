@@ -7,31 +7,33 @@
         .run(appRun);
 
     /* @ngInject */
-    function dummymenus(dummymoduleConstants) {
+    function dummymenus(dummymoduleConstants, _) {
         var moduleConstants = dummymoduleConstants;
 
-        // set to noop the menu handler, in case nobody is interested by it...
+        // set menu handler to noop, in case nobody is interested..
         var dummyClickHandler = angular.noop;
-        var dummyChkHandler = angular.noop;
-        var dummyChkValue = true;
-
+        var dummyChkValue = false;
 
         var menus = [
             {
-                title: 'dummymodule menu',
+                id: 'examplemenu',
+                title: 'Example Items',
                 items: [
+                    // simple menu item with handler
                     {   
+                        id: 'simpleitem',
                         type: 'simple',
                         content: 'Dummy',
-                        handler: function() { dummyClickHandler(); }
+                        handler: function() {
+                            dummyClickHandler();
+                        }
                     },
+                    //  checkbox menu item
                     {
+                        id: 'checkboxitem',
                         type: 'checkbox',
                         content: 'Dummy Check',
-                        model: dummyChkValue,
-                        handler: function(val) {
-                            dummyChkHandler(val);
-                        }
+                        model: dummyChkValue
                     }
                 ]
             }
@@ -43,10 +45,11 @@
             onClickDummy: function(handler) {
                 dummyClickHandler = handler;
             },
-            // set 'dummy check' change handler
-            onChangeDummyChk: function(handler) {
-                dummyChkHandler = handler;
-            }            
+            getDummyChkValue: function () {
+                var menu = _.find(menus, function(menu) { return menu.id === 'examplemenu'; });
+                var item = _.find(menu.items, function(item) { return item.id === 'checkboxitem'; });
+                return item.model;
+            }
         };
 
         return service;
@@ -56,7 +59,6 @@
             return menus;
         }
     }
-
 
     /* @ngInject */
     function appRun(menuhelper, dummymoduleConstants, dummymenus) {

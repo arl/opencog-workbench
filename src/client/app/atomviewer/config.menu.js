@@ -10,29 +10,35 @@
         var moduleConstants = atomviewerConstants;
         var menus = [
             {
+                id: 'filemenu',
                 title: '<i class="fa fa-file"></i> File <span class="caret">',
                 items: [
                     {
+                        id: 'import',
                         content: '<i class="fa fa-exchange"></i> Import',
-                        url: ''                    
+                        handler: angular.noop
                     },
                     {
+                        id: 'export',
                         content: '<i class="fa fa-exchange"></i> Export',
-                        url: ''                    
+                        handler: angular.noop
                     }
                 ]
 
             },
             {
+                id: 'viewmenu',
                 title: '<i class="fa fa-eye"></i> View <span class="caret">',
                 items: [
                     {
+                        id: '1',
                         content: '<i class="fa fa-exchange"></i> Import',
-                        url: ''                    
+                        handler: angular.noop
                     },
                     {
+                        id: '2',
                         content: '<i class="fa fa-exchange"></i> Export',
-                        url: ''                    
+                        handler: angular.noop
                     }
                 ]
 

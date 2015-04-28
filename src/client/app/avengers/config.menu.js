@@ -10,36 +10,39 @@
         var moduleConstants = avengersConstants;
         var menus = [
             {
+                id: 'avengersmenu1',
                 title: 'avengers menu1',
                 items: [
                     {
-                        content: 'subitem1.1',
-                        url: ''                    
+                        id: 'subitem1.1',
+                        content: 'Item 1',
+                        handler: angular.noop
                     },
                     {
-                        content: 'subitem1.2',
-                        url: ''                    
+                        id: 'subitem1.2',
+                        content: 'Item 2',
+                        handler: angular.noop
                     }
                 ]
 
             },
             {
+                id: 'avengersmenu2',
                 title: 'avengers menu2',
                 items: [
                     {
-                        content: 'subitem2.1',
-                        url: ''                    
+                        id: 'subitem2.1',
+                        content: 'Item 1',
+                        handler: angular.noop
                     },
                     {
-                        content: 'subitem2.2',
-                        url: ''                    
-                    },
-                    {
-                        content: 'subitem2.3',
-                        url: ''                    
-                    }                
+                        id: 'subitem2.2',
+                        content: 'Item 2',
+                        handler: angular.noop
+                    }
                 ]
-            }            
+
+            }       
         ];
         menuhelper.configureMenus(moduleConstants.name, menus);
     }
