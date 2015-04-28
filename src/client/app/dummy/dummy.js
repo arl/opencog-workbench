@@ -3,10 +3,10 @@
 
     angular
         .module('modules.dummy')
-        .controller('DummyCtrl', DummyCtrl);
+        .controller('Dummy', Dummy);
 
     /* @ngInject  */
-    function DummyCtrl(logger, dummyConstants, dummymenus) {
+    function Dummy(logger, dummyConstants, dummymenus) {
 
         /*jshint validthis: true */
         var vm = this;

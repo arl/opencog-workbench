@@ -4,7 +4,7 @@
     angular
         .module('modules.dummy', [])
         .constant('dummyConstants', {
-            'name': 'Dummymodule',
+            'name': 'Dummy',
             'id': 'dummy',
             'faIcon': 'fa-wrench'            
         });
