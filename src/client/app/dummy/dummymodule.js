@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('app.dummymodule')
-        .controller('Dummymodule', Dummymodule);
+        .module('modules.dummy')
+        .controller('DummyCtrl', DummyCtrl);
 
     /* @ngInject  */
-    function Dummymodule(logger, dummymoduleConstants, dummymenus) {
+    function DummyCtrl(logger, dummyConstants, dummymenus) {
 
         /*jshint validthis: true */
         var vm = this;
@@ -15,7 +15,7 @@
             title: 'A Great module',
             description: 'a great empty module'
         };
-        vm.title = dummymoduleConstants.name;
+        vm.title = dummyConstants.name;
 
         // define menu click handler
         dummymenus.onClickDummy(function() {
@@ -28,7 +28,7 @@
         activate();
 
         function activate() {
-            logger.info('Activated Dummymodule View');
+            logger.info('Activated Dummy View');
         }
     }
 })();

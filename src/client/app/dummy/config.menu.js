@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('app.dummymodule')
+        .module('modules.dummy')
         .factory('dummymenus', dummymenus)
         .run(appRun);
 
     /* @ngInject */
-    function dummymenus(dummymoduleConstants, _) {
-        var moduleConstants = dummymoduleConstants;
+    function dummymenus(dummyConstants, _) {
+        var moduleConstants = dummyConstants;
 
         // set menu handler to noop, in case nobody is interested..
         var dummyClickHandler = angular.noop;
@@ -61,8 +61,8 @@
     }
 
     /* @ngInject */
-    function appRun(menuhelper, dummymoduleConstants, dummymenus) {
-        var moduleConstants = dummymoduleConstants;
+    function appRun(menuhelper, dummyConstants, dummymenus) {
+        var moduleConstants = dummyConstants;
         menuhelper.configureMenus(moduleConstants.name, dummymenus.getModuleMenus());
     }
 

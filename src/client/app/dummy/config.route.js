@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('app.dummymodule')
+        .module('modules.dummy')
         .run(appRun);
 
     /* @ngInject */
-    function appRun(routeHelper, dummymoduleConstants, logger) {
+    function appRun(routeHelper, dummyConstants, logger) {
 
-        var moduleConstants = dummymoduleConstants;
+        var moduleConstants = dummyConstants;
 
         // module routes definition
         var routes = [
@@ -22,9 +22,9 @@
                 config: {
                     url: moduleConstants.id,
                     views: {
-                        'dummymodule@tab': {
-                            templateUrl: 'app/dummymodule/dummymodule.html',
-                            controller: 'Dummymodule as vm'
+                        'dummy@tab': {
+                            templateUrl: 'app/dummy/dummymodule.html',
+                            controller: 'DummyCtrl as vm'
                         }
                     },
                     data: {
@@ -34,7 +34,7 @@
                     },
                     resolve: {
                         baz: function() {
-                            console.log('resolving "baz" for tab.dummymodule...');
+                            console.log('resolving "baz" for tab.dummy...');
                             return 'baz';
                         }
                     },
@@ -42,10 +42,10 @@
                     deepStateRedirect: true,
                     sticky: true,
                     onEnter: function() {
-                        logger.info('Entering DummyModule View');
+                        logger.info('Entering Dummy Module');
                     },
                     onExit: function() {
-                        logger.info('Exiting DummyModule View');
+                        logger.info('Exiting Dummy Module');
                     }
                 }
             }

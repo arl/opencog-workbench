@@ -19,12 +19,9 @@
         'app.layout',
 
         /*
-         * workbench components
+         * OpenCog Workbench Modules
          */
-        'app.avengers',
-        'app.dashboard',
-        'app.atomviewer',
-        'app.dummymodule'
+        'app.modules'
     ]);
 
 })();

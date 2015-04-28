@@ -2,10 +2,10 @@
     'use strict';
 
     angular
-        .module('app.dummymodule', [])
-        .constant('dummymoduleConstants', {
+        .module('modules.dummy', [])
+        .constant('dummyConstants', {
             'name': 'Dummymodule',
-            'id': 'dummymodule',
+            'id': 'dummy',
             'faIcon': 'fa-wrench'            
         });
 

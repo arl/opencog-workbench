@@ -51,6 +51,7 @@ module.exports = function() {
       entrypoint : clientContent + "styles/styles.scss"
     },
     js: [
+      // TODO : this dosen't really seem necessary, it's included by the next rule no?
       clientApp + "**/*module*.js",
       clientApp + "**/*.js"
     ],
