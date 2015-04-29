@@ -18,12 +18,5 @@
     <div class="container shuffle-animation" data-ui-view>
     </div>
 
-    <!-- can't use ng-repeat here, as doing this recreate the views each time and we lose the view state
-      so unfortunately, it seems that every module must be hard-coded here
-    -->
-    <div class="container shuffle-animation" ui-view="dashboard" ng-show="tVm.isActive('tab.dashboard')"></div>
-    <div class="container shuffle-animation" ui-view="avengers" ng-show="tVm.isActive('tab.avengers')"></div>
-    <div class="container shuffle-animation" ui-view="atomviewer" ng-show="tVm.isActive('tab.atomviewer')"></div>
-    <div class="container shuffle-animation" ui-view="dummy" ng-show="tVm.isActive('tab.dummy')"></div>
-
+    <tab-view></tab-view>
 </section>
