@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('components.atomviewer')
+        .module('components.dummy')
         .run(appRun);
 
     /* @ngInject */
-    function appRun(routeHelper, atomviewerConstants, logger) {
+    function appRun(routeHelper, dummyConstants, logger) {
 
-        var moduleConstants = atomviewerConstants;
+        var moduleConstants = dummyConstants;
 
         // module routes definition
         var routes = [
@@ -22,9 +22,9 @@
                 config: {
                     url: moduleConstants.id,
                     views: {
-                        'atomviewer@tab': {
-                            templateUrl: 'app/modules/atomviewer/atomviewer.html',
-                            controller: 'Atomviewer as vm'
+                        'dummy@tab': {
+                            templateUrl: 'app/components/dummy/dummy.html',
+                            controller: 'Dummy as vm'
                         }
                     },
                     data: {
@@ -33,19 +33,19 @@
                         content: '<i class="fa ' + moduleConstants.faIcon  + '"></i> ' + moduleConstants.name
                     },
                     resolve: {
-                        bar: function() {
-                            console.log('resolving "bar" for tab.atomviewer...');
-                            return 'bar';
+                        baz: function() {
+                            console.log('resolving "baz" for tab.dummy...');
+                            return 'baz';
                         }
                     },
                     title: moduleConstants.name,
                     deepStateRedirect: true,
                     sticky: true,
                     onEnter: function() {
-                        logger.info('Entering Atomspace Viewer');
+                        logger.info('Entering Dummy Module');
                     },
                     onExit: function() {
-                        logger.info('Exiting Atomspace Viewer');
+                        logger.info('Exiting Dummy Module');
                     }
                 }
             }

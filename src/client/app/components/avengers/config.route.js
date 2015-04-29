@@ -23,7 +23,7 @@
                     url: moduleConstants.id,
                     views: {
                         'avengers@tab': {
-                            templateUrl: 'app/modules/avengers/avengers.html',
+                            templateUrl: 'app/components/avengers/avengers.html',
                             controller: 'Avengers as vm'
                         }
                     },

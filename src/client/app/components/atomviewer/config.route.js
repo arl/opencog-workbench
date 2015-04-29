@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('components.dashboard')
+        .module('components.atomviewer')
         .run(appRun);
 
     /* @ngInject */
-    function appRun(routeHelper, dashboardConstants, logger) {
+    function appRun(routeHelper, atomviewerConstants, logger) {
 
-        var moduleConstants = dashboardConstants;
+        var moduleConstants = atomviewerConstants;
 
         // module routes definition
         var routes = [
@@ -22,9 +22,9 @@
                 config: {
                     url: moduleConstants.id,
                     views: {
-                        'dashboard@tab': {
-                            templateUrl: 'app/modules/dashboard/dashboard.html',
-                            controller: 'Dashboard as vm'
+                        'atomviewer@tab': {
+                            templateUrl: 'app/components/atomviewer/atomviewer.html',
+                            controller: 'Atomviewer as vm'
                         }
                     },
                     data: {
@@ -34,7 +34,7 @@
                     },
                     resolve: {
                         bar: function() {
-                            console.log('resolving "bar" for tab.dashboard...');
+                            console.log('resolving "bar" for tab.atomviewer...');
                             return 'bar';
                         }
                     },
@@ -42,10 +42,10 @@
                     deepStateRedirect: true,
                     sticky: true,
                     onEnter: function() {
-                        logger.info('Entering Dashboard View');
+                        logger.info('Entering Atomspace Viewer');
                     },
                     onExit: function() {
-                        logger.info('Exiting Dashboard View');
+                        logger.info('Exiting Atomspace Viewer');
                     }
                 }
             }

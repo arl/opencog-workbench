@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('components.dummy')
+        .module('components.dashboard')
         .run(appRun);
 
     /* @ngInject */
-    function appRun(routeHelper, dummyConstants, logger) {
+    function appRun(routeHelper, dashboardConstants, logger) {
 
-        var moduleConstants = dummyConstants;
+        var moduleConstants = dashboardConstants;
 
         // module routes definition
         var routes = [
@@ -22,9 +22,9 @@
                 config: {
                     url: moduleConstants.id,
                     views: {
-                        'dummy@tab': {
-                            templateUrl: 'app/modules/dummy/dummy.html',
-                            controller: 'Dummy as vm'
+                        'dashboard@tab': {
+                            templateUrl: 'app/components/dashboard/dashboard.html',
+                            controller: 'Dashboard as vm'
                         }
                     },
                     data: {
@@ -33,19 +33,19 @@
                         content: '<i class="fa ' + moduleConstants.faIcon  + '"></i> ' + moduleConstants.name
                     },
                     resolve: {
-                        baz: function() {
-                            console.log('resolving "baz" for tab.dummy...');
-                            return 'baz';
+                        bar: function() {
+                            console.log('resolving "bar" for tab.dashboard...');
+                            return 'bar';
                         }
                     },
                     title: moduleConstants.name,
                     deepStateRedirect: true,
                     sticky: true,
                     onEnter: function() {
-                        logger.info('Entering Dummy Module');
+                        logger.info('Entering Dashboard View');
                     },
                     onExit: function() {
-                        logger.info('Exiting Dummy Module');
+                        logger.info('Exiting Dashboard View');
                     }
                 }
             }

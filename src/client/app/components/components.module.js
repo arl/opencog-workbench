@@ -2,7 +2,7 @@
     'use strict';
 
     /*
-     * OpenCog Workbench components modules
+     * OpenCog Workbench components
      */
     angular.module('app.components', [
 
