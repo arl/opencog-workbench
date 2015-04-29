@@ -9,7 +9,7 @@
         // add new modules here
         // 'modules.avengers',
         // 'modules.dashboard',
-        // 'modules.atomviewer',
+        'modules.atomviewer',
         'modules.dummy'
     ]);
 

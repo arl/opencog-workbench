@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.atomviewer')
+        .module('modules.atomviewer')
         .run(appRun);
 
     /* @ngInject */
@@ -23,7 +23,7 @@
                     url: moduleConstants.id,
                     views: {
                         'atomviewer@tab': {
-                            templateUrl: 'app/atomviewer/atomviewer.html',
+                            templateUrl: 'app/modules/atomviewer/atomviewer.html',
                             controller: 'Atomviewer as vm'
                         }
                     },

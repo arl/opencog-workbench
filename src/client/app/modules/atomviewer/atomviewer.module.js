@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.atomviewer', [])
+        .module('modules.atomviewer', [])
         .constant('atomviewerConstants', {
             'name': 'Atomspace Viewer',
             'id': 'atomviewer',
