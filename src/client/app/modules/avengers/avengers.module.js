@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.avengers', [])
+        .module('modules.avengers', [])
         .constant('avengersConstants', {
             'name': 'Avengers',
             'id': 'avengers',

@@ -1,5 +1,5 @@
 /* jshint -W117, -W030 */
-describe('app.avengers', function() {
+describe('modules.avengers', function() {
     var controller;
 
     beforeEach(function() {

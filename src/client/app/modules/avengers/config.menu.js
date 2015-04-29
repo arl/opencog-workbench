@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.avengers')
+        .module('modules.avengers')
         .run(appRun);
 
     /* @ngInject */

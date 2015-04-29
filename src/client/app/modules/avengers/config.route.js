@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.avengers')
+        .module('modules.avengers')
         .run(appRun);
 
     /* @ngInject */
@@ -23,7 +23,7 @@
                     url: moduleConstants.id,
                     views: {
                         'avengers@tab': {
-                            templateUrl: 'app/avengers/avengers.html',
+                            templateUrl: 'app/modules/avengers/avengers.html',
                             controller: 'Avengers as vm'
                         }
                     },
