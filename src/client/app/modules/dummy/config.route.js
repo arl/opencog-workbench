@@ -23,8 +23,8 @@
                     url: moduleConstants.id,
                     views: {
                         'dummy@tab': {
-                            templateUrl: 'app/dummy/dummy.html',
-                            controller: 'DummyCtrl as vm'
+                            templateUrl: 'app/modules/dummy/dummy.html',
+                            controller: 'Dummy as vm'
                         }
                     },
                     data: {
