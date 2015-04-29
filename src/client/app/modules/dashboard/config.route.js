@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('modules.dashboard')
+        .module('components.dashboard')
         .run(appRun);
 
     /* @ngInject */

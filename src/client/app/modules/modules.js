@@ -2,15 +2,15 @@
     'use strict';
 
     /*
-     * OpenCog Workbench Modules
+     * OpenCog Workbench components modules
      */
-    angular.module('app.modules', [
+    angular.module('app.components', [
 
-        // add new modules here
-        'modules.avengers',
-        'modules.dashboard',
-        'modules.atomviewer',
-        'modules.dummy'
+        'components.avengers',
+        'components.dashboard',
+        'components.atomviewer',
+        'components.dummy'
+        // add new components module here
     ]);
 
 })();

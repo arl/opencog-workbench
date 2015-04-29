@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('modules.dummy')
+        .module('components.dummy')
         .factory('dummymenus', dummymenus)
         .run(appRun);
 

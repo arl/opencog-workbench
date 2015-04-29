@@ -18,9 +18,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 
-                <!-- permanent menu : list of Modules-->
+                <!-- static menu : OpenCog Workbench components list -->
                 <li dropdown>
-                    <a dropdown-toggle role="button">Modules <span class="caret"></span></a>
+                    <a dropdown-toggle role="button">Components <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="nlightblue fade-selection-animation" data-ng-class="tnVm.isCurrent(r)"
                             data-ng-repeat="r in tnVm.mainRoutes">
@@ -34,7 +34,7 @@
                     </ul>
                 </li>
 
-               <!-- generated menus : menus specific to active module -->
+               <!-- dynamic menus : active tab/component specific menus -->
                <li dropdown data-ng-repeat="menu in tnVm.menus">
                     <a dropdown-toggle role="button" data-ng-bind-html="menu.title"></span></a>
                       <ul class="dropdown-menu" role="menu">

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('modules.avengers')
+        .module('components.avengers')
         .controller('Avengers', Avengers);
 
     /* @ngInject */

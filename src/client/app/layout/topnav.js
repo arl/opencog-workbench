@@ -38,9 +38,9 @@
         }
 
         /**
-         * get main navigation routes (i.e different oc-workbench modules and their main routes)
+         * get main navigation routes (i.e workbench components main route)
          *
-         * @return {[type]} [description]
+         * @return {Array} list of components main route
          */
         function getMainRoutes() {
             vm.mainRoutes = mainRoutes.filter(function(r) {
@@ -53,7 +53,7 @@
         /**
          * [get current composent menu items to be displayed]
          *
-         * @param  {[type]} currentComponent [currently active component]
+         * @param  {String} currentComponent [currently active component]
          *
          * @return {[Array]}                 [menu elements to be displayed when component is active]
          */

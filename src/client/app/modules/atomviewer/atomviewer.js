@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('modules.atomviewer')
+        .module('components.atomviewer')
         .controller('Atomviewer', Atomviewer);
 
     /* @ngInject  */
