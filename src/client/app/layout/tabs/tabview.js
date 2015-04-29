@@ -5,8 +5,11 @@
         .module('app.layout.tabs')
         .directive('tabView', tabView);
 
-
-    // if directive works => place it in its own file tabview.js
+    /**
+     * tabView directive generates the ui-view tags for the tabs
+     * this allows us to not have to hard-code anything about the workbench
+     * components in the app.layout module
+     */
     /* @ngInject */
     function tabView($compile, routeHelper) {
 
