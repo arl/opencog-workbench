@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.dashboard')
+        .module('modules.dashboard')
         .run(appRun);
 
     /* @ngInject */
@@ -23,7 +23,7 @@
                     url: moduleConstants.id,
                     views: {
                         'dashboard@tab': {
-                            templateUrl: 'app/dashboard/dashboard.html',
+                            templateUrl: 'app/modules/dashboard/dashboard.html',
                             controller: 'Dashboard as vm'
                         }
                     },

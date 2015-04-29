@@ -1,5 +1,5 @@
 /* jshint -W117, -W030 */
-describe('app.dashboard', function() {
+describe('modules.dashboard', function() {
     var controller;
 
     beforeEach(function() {
