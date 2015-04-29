@@ -11,21 +11,12 @@
      * components in the app.layout module
      */
     /* @ngInject */
-    function tabView($compile, routeHelper) {
+    function tabView($compile, routeHelper, _) {
 
-        return {
-            restrict: 'E',
-            compile: compile,
-            // inject main routes into returned object...
-            mainRoutes : routeHelper.getMainRoutes()
-        };
+        function generateTemplate() {
+            return _.map(routeHelper.getMainRoutes(), function(route) {
 
-        function compile ($elem, attrs, transclude) {
-            
-            // ... so we can access it from here
-            var html = _.map(this.mainRoutes, function(route) {
-
-                // and generate the series of ui-view's
+                // generate the series of ui-view div's from the main routes
                 return new Array(
                     '<div class="container shuffle-animation" ',
                     'ui-view="', route.url, '" ',
@@ -33,8 +24,15 @@
                     '</div>'
                     ).join('');
             }).join('\n');
-
-            $elem.html(html);
         }
-    };
+
+        // very simple directive with precompiled template
+        return {
+            restrict: 'E',
+            // inject main routes into returned object...
+            template: generateTemplate()
+        };
+
+    }
+
 })();

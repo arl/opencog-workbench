@@ -375,7 +375,7 @@ gulp.task('autotest', function(done) {
  * serve the dev environment, with debug,
  * and with node inspector
  */
-gulp.task('serve-dev-debug', function() {
+gulp.task('serve-dev-debug', ['scss', 'scss-watcher'], function() {
     serve({
         mode: 'dev',
         debug: '--debug'
@@ -386,7 +386,7 @@ gulp.task('serve-dev-debug', function() {
  * serve the dev environment, with debug-brk,
  * and with node inspector
  */
-gulp.task('serve-dev-debug-brk', function() {
+gulp.task('serve-dev-debug-brk', ['scss', 'scss-watcher'], function() {
     serve({
         mode: 'dev',
         debug: '--debug-brk'
@@ -455,7 +455,7 @@ function serve(args) {
 
     return plug.nodemon(options)
         .on('start', function() {
-            startBrowserSync(args.mode == 'dev');
+            startBrowserSync(args.mode === 'dev');
         })
         //.on('change', tasks)
         .on('restart', function() {
