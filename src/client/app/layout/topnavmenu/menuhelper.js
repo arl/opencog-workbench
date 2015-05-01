@@ -45,7 +45,8 @@
             restrict: 'A',
             replace: true,
             scope : {
-                'model': '='
+                'model': '=',
+                'content': '='
             },
             template : getTemplate()
         };
@@ -55,7 +56,7 @@
             return new Array(
                 '<a ng-click="model = !model"><i ng-class="model?',
                 '\'fa fa-check-square-o\'', ':', '\'fa fa-square-o\'',
-                '"></i> Test</a>'
+                '"></i> {{content}}</a>'
                 ).join('');
         }
     }

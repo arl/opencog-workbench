@@ -12,7 +12,7 @@
 
         // set menu handler to noop, in case nobody is interested..
         var dummyClickHandler = angular.noop;
-        var dummyChkValue = false;
+        var dummyChkValue = true;
 
         var menus = [
             {
@@ -38,6 +38,7 @@
                 ]
             }
         ];
+
         var service = {
             getModuleMenus: getModuleMenus,
 
