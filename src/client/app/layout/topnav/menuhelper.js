@@ -6,7 +6,7 @@
         .factory('menuhelper', menuhelper);
 
     /* @ngInject */
-    function menuhelper() {
+    function menuhelper(_) {
 
         var allMenus = [];
 
@@ -49,13 +49,13 @@
             var menuitem = getMenuItem(menupath);
             if (menuitem) {
                 if (menuitem.handler) {
-                    throw { message: 'click handler already exists for menu item ' + menupath};
+                    throw {message: 'click handler already exists for menu item ' + menupath};
                 } else {
-                  // set handler
-                  menuitem.handler = handler;
+                    // set handler
+                    menuitem.handler = handler;
                 }
             } else {
-                throw { message: 'couldn\'t find menu item ' + menupath};
+                throw {message: 'couldn\'t find menu item ' + menupath};
             }
         }
 
@@ -68,7 +68,7 @@
             if (menuitem && menuitem.handler) {
                 delete menuitem.handler;
             } else {
-                throw { message: 'couldn\'t find menu item ' + menupath};
+                throw {message: 'couldn\'t find menu item ' + menupath};
             }          
         }
 
@@ -92,7 +92,7 @@
                 var menu = _.find(component.menus, function(menu) { return menu.id === path[1]; });
                 menuitem = _.find(menu.items, function(item) { return item.id === path[2]; });
             }
-            catch(e) {}
+            catch (e) {}
             return menuitem;
         }
     }
