@@ -3,11 +3,11 @@
 
     angular
         .module('components.dummy')
-        .factory('dummymenus', dummymenus)
+        .factory('DummyMenus', DummyMenus)
         .run(appRun);
 
     /* @ngInject */
-    function dummymenus(dummyConstants, _) {
+    function DummyMenus(dummyConstants, _) {
         var moduleConstants = dummyConstants;
 
         // set menu handler to noop, in case nobody is interested..
@@ -40,7 +40,7 @@
         ];
 
         var service = {
-            getModuleMenus: getModuleMenus,
+            getModuleMenus: function() { return menus; },
 
             // set 'call dummy' handler
             onClickDummy: function(handler) {
@@ -56,15 +56,12 @@
         return service;
         ///////////////
 
-        function getModuleMenus() {
-            return menus;
-        }
     }
 
     /* @ngInject */
-    function appRun(menuhelper, dummyConstants, dummymenus) {
+    function appRun(menuhelper, dummyConstants, DummyMenus) {
         var moduleConstants = dummyConstants;
-        menuhelper.configureMenus(moduleConstants.name, dummymenus.getModuleMenus());
+        menuhelper.configureMenus(moduleConstants.name, DummyMenus.getModuleMenus());
     }
 
 })();

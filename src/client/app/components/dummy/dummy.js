@@ -6,7 +6,7 @@
         .controller('Dummy', Dummy);
 
     /* @ngInject  */
-    function Dummy(logger, dummyConstants, dummymenus) {
+    function Dummy(logger, dummyConstants, DummyMenus) {
 
         /*jshint validthis: true */
         var vm = this;
@@ -18,10 +18,10 @@
         vm.title = dummyConstants.name;
 
         // define menu click handler
-        dummymenus.onClickDummy(function() {
+        DummyMenus.onClickDummy(function() {
 
             console.log('Dummy Clicked');
-            var chkval = dummymenus.getDummyChkValue();
+            var chkval = DummyMenus.getDummyChkValue();
             console.log('chkval:' + chkval);
         });   
 

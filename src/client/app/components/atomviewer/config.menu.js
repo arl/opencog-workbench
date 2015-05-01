@@ -3,20 +3,22 @@
 
     angular
         .module('components.atomviewer')
+        .factory('AtomViewerMenus', AtomViewerMenus)
         .run(appRun);
 
     /* @ngInject */
-    function appRun(menuhelper, atomviewerConstants) {
+    function AtomViewerMenus(atomviewerConstants, _) {
         var moduleConstants = atomviewerConstants;
 
-        var isD3 = true;
-        var isTable = false;
-        var isJSON = false;
-        var isScheme = false;
+        // menu item handler
+        var debugClickHandler = angular.noop;
+
+        // view radio button model array
+        var viewradioModel = [true, false, false, false];
 
         var menus = [
             {
-                id: 'file',
+                id: 'filemenu',
                 title: '<i class="fa fa-file"></i> File <span class="caret">',
                 items: [
                     {
@@ -33,43 +35,61 @@
 
             },
             {
-                id: 'view',
+                id: 'viewmenu',
                 title: '<i class="fa fa-eye"></i> View <span class="caret">',
                 items: [
                     {
                         type: 'header',
                         content: 'Views'
                     },
-                    {
-                        id: 'd3',
-                        type: 'checkbox',
-                        content: 'D3',
-                        model: isD3
+
+                    // simple menu item with handler
+                    {   
+                        id: 'simpleitem',
+                        type: 'simple',
+                        content: 'debug',
+                        handler: function() {
+                            debugClickHandler();
+                        }
                     },
+
+                    // new type : radio button
                     {
-                        id: 'table',
-                        type: 'checkbox',
-                        content: 'Table',
-                        model: isTable
-                    },
-                    {
-                        id: 'json',
-                        type: 'checkbox',
-                        content: 'JSON',
-                        model: isJSON
-                    },
-                    {
-                        id: 'scheme',
-                        type: 'checkbox',
-                        content: 'Scheme',
-                        model: isScheme
+                        id: 'viewradio',
+                        type: 'radio',
+                        content: [
+                            'D3', 'Table', 'JSON', 'Scheme'
+                        ],
+                        model: viewradioModel
                     }
                 ]
-
             }            
         ];
 
-        menuhelper.configureMenus(moduleConstants.name, menus);
+        var service = {
+            getModuleMenus: function() { return menus; },
+
+            // set 'debug' handler
+            onDbgClick: function(handler) {
+                debugClickHandler = handler;
+            },
+
+            getViewRadioValue: function () {
+                var menu = _.find(menus, function(menu) { return menu.id === 'viewmenu'; });
+                var item = _.find(menu.items, function(item) { return item.id === 'viewradio'; });
+                return item.model;
+            }
+        };
+
+        return service;
+        ///////////////
+
+    }
+
+    /* @ngInject */
+    function appRun(menuhelper, atomviewerConstants, AtomViewerMenus) {
+        var moduleConstants = atomviewerConstants;
+        menuhelper.configureMenus(moduleConstants.name, AtomViewerMenus.getModuleMenus());
     }
 
 })();

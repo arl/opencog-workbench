@@ -4,7 +4,8 @@
     angular
         .module('app.layout.topnav')
         .factory('menuhelper', menuhelper)
-        .directive('checkboxMenuitem', checkboxMenuitem);
+        .directive('checkboxMenuitem', checkboxMenuitem)
+        .directive('radioMenuitem', radioMenuitem);
 
     /* @ngInject */
     function menuhelper() {
@@ -60,4 +61,27 @@
                 ).join('');
         }
     }
+
+
+    /* @ngInject */
+    function radioMenuitem () {
+        var directive = {
+            restrict: 'A',
+            replace: true,
+            scope : {
+                'model': '=',
+                'content': '='
+            },
+            template : getTemplate()
+        };
+        return directive;
+
+        function getTemplate() {
+            return new Array(
+                '<a ng-click="model = !model"><i ng-class="model?',
+                '\'fa fa-check-square-o\'', ':', '\'fa fa-square-o\'',
+                '"></i> {{content}}</a>'
+                ).join('');
+        }
+    }    
 })();
