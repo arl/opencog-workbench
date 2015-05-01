@@ -32,7 +32,7 @@
 
             }
         ];
-        menuhelper.configureMenus(dashboardConstants.name, menus);
+        menuhelper.configureMenus(dashboardConstants.id, menus);
     }
 
 })();

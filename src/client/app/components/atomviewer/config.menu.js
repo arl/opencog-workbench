@@ -89,7 +89,7 @@
     /* @ngInject */
     function appRun(menuhelper, atomviewerConstants, AtomViewerMenus) {
         var moduleConstants = atomviewerConstants;
-        menuhelper.configureMenus(moduleConstants.name, AtomViewerMenus.getModuleMenus());
+        menuhelper.configureMenus(moduleConstants.id, AtomViewerMenus.getModuleMenus());
     }
 
 })();

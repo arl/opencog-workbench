@@ -23,10 +23,7 @@
                     {   
                         id: 'simpleitem',
                         type: 'simple',
-                        content: 'Dummy',
-                        handler: function() {
-                            dummyClickHandler();
-                        }
+                        content: 'Dummy'
                     },
                     //  checkbox menu item
                     {
@@ -39,13 +36,11 @@
             }
         ];
 
+        console.warn('we probably have to remove back DummyMenus factory as its sole purpose was to hold the handlers and values bound to menu items, and this is not necessary any more since we use menuhelpers functions for this');
+
         var service = {
             getModuleMenus: function() { return menus; },
 
-            // set 'call dummy' handler
-            onClickDummy: function(handler) {
-                dummyClickHandler = handler;
-            },
             getDummyChkValue: function () {
                 var menu = _.find(menus, function(menu) { return menu.id === 'examplemenu'; });
                 var item = _.find(menu.items, function(item) { return item.id === 'checkboxitem'; });
@@ -61,7 +56,7 @@
     /* @ngInject */
     function appRun(menuhelper, dummyConstants, DummyMenus) {
         var moduleConstants = dummyConstants;
-        menuhelper.configureMenus(moduleConstants.name, DummyMenus.getModuleMenus());
+        menuhelper.configureMenus(moduleConstants.id, DummyMenus.getModuleMenus());
     }
 
 })();

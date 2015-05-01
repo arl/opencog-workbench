@@ -6,7 +6,7 @@
         .controller('Dummy', Dummy);
 
     /* @ngInject  */
-    function Dummy(logger, dummyConstants, DummyMenus) {
+    function Dummy($scope, logger, dummyConstants, DummyMenus, menuhelper) {
 
         /*jshint validthis: true */
         var vm = this;
@@ -18,12 +18,16 @@
         vm.title = dummyConstants.name;
 
         // define menu click handler
-        DummyMenus.onClickDummy(function() {
+        menuhelper.setClickHandler('/dummy/examplemenu/simpleitem', function() {
 
             console.log('Dummy Clicked');
-            var chkval = DummyMenus.getDummyChkValue();
-            console.log('chkval:' + chkval);
-        });   
+            // var chkval = DummyMenus.getDummyChkValue();
+            // console.log('chkval:' + chkval);
+        });
+
+        $scope.$on('$destroy', function() {
+            menuhelper.resetClickHandler('/dummy/examplemenu/simpleitem');
+        });
 
         activate();
 

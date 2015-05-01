@@ -44,7 +44,7 @@
 
             }       
         ];
-        menuhelper.configureMenus(moduleConstants.name, menus);
+        menuhelper.configureMenus(moduleConstants.id, menus);
     }
 
 })();
