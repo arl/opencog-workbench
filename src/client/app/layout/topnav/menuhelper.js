@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.layout.topnavmenu')
+        .module('app.layout.topnav')
         .factory('menuhelper', menuhelper)
         .directive('checkboxMenuitem', checkboxMenuitem);
 
