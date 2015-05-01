@@ -3,17 +3,13 @@
 
     angular
         .module('components.dummy')
-        .factory('DummyMenus', DummyMenus)
         .run(appRun);
 
     /* @ngInject */
-    function DummyMenus(dummyConstants, _) {
+    function appRun(menuhelper, dummyConstants) {
         var moduleConstants = dummyConstants;
 
-        // set menu handler to noop, in case nobody is interested..
-        var dummyClickHandler = angular.noop;
-        var dummyChkValue = true;
-
+        // define our component menus
         var menus = [
             {
                 id: 'examplemenu',
@@ -25,38 +21,36 @@
                         type: 'simple',
                         content: 'Dummy'
                     },
+
                     //  checkbox menu item
                     {
                         id: 'checkboxitem',
                         type: 'checkbox',
                         content: 'Dummy Check',
-                        model: dummyChkValue
+                        model: true // checkbox default value
+                    },
+
+                    // header menu item
+                    {
+                        type: 'header',
+                        content: 'Radio'
+                    },
+
+                    // radio menu item
+                    {
+                        id: 'radioitem',
+                        type: 'radio',
+                        content: [
+                            'Item 0', 'Item 1', 'Item 2', 'Item 3'
+                        ],
+                        model: 2 // default selection : content[2] -> 'Item 2'
                     }
                 ]
             }
         ];
 
-        console.warn('we probably have to remove back DummyMenus factory as its sole purpose was to hold the handlers and values bound to menu items, and this is not necessary any more since we use menuhelpers functions for this');
-
-        var service = {
-            getModuleMenus: function() { return menus; },
-
-            getDummyChkValue: function () {
-                var menu = _.find(menus, function(menu) { return menu.id === 'examplemenu'; });
-                var item = _.find(menu.items, function(item) { return item.id === 'checkboxitem'; });
-                return item.model;
-            }
-        };
-
-        return service;
-        ///////////////
-
-    }
-
-    /* @ngInject */
-    function appRun(menuhelper, dummyConstants, DummyMenus) {
-        var moduleConstants = dummyConstants;
-        menuhelper.configureMenus(moduleConstants.id, DummyMenus.getModuleMenus());
+        // declare them to the menuhelper
+        menuhelper.configureMenus(moduleConstants.id, menus);
     }
 
 })();

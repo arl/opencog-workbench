@@ -39,7 +39,7 @@
                     <a dropdown-toggle role="button" data-ng-bind-html="menu.title"></span></a>
                       <ul class="dropdown-menu" role="menu">
                         <li data-ng-repeat="subm in menu.items">
-
+    
                             <!-- menu header item -->
                             <a data-ng-if="subm.type === 'header'" class="dropdown-header" data-ng-bind-html="subm.content"></a>
 
@@ -47,10 +47,10 @@
                             <a data-ng-if="!subm.type || subm.type === 'simple'" data-ng-click="subm.handler()" data-ng-bind-html="subm.content"></a>
 
                             <!-- checkbox menu item (using directive)-->
-                            <a data-checkbox-menuitem data-ng-if="subm.type === 'checkbox'" model="subm.model" content="subm.content"></a>
+                            <a data-ng-if="subm.type === 'checkbox'" data-checkbox-menuitem model="subm.model" content="subm.content" handler="subm.handler"></a>
 
                             <!-- radio menu item (using directive)-->
-                            <a data-radio-menuitem data-ng-if="subm.type === 'radio'" model="subm.model" content="subm.content"></a>
+                            <a data-ng-repeat="item in subm.content track by $index" data-radio-menuitem data-ng-if="subm.type === 'radio'" model="subm.model == $index" content="subm.content[$index]" handler="subm.handler"></a>
 
                         </li>
                     </ul>
