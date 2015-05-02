@@ -1,61 +1,98 @@
 <!-- Static navbar -->
-<nav class="navbar navbar-fixed-top navbar-inverse" data-ng-controller="Topnav as tnVm">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">
-                <div>
-                    <img alt="OpenCog Workbench">
-                    <span>OpenCog<br>Workbench</span>
-                </div>
-            </a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+<div id="wrap">
+  <nav class="navbar navbar-fixed-top navbar-inverse" data-ng-controller="Topnav as tnVm">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="navbar-brand">
+          <div>
+            <img alt="OpenCog Workbench">
+            <span>OpenCog<br>Workbench</span>
+          </div>
+        </a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
 
-                <!-- static menu : OpenCog Workbench components list -->
-                <li dropdown>
-                    <a dropdown-toggle role="button">Components <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li class="nlightblue fade-selection-animation" data-ng-class="tnVm.isCurrent(r)"
-                            data-ng-repeat="r in tnVm.mainRoutes">
-                            <a data-ui-sref="{{r.name}}" data-ng-bind-html="r.data.content"></a>
-                        </li>
+        <ul class="nav navbar-nav">
+          <!-- static menu : OpenCog Workbench components list -->
+          <li dropdown>
+              <a dropdown-toggle role="button">Components <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                  <li class="nlightblue fade-selection-animation" data-ng-class="tnVm.isCurrent(r)"
+                      data-ng-repeat="r in tnVm.mainRoutes">
+                      <a data-ui-sref="{{r.name}}" data-ng-bind-html="r.data.content"></a>
+                  </li>
 
-                        <!-- this is here to test state change errors -->
-                        <li class="nlightblue fade-selection-animation">
-                            <a data-ui-sref="badstate">Bad State</a>
-                        </li>                        
-                    </ul>
-                </li>
+                  <!-- this is here to test state change errors -->
+                  <li class="nlightblue fade-selection-animation">
+                      <a data-ui-sref="badstate">Bad State</a>
+                  </li>                        
+              </ul>
+          </li>
 
-               <!-- dynamic menus : active tab/component specific menus -->
-               <li dropdown data-ng-repeat="menu in tnVm.menus">
-                    <a dropdown-toggle role="button" data-ng-bind-html="menu.title"></span></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li data-ng-repeat="subm in menu.items">
-    
-                            <!-- menu header item -->
-                            <a data-ng-if="subm.type === 'header'" class="dropdown-header" data-ng-bind-html="subm.content"></a>
+          <!-- dynamic menus : active tab/component specific menus -->
+          <li dropdown data-ng-repeat="menu in tnVm.menus">
+            <a dropdown-toggle role="button" data-ng-bind-html="menu.title"></a>
+            <ul class="dropdown-menu" role="menu">
+              <li data-ng-repeat="subm in menu.items">
 
-                            <!-- simple menu item -->
-                            <a data-ng-if="!subm.type || subm.type === 'simple'" data-ng-click="subm.handler()" data-ng-bind-html="subm.content"></a>
+                <!-- menu header item -->
+                <a data-ng-if="subm.type === 'header'" class="dropdown-header" data-ng-bind-html="subm.content"></a>
 
-                            <!-- checkbox menu item (using directive)-->
-                            <a data-ng-if="subm.type === 'checkbox'" data-checkbox-menuitem model="subm.model" content="subm.content" handler="subm.handler"></a>
+                <!-- simple menu item -->
+                <a data-ng-if="!subm.type || subm.type === 'simple'" data-ng-click="subm.handler()" data-ng-bind-html="subm.content"></a>
 
-                            <!-- radio menu item (using directive)-->
-                            <a data-ng-repeat="item in subm.content track by $index" data-radio-menuitem data-ng-if="subm.type === 'radio'" model="subm.model == $index" content="subm.content[$index]" handler="subm.handler"></a>
+                <!-- checkbox menu item (using directive)-->
+                <a data-ng-if="subm.type === 'checkbox'" data-checkbox-menuitem model="subm.model" content="subm.content" handler="subm.handler"></a>
 
-                        </li>
-                    </ul>
-               </li>
+                <!-- radio menu item (using directive)-->
+                <a data-ng-repeat="item in subm.content track by $index" data-radio-menuitem data-ng-if="subm.type === 'radio'" model="subm.model == $index" content="subm.content[$index]" handler="subm.handler"></a>
+              </li>
             </ul>
-        </div>
+          </li>
+
+        </ul>
+
+      </div>
     </div>
-</nav>
+  </nav>
+
+  <!-- <nav class="navbar navbar-fixed-top navbar-inverse" data-ng-controller="Topnav as tnVm"> -->
+
+
+  <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".main-nav">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+          </div>
+          <div class="collapse navbar-collapse main-nav">
+              <ul class="nav navbar-nav">
+                  <li><a href="#">it1d</a></li>
+                  <li class="divider-vertical"></li>
+                  <li><a href="#about">it2d</a></li>
+                  <li class="divider-vertical"></li>
+                  <li><a href="#contact">it3d</a></li>
+                  <li class="divider-vertical"></li>
+                  <li><a href="#contact">it4d</a></li>
+                  <li class="divider-vertical"></li>
+                  <li><a href="#contact">it5d</a></li>
+                  <li class="divider-vertical"></li>
+                  <li><a href="#contact">it6d</a></li>
+                  <li class="divider-vertical"></li>
+                  <li><a href="#contact">it7d</a></li>
+
+              </ul>
+          </div>
+      </div>
+  </nav>
+
+</div>

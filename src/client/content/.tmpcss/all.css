@@ -874,6 +874,9 @@ form {
 .not-allowed {
   cursor: not-allowed; }
 
+body {
+  padding-top: 50px; }
+
 /*
 <a href="/" class="navbar-brand">
 <div style="display: flex;">
