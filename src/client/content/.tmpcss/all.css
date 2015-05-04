@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* Include custom theme */
 * {
   /*-webkit-box-shadow: none !important;
@@ -838,58 +837,54 @@ form {
 
 /* Users ends */
 /*#endregion */
-/* tab color */
-.nav-tabs > li > a {
-  background-color: #333333;
-  border-color: #777777;
-  color: #fff; }
+/*
+    additions made after reading 
+    http://stackoverflow.com/questions/19890700/change-navbar-height-in-bootstrap3
+*/
+/* height for both navbars : main navbar and tab-navbar */
+body {
+  padding-top: 20px; }
 
-/* active tab color */
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-  color: #fff;
-  background-color: #666;
-  border: 1px solid #888888; }
+.navbar {
+  min-height: 20px; }
 
-/* opencog workbench logo and title (top-left) */
-.navbar-brand div {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex; }
-  .navbar-brand div img {
-    display: block;
-    height: 40px;
-    width: 40px;
-    margin-top: -10px;
-    content: url('../images/oclogo.png'); }
-  .navbar-brand div span {
-    width: 140px;
-    padding-left: 30px;
-    margin-top: -10px;
-    text-align: center; }
+.navbar .nav > li > a {
+  padding-top: 0px;
+  padding-bottom: 0px; }
 
-​ .nav-tabs > li > a:hover {
-  border-color: #000000;
-  background-color: #111111; }
+/* branding */
+.navbar-brand {
+  margin-left: -50px !important;
+  min-height: 20px;
+  height: 20px !important;
+  padding-top: 0px;
+  padding-bottom: 0px; }
+  .navbar-brand div {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+    .navbar-brand div img {
+      display: block;
+      height: 40px;
+      width: 40px;
+      margin-left: -3px;
+      content: url('../images/oclogo.png'); }
+    .navbar-brand div span {
+      padding-left: 33px;
+      text-align: center;
+      font-size: 19px;
+      font-weight: 600;
+      padding-right: 10px; }
+
+/**************/
+/*    tabs    */
+/**************/
+.navbar-tabs {
+  padding-left: 250px; }
 
 .not-allowed {
   cursor: not-allowed; }
 
-body {
-  padding-top: 50px; }
-
-/*
-<a href="/" class="navbar-brand">
-<div style="display: flex;">
-                <img alt="OpenCog Workbench" class="oclogo">
-                <span class="brand-title" style="
-    width: 140px;
-    padding-left: 30px;
-    margin-top: -10px;
-">OpenCog<br>Workbench</span>
-</div>
-            </a>
-
- */
 /*#region Override background color theme */
 /*For Bootstrap 3*/
 .nav, .pagination, .carousel, .panel-title a {
