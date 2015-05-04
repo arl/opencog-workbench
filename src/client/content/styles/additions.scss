@@ -1,11 +1,5 @@
-
-/*
-    additions made after reading 
-    http://stackoverflow.com/questions/19890700/change-navbar-height-in-bootstrap3
-*/
-
 /* height for both navbars : main navbar and tab-navbar */
-$navbar-height: 20px;
+$navbar-height: 24px;
 
 body {
   padding-top: $navbar-height;
@@ -18,7 +12,8 @@ body {
 
 .navbar .nav > li > a {
   padding-top: 0px;
-  padding-bottom: 0px;  
+  padding-bottom: 0px;
+  line-height: $navbar-height;
 }
 /* branding */
 .navbar-brand {
@@ -39,11 +34,10 @@ body {
       content:url('../images/oclogo.png')
     }
     & span {
-      padding-left: 33px;
+      padding: 3px 10px 0px 33px;
       text-align: center;
       font-size: 19px;
       font-weight: 600;
-      padding-right: 10px;
     }    
   }
 }
@@ -52,11 +46,21 @@ body {
 /*    tabs    */
 /**************/
 .navbar-tabs {
-   padding-left: 250px;
+   padding-left: 198px;
+   line-height: $navbar-height;
 }
 
-
+.nav-pills > li > a {
+  height: $navbar-height - 4px;
+  margin-top: 4px;
+}
 
 .not-allowed {
   cursor: not-allowed;
+}
+
+.nav > li > a {
+  &:hover, &:focus {
+    background-color: #8C97A0;  
+  }
 }

@@ -837,26 +837,23 @@ form {
 
 /* Users ends */
 /*#endregion */
-/*
-    additions made after reading 
-    http://stackoverflow.com/questions/19890700/change-navbar-height-in-bootstrap3
-*/
 /* height for both navbars : main navbar and tab-navbar */
 body {
-  padding-top: 20px; }
+  padding-top: 24px; }
 
 .navbar {
-  min-height: 20px; }
+  min-height: 24px; }
 
 .navbar .nav > li > a {
   padding-top: 0px;
-  padding-bottom: 0px; }
+  padding-bottom: 0px;
+  line-height: 24px; }
 
 /* branding */
 .navbar-brand {
   margin-left: -50px !important;
-  min-height: 20px;
-  height: 20px !important;
+  min-height: 24px;
+  height: 24px !important;
   padding-top: 0px;
   padding-bottom: 0px; }
   .navbar-brand div {
@@ -865,25 +862,32 @@ body {
     display: flex; }
     .navbar-brand div img {
       display: block;
-      height: 40px;
-      width: 40px;
+      height: 48px;
+      width: 48px;
       margin-left: -3px;
       content: url('../images/oclogo.png'); }
     .navbar-brand div span {
-      padding-left: 33px;
+      padding: 3px 10px 0px 33px;
       text-align: center;
       font-size: 19px;
-      font-weight: 600;
-      padding-right: 10px; }
+      font-weight: 600; }
 
 /**************/
 /*    tabs    */
 /**************/
 .navbar-tabs {
-  padding-left: 250px; }
+  padding-left: 198px;
+  line-height: 24px; }
+
+.nav-pills > li > a {
+  height: 20px;
+  margin-top: 4px; }
 
 .not-allowed {
   cursor: not-allowed; }
+
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: #8C97A0; }
 
 /*#region Override background color theme */
 /*For Bootstrap 3*/
