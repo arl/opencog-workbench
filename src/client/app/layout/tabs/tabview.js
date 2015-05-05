@@ -6,13 +6,21 @@
         .directive('tabView', tabView);
 
     /**
-     * tabView directive generates the ui-view tags for the tabs
-     * this allows us to not have to hard-code anything about the workbench
-     * components in the app.layout module
+     * tabView directive generates the serie of ui-view tags that keep the 
+     * state of components for which a tab is opened (sticky states)
+     * doing this allow us to know nothing about the workbench components
+     * in the app.layout module
      */
     /* @ngInject */
-    function tabView($compile, routeHelper, _) {
+    function tabView($compile, routeHelper, $state, _) {
 
+        return {
+            restrict: 'E',
+            template: generateTemplate(),
+            link: link
+        };
+
+        // generate template at directive instantiation
         function generateTemplate() {
             return _.map(routeHelper.getMainRoutes(), function(route) {
 
@@ -20,19 +28,17 @@
                 return new Array(
                     '<div class="container shuffle-animation" ',
                     'ui-view="', route.url, '" ',
-                    'ng-show="tVm.isActive(\'', route.name, '\')">',
+                    'ng-show="$state.includes(\'', route.name, '\')">',
                     '</div>'
                     ).join('');
+
             }).join('\n');
         }
 
-        // very simple directive with precompiled template
-        return {
-            restrict: 'E',
-            // inject main routes into returned object...
-            template: generateTemplate()
-        };
-
+        // just add $state to the scope
+        function link($scope, $element, $attrs) {
+            $scope.$state = $state;
+        }
     }
 
 })();

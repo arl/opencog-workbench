@@ -5,6 +5,9 @@
         .module('app.layout.tabs')
         .controller('Tabs', Tabs);
 
+    /**
+     * controller of our root state ('tab' state : '/')
+     */
     /* @ngInject */
     function Tabs($scope, config, logger, $state, TabMgr) {
         /*jshint validthis: true */
@@ -13,7 +16,6 @@
         // should return if we show this tab or not (maybe we can directly do it
         // in the expression ng-show in template?)
         vm.isActive = function(stateName) {
-
             return $state.includes(stateName);
         };
 

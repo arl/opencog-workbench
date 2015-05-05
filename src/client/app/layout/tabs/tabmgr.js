@@ -8,12 +8,7 @@
 
     /* @ngInject */
     function appRun(routeHelper) {
-        // register the tab state (parent state of every module main state)
-        routeHelper.configureRoutes(getStates());
-    }
-
-    function getStates() {
-        return [
+        var rootState =  [
             {
                 state: 'tab',
                 config : {
@@ -27,6 +22,9 @@
                 }
             }
         ];
+
+        // register the tab state (parent state of every module main state)
+        routeHelper.configureRoutes(rootState);
     }
 
     /* @ngInject */
@@ -46,10 +44,8 @@
 
         /**
          * open a tab corresponding to given state
-         *
-         *  if tab is present, set it as active
-         *  or open a new tab and activate it
-         *
+         * @note if tab is present, set it as active
+         *       or open a new tab and activate it
          * @param {Object} state state representing the tab to open
          */
         function openTab(state) {
@@ -64,8 +60,7 @@
 
         /**
          * return all opened tabs
-         *
-         * @return {[type]} [description]
+         * @return {Array} array of tabs
          */
         function getTabs() {
             return tabs;
@@ -98,7 +93,6 @@
 
         /**
          * get active tab, if any
-         *
          * @return {Object}     active tab or undefined
          */
         function getActiveTab() {
@@ -112,10 +106,8 @@
 
         /**
          * check if given state already has a tab 
-         *
          * @param  {Object}  state 
-         *
-         * @return {Boolean}       tab present?
+         * @return {Boolean} is tab present?
          */
         function isTabPresent(state) {
             // check that this state has not already his tab
@@ -126,8 +118,7 @@
 
         /**
          * set as active the tab corresponding to state given as argument
-         *
-         * @param  {Object} state [state which tab will be activated]
+         * @param  {Object} state state which tab will be activated
          */
         function setActiveTab(state) {
             _.each(tabs, function(t) {
@@ -137,7 +128,6 @@
 
         /**
          * remove tab corresponding to state given as argument
-         *
          * @param  {Object} state state which tab will be removed
          */
         function removeTab(state) {
@@ -147,10 +137,10 @@
         }
 
         /**
-         * update closeEnabled flag, depending on tab count
+         * update closeEnabled flag on all tabs
          */
         function updateTabClosing() {
-            // if only tab, disable closing
+            // disable closing if only one tab opened
             if (tabs.length === 1) {
                 tabs[0].closeEnabled = false;
             } else {
