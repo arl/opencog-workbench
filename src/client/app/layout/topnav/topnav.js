@@ -6,14 +6,16 @@
         .controller('Topnav', Topnav);
 
     /* @ngInject */
-    function Topnav($rootScope, $state, routeHelper, menuhelper, _) {
+    function Topnav($rootScope, $state, routeHelper, menuhelper, TabMgr, _) {
         /*jshint validthis: true */
         var vm = this;
+
         var mainRoutes = routeHelper.getMainRoutes();
         var allMenus = menuhelper.getAllMenus();
+
         vm.isCurrent = isCurrent;
-        console.log(vm.title); // example
-        //vm.sidebarReady = function(){console.log('done animating menu')}; // example
+        vm.getTabs = getTabs;
+        vm.closeTab = closeTab;
 
         activate();
 
@@ -30,8 +32,34 @@
         }
 
         /**
+         * say if we currently are on given main route (or in a substate of it)
+         * @param  {String}  route main route name
+         */
+        function isCurrent(route) {
+            if (!route.title || !$state.current || !$state.current.title) {
+                return '';
+            }
+            var menuName = route.title;
+            return $state.current.title.substr(0, menuName.length) === menuName ? 'current' : '';
+        }
+
+        /**
+         * get all tabs
+         */
+        function getTabs() {            
+            return TabMgr.getTabs();
+        }
+
+        function closeTab($event, tab) {
+            $event.stopPropagation();
+            if (tab.closeEnabled) {
+                TabMgr.closeTab(tab);
+            }
+        };
+
+        /**
          * get main navigation routes (i.e workbench components main route)
-         * @return {Array} list of components main route
+         * @return {Array}
          */
         function getMainRoutes() {
             vm.mainRoutes = mainRoutes.filter(function(r) {
@@ -54,19 +82,6 @@
                 // trigger the UI menu update
                 vm.menus = componentMenu.menus;
             }
-        }        
-
-        /**
-         * say if we currently are on given main route (or in a substate of it)
-         * @param  {String}  route main route name
-         * @return {Boolean} are we on given route
-         */
-        function isCurrent(route) {
-            if (!route.title || !$state.current || !$state.current.title) {
-                return '';
-            }
-            var menuName = route.title;
-            return $state.current.title.substr(0, menuName.length) === menuName ? 'current' : '';
         }
     }
 })();

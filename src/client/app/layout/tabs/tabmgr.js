@@ -15,7 +15,7 @@
                     url: '/',
                     views: {
                         '@': {
-                            controller: 'Tabs as tVm',
+                            controller: 'RootTab as rtVm',
                             templateUrl: 'app/layout/tabs/tabs.html'
                         }   
                     }                    

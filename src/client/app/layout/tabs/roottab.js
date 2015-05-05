@@ -3,34 +3,15 @@
 
     angular
         .module('app.layout.tabs')
-        .controller('Tabs', Tabs);
+        .controller('RootTab', RootTab);
 
     /**
      * controller of our root state ('tab' state : '/')
      */
     /* @ngInject */
-    function Tabs($scope, config, logger, $state, TabMgr) {
+    function RootTab($scope, $state, TabMgr) {
         /*jshint validthis: true */
         var vm = this;
-
-        // should return if we show this tab or not (maybe we can directly do it
-        // in the expression ng-show in template?)
-        vm.isActive = function(stateName) {
-            return $state.includes(stateName);
-        };
-
-        // get all tabs
-        vm.getTabs = function(tab) {
-            return TabMgr.getTabs();
-        };
-
-        // close tab
-        vm.closeTab = function($event, tab) {
-            $event.stopPropagation();
-            if (tab.closeEnabled) {
-                TabMgr.closeTab(tab);
-            }
-        };
 
         activate();
 

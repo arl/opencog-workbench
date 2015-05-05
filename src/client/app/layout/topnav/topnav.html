@@ -1,8 +1,8 @@
 <!-- Static navbar -->
-<div id="wrap">
+<div id="wrap" data-ng-controller="Topnav as tnVm">
 
   <!-- main navbar : branding & menus -->
-  <nav class="navbar navbar-fixed-top navbar-inverse" data-ng-controller="Topnav as tnVm">
+  <nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -65,7 +65,7 @@
   </nav>
 
   <!-- tab navbar -->
-  <nav class="navbar navbar-default navbar-static-top navbar-tabs" data-ng-controller="Tabs as tVm">
+  <nav class="navbar navbar-default navbar-static-top navbar-tabs">
       <div class="container">
           <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".main-nav">
@@ -76,9 +76,9 @@
           </div>
           <div class="collapse navbar-collapse main-nav">
             <tabset type="pills">
-              <tab ng-repeat="tab in tVm.getTabs()" ui-sref="{{tab.state.name}}" active="tab.active">
+              <tab ng-repeat="tab in tnVm.getTabs()" ui-sref="{{tab.state.name}}" active="tab.active">
                 <tab-heading><i class="fa {{tab.state.data.faIcon}}"></i> {{tab.state.title}}
-                  <a ng-class="{'not-allowed': !tab.closeEnabled}" ng-click="$parent.tVm.closeTab($event, tab)" href>
+                  <a ng-class="{'not-allowed': !tab.closeEnabled}" ng-click="$parent.tnVm.closeTab($event, tab)" href>
                   <i class="fa fa-times"></i></a>
                 </tab-heading>
               </tab>
