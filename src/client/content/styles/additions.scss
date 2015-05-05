@@ -46,8 +46,10 @@ body {
 /*    tabs    */
 /**************/
 .navbar-tabs {
-   padding-left: 198px;
-   line-height: $navbar-height;
+  padding-left: 198px;
+  line-height: $navbar-height;
+  position: fixed;
+  width: 100%;
 }
 
 .nav-pills > li > a {

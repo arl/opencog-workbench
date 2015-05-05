@@ -877,7 +877,9 @@ body {
 /**************/
 .navbar-tabs {
   padding-left: 198px;
-  line-height: 24px; }
+  line-height: 24px;
+  position: fixed;
+  width: 100%; }
 
 .nav-pills > li > a {
   height: 20px;
