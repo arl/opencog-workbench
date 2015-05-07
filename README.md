@@ -1,8 +1,21 @@
 #OpenCog Workbench
 
+
+**the doc is still in progress...**
+While you can find info here about how different ways to run the server, for example the server backend for the opencog workbench probably won't be a nodejs server
+
+
+
+
+### Running the build environment
+Type ```gulp build```  to generate an optimized build.
+Then ```gulp serve-build``` and browse to http://localhost:7200
+
+### Running the development environment
+Type `gulp serve-dev` and browse to `http://localhost:7200`
+
 ## Structure
-	/build 	(created on the fly)
-	/gulp	
+	/build	(created on the fly with gulp build)
 	/src
 		/client
 			/app
@@ -11,35 +24,8 @@
 		/server
 			/data
 			/routes
+ 	/report		(various reports
 	
-## Requirements
-
-- Install Latest Node from source or binaries (or at least node > 12.1)
-
-	go to https://nodejs.org/download/
-	then create NODE_PATH envvar and add $NODE_PATH/bin and $NODE_PATH/lib/node_modules to path
-
-	then npm install -g node-inspector bower gulp
-
-and finally npm install
-
-	- on OSX install [home brew](http://brew.sh/) and type `brew install node`
-	- on Windows install [chocolatey](https://chocolatey.org/) and type `choco install nodejs`
-- On OSX you can alleviate the need to run as sudo by [following these instructions](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md). I highly recommend this step on OSX
-- Open terminal
-- Type `npm install -g node-inspector bower gulp`
-
-## Installing Node.js and Bower Packages
-- Open terminal
-- Type `npm install`
-
-## Installing Bower Packages
-`npm install` will install these too, but you can do it manually.
-- Open terminal
-- Type `bower install`
-
-## Running
-Runs locally, no database required.
 
 ### Dev Builds
 The dev build does not optimize the deployed code. It simply runs it in place. You can run a dev build in multiple ways.
@@ -62,8 +48,7 @@ The optimizations are performed by the gulp tasks and include the following list
 - preparing Angular's templatecache for html templates
 - concat task to bundle css and js, separately
 - Angular dependency injection annotations using ngAnnotate
-- uglify to minify and mangle javascript
-- source maps
+- uglify to minify javascript
 - css autoprefixer for vendor prefixes
 - minify css
 - optimize images
@@ -71,7 +56,8 @@ The optimizations are performed by the gulp tasks and include the following list
 - deploying all js, css, images, fonts, and index.html
 
 ## Testing
-Type `gulp test` to run the tests including both unit and midway tests (spins up a server). This will create a watch on the files, with a 5 second delay, to run the tests.
+Type `gulp test` to run the tests once. 
+`gulp autotest` creates a watch on the files, running the tests on each save
 
 Testing uses karma, mocha, chai, sinon, ngMidwayTester libraries.
 
@@ -83,25 +69,10 @@ The app is quite simple and has 2 main routes:
 ### The Modules
 The app has 4 feature modules and depends on a series of external modules and custom but cross-app modules
 
-```
-app --> [
-        app.avengers,
-        app.dashboard,
-        app.layout,
-        app.widgets,
-		app.core --> [
-			ngAnimate,
-			ngRoute,
-			ngSanitize,
-			blocks.exception,
-			blocks.logger,
-			blocks.router
-		]
-    ]
-```
+
 
 ## core Module
-Core modules are ones that are shared throughout the entire application and may be customized for the specific application. Example might be common data services.
+Core modules are ones that are shared throughout the entire application. Example might be common data services.
 
 This is an aggregator of modules that the application will need. The `core` module takes the blocks, common, and Angular sub-modules as dependencies. 
 
@@ -155,36 +126,8 @@ Alternative to running node-inspector in its own tab is to use `gulp-shell`
 gulp.src('', {read: false})
     .pipe(plug.shell(['node-inspector']));
 ```
-
 Run `gulp serve-dev-debug` or `gulp serve-dev-debug-brk` to debug node via the Gulp tasks in this project.
 
 ### Issues 
 
-####If a process stays connected find it and kill with these commands
-
-```
-lsof -i TCP|fgrep LISTEN
-kill -9 34608
-```    
-
-####Set up some aliases for the Mac
-
-Edit the bash profile
-
-    nano ~/.bash_profile
-
-Enter the aliases
-
-    /usr/local/bin
-    alias lsp='sudo lsof -i -n -P | grep LISTEN'
-
-    alias cdmod='cd _git/ng-demos/modular'
-
-    alias gadd='git add . -A'
-
-CTRL-X and save
-
-Source the file
-
-    source ~/.bash_profile
 
