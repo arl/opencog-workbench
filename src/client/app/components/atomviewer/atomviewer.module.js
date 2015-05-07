@@ -2,7 +2,9 @@
     'use strict';
 
     angular
-        .module('components.atomviewer', [])
+        .module('components.atomviewer', [
+			'components.atomviewer.importexport'        	
+        ])
         .constant('atomviewerConstants', {
             'name': 'Atomspace Viewer',
             'id': 'atomviewer',
