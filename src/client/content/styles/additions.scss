@@ -1,13 +1,15 @@
 /* height for both navbars : main navbar and tab-navbar */
 $navbar-height: 24px;
 
-body {
-  padding-top: $navbar-height;
-}
-
-
 .navbar {
   min-height: $navbar-height;
+}
+
+// added now
+#mainnav {
+  margin-bottom: 0px;
+  border-bottom-width: 0px;
+  z-index: 1000;
 }
 
 .navbar .nav > li > a {
@@ -45,11 +47,14 @@ body {
 /**************/
 /*    tabs    */
 /**************/
-.navbar-tabs {
+#secondarynav {
   padding-left: 198px;
   line-height: $navbar-height;
   position: fixed;
   width: 100%;
+  top: $navbar-height;
+  z-index: 999;
+  margin-bottom: 0px;
 }
 
 .nav-pills > li > a {

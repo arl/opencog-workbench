@@ -838,11 +838,13 @@ form {
 /* Users ends */
 /*#endregion */
 /* height for both navbars : main navbar and tab-navbar */
-body {
-  padding-top: 24px; }
-
 .navbar {
   min-height: 24px; }
+
+#mainnav {
+  margin-bottom: 0px;
+  border-bottom-width: 0px;
+  z-index: 1000; }
 
 .navbar .nav > li > a {
   padding-top: 0px;
@@ -875,11 +877,14 @@ body {
 /**************/
 /*    tabs    */
 /**************/
-.navbar-tabs {
+#secondarynav {
   padding-left: 198px;
   line-height: 24px;
   position: fixed;
-  width: 100%; }
+  width: 100%;
+  top: 24px;
+  z-index: 999;
+  margin-bottom: 0px; }
 
 .nav-pills > li > a {
   height: 20px;
