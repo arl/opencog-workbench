@@ -11,32 +11,17 @@
         <div data-ng-include="'app/layout/topnav/topnav.html'"></div>
     </header>
     <section id="content" class="container-fluid">
-        
-        <div class="row">
-            <div class="col-xs-3">
-                
-            </div>
-            <div class="col-sm-9">
-                <!-- here comes the root state view ('tab') -->
-               <div ui-view></div> 
-            </div>
-            
-        </div>
+       
+      <!-- here comes the root state view ('tab') --> 
+      <div ui-view></div> 
 
+      <div ngplus-overlay
+           ngplus-overlay-delay-in="50"
+           ngplus-overlay-delay-out="700"
+           ngplus-overlay-animation="dissolve-animation">
+          <img class="busy-overlay">
 
-        <!-- <div data-ng-include="'app/layout/sidebar.html'"></div> -->
- 
-
-
-        <div ngplus-overlay
-             ngplus-overlay-delay-in="50"
-             ngplus-overlay-delay-out="700"
-             ngplus-overlay-animation="dissolve-animation">
-            <img class="busy-overlay">
-
-            <div class="page-spinner-message overlay-message">{{shVm.busyMessage}}</div>
-        </div>
+          <div class="page-spinner-message overlay-message">{{shVm.busyMessage}}</div>
+      </div>
     </section>
 </div>
-
-
