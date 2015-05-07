@@ -11,8 +11,9 @@
 
         // define our component menus
         var menus = [
+            // file menu
             {
-                id: 'filemenu',
+                id: 'file',
                 title: '<i class="fa fa-file"></i> File <span class="caret">',
                 items: [
                     {
@@ -26,10 +27,10 @@
                         content: '<i class="fa fa-exchange"></i> Export'
                     }
                 ]
-
             },
+            // view menu
             {
-                id: 'viewmenu',
+                id: 'view',
                 title: '<i class="fa fa-eye"></i> View <span class="caret">',
                 items: [
                     {
@@ -78,7 +79,36 @@
                         content: 'Terminal'
                     }
                 ]
-            }            
+            },
+            // analyze menu
+            {
+                id: 'analyze',
+                title: '<i class="fa fa-book"></i> Analyze <span class="caret">',
+                items: [
+                    {
+                        id: 'statistics',
+                        type: 'simple',
+                        content: '<i class="fa fa-question"></i> Statistics'
+                    }
+                ]
+            },
+            // help menu
+            {
+                id: 'help',
+                title: '<i class="fa fa-book"></i> Help <span class="caret">',
+                items: [
+                    {
+                        id: 'howtouse',
+                        type: 'simple',
+                        content: '<i class="fa fa-question"></i> How to Use'
+                    },
+                    {
+                        id: 'about',
+                        type: 'simple',
+                        content: '<i class="fa fa-info"></i> About'
+                    }
+                ]
+            }
         ];
 
         // declare them to the menuhelper

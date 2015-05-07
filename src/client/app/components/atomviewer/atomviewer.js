@@ -16,6 +16,8 @@
         // exports into view
         vm.title = atomviewerConstants.name;
         vm.infos = ['nothing for now..., click on a menu for example'];
+        vm.showImport = false;
+        vm.showExport = false;
 
         activate();
 
@@ -25,30 +27,30 @@
 
             /* install menu handlers */
             // file menu
-            menuhelper.setMenuHandler('/atomviewer/filemenu/import', function() {
-                vm.infos.push('Clicked on Import');
+            menuhelper.setMenuHandler('/atomviewer/file/import', function() {
+                vm.showImport = !vm.showImport;
             });
-            menuhelper.setMenuHandler('/atomviewer/filemenu/export', function() {
-                vm.infos.push('Clicked on Export');
+            menuhelper.setMenuHandler('/atomviewer/file/export', function() {
+                vm.showExport = !vm.showExport;
             });
 
             // view menu
-            menuhelper.setMenuHandler('/atomviewer/viewmenu/viewradio', function(val) {
+            menuhelper.setMenuHandler('/atomviewer/view/viewradio', function(val) {
                 vm.infos.push('Main view changed to :' + views[val]);
             });
-            menuhelper.setMenuHandler('/atomviewer/viewmenu/left-sidebar', function(val) {
+            menuhelper.setMenuHandler('/atomviewer/view/left-sidebar', function(val) {
                 vm.infos.push('Left Sidebar is :' + (val?'shown':'hidden'));
             });
-            menuhelper.setMenuHandler('/atomviewer/viewmenu/right-sidebar', function(val) {
+            menuhelper.setMenuHandler('/atomviewer/view/right-sidebar', function(val) {
                 vm.infos.push('Right Sidebar is :' + (val?'shown':'hidden'));
             });
-            menuhelper.setMenuHandler('/atomviewer/viewmenu/atomdetails', function(val) {
+            menuhelper.setMenuHandler('/atomviewer/view/atomdetails', function(val) {
                 vm.infos.push('Atom Details modal window is :' + (val?'shown':'hidden'));
             });          
-            menuhelper.setMenuHandler('/atomviewer/viewmenu/toolbox', function(val) {
+            menuhelper.setMenuHandler('/atomviewer/view/toolbox', function(val) {
                 vm.infos.push('Toolbox modal window is :' + (val?'shown':'hidden'));
             });          
-            menuhelper.setMenuHandler('/atomviewer/viewmenu/terminal', function(val) {
+            menuhelper.setMenuHandler('/atomviewer/view/terminal', function(val) {
                 vm.infos.push('Terminal modal window is :' + (val?'shown':'hidden'));
             });          
 

@@ -1,6 +1,631 @@
-﻿<h1>{{vm.title}} Component</h1>
-<div>
-    <ul data-ng-repeat="info in vm.infos">
-        <li>{{info}}</li>
-    </ul>
-</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="today-datas">
+                        <li class="blightblue">
+                            <div class="pull-left"><i class="fa fa-plane"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">Stark Tower</span> New York, New York
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+
+                        <li class="bblue">
+                            <div class="pull-left avenger-logo"></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">{{vm.avengerCount}}</span> Cast
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget wblue">
+                        <div data-cc-widget-header title="Avengers Movie Cast"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <table class="table table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Character</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-ng-repeat="a in vm.avengers">
+                                        <td>{{a.name}}</td>
+                                        <td>{{a.character}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget wlightblue">
+                        <div data-cc-widget-header title="{{vm.news.title}}"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <small>{{vm.news.description}}</small>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="container-fluid">
+    <div class="row" id="wrapper">
+        <div class="col-xs-3" id="leftMenu">
+            <div id="leftMenuInner">
+            <!-- CONNECT -->
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#connectPanel">
+                    <i class="fa fa-globe"></i> Connect
+                  </a>
+                </div>
+                <div id="connectPanel" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <!-- CONTENT -->
+                     <table class="table table-settings">
+                        <tr>
+                          <td width="30%">Server</td>
+                          <td>
+                          <div class="input-group">
+                           <input type="text" class="form-control" id="ConnectCogServer" placeholder="http://localhost:5000/">
+                           <span class="input-group-btn">
+                              <button id="ConnectSaveCogServerModalButton" class="btn btn-default" type="button"><i class="fa fa-floppy-o"></i></button>
+                              <button id="ConnectListCogServerModalButton" class="btn btn-default" type="button">...</button>
+                           </span>
+                        </div>
+                          </td>
+                        </tr>
+                         <tr>
+                          <td width="30%">Status</td>
+                          <td><span id="ConnectionStatus">Not connected yet.</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Autoconnect</td>
+                          <td><div id="ConnectAutoConnect"></div></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" align="right"  >
+                          <button class="btn btn-info" id="ConnectGetAtomTypesButton"><i class="fa fa-plug"></i> Get Atom Types</button>
+                          <button class="btn btn-success" id="ConnectConnectButton"><i class="fa fa-plug"></i> Connect</button>
+                          </td>   
+                        </tr>
+                      </table>
+                    <!-- END CONTENT -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- FILTER -->
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#filterPanel">
+                    <i class="fa fa-filter"></i> Filter
+                  </a>
+                </div>
+                <div id="filterPanel" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <!-- CONTENT -->
+                     <table class="table table-settings">
+                        <tr>
+                          <td width="40%">Attentional Focus Only</td>
+                          <td><input type="checkbox" id="FilterAttentionalFocusOnly"></td>
+                        </tr>
+                        <tr>
+                          <td>STI Range <span id="FilterSTIRangeAmount"> </span></td>
+                          <td><div id="FilterSTIRange"></div></td>
+                        </tr>
+                        <tr>
+                          <td>TruthValue Strength</td>
+                          <td><input class="form-control input-sm" type="text" size="2" placeholder="" id="FilterTruthValueStrength"> </td>
+                        </tr>
+                         <tr>
+                          <td>TruthValue Confidence</td>
+                          <td><input class="form-control input-sm" type="text" size="2" placeholder="" id="FilterTruthValueConfidence"></td>
+                        </tr>
+                         <tr>
+                          <td>TruthValue Count</td>
+                          <td><input class="form-control input-sm" type="text" size="2" placeholder="" id="FilterTruthValueCount"> </td>
+                        </tr>
+                         <tr>
+                          <td>Atom Name</td>
+                          <td><input type="text" class="form-control input-sm" id="FilterAtomName"></td>
+                        </tr>
+                        <tr>
+                          <td>Atom Type</td>
+                          <td><select class="form-control input-sm" id="FilterAtomType">
+                           <option value="0" id="FilterAtomTypeNoneValue">--None--</option>
+                        </select></td>
+                        </tr>
+                         <tr>
+                          <td>Limit</td>
+                          <td><input type="text" class="form-control input-sm" id="FilterLimit"></td>
+                        </tr>
+                         <tr>
+                          <td>Incoming Sets</td>
+                          <td> <input type="checkbox" id="FilterIncomingSets"> </td>
+                        </tr>
+                         <tr>
+                          <td>Outcoming Sets</td>
+                          <td><input type="checkbox" id="FilterOutgoingSets"></td>
+                        </tr>
+                        <tr>
+                        <td colspan="2" align="right" >
+                          <button disabled="disabled" class="btn btn-info"  id="FilterRefreshButton">
+                            <i class="fa fa-plug"></i> Refresh
+                          </button>
+                        </td>
+                        </tr>
+                    </table>
+                    <!-- END CONTENT -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- ADVANCED FILTER -->
+              <div class="accordion-group" style="display:none">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#advancedFilterPanel">
+                    <i class="fa fa-globe"></i> Advanced Filter
+                  </a>
+                </div>
+                <div id="advancedFilterPanel" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <!-- CONTENT -->
+                        <div class="form-group">
+                          <label for="AdvancedFilterFilter">Advanced Filter</label>
+                          <textarea id="AdvancedFilterFilter" class="form-control"></textarea>
+                          <br>
+                          <label for="AdvancedFilterSavedfilters">Saved Advanced Filters</label>
+                          <select id="AdvancedFilterSavedFilters" class="form-control">
+                          </select>
+                          <br>
+                          <div class="pull-right">
+                            <button id="AdvancedFilterRemember" class="btn btn-success btn-xs" disabled="disabled">Remember</button>
+                            <button id="AdvancedFilterForget" class="btn btn-success btn-xs" disabled="disabled">Forget</button> 
+                            <button id="AdvancedFilterExecute" class="btn btn-success btn-xs" disabled="disabled">Execute</button>
+                          </div>
+                        </div>
+                    <!-- END CONTENT -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- APPEARANCE -->
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#appearancePanel">
+                    <i class="fa fa-eye"></i> Appearance
+                  </a>
+                </div>
+                <div id="appearancePanel" class="accordion-body collapse">
+                  <div class="accordion-inner" style="padding:0px">
+                    <!-- CONTENT -->
+                        <div id="AppearanceInner-d3" style="padding:0px">
+                          <table class="table table-settings">
+                            <tr>
+                              <td width="30%">Show Text?</td>
+                              <td><div id="AppearanceShowText"></div></td>
+                            </tr>
+                            <tr>
+                              <td>Show Links?</td>
+                              <td><div id="AppearanceShowLinks"></div></td>
+                            </tr>
+                            <tr> 
+                              <td>Show Link Handles:</td>
+                              <td>
+                              <div id="displayShowLinkHandles"></div>  
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Charge</td>
+                              <td><div id="appearanceCharge"></div></td>
+                            </tr>
+                            <tr>
+                              <td>Friction</td>
+                              <td><div id="appearanceFriction"></div></td>
+                            </tr>
+                              <tr>
+                              <td>Link Strength</td>
+                              <td><div id="appearanceLinkStrength"></div></td>
+                            </tr>
+                              <tr>
+                              <td>Link Distance</td>
+                              <td><div id="appearanceLinkDistance"></div></td>
+                            </tr>
+                            <tr>
+                            <td>Nodes Shape
+                            </td>
+                            <td>
+                            <select id="displayNodeShape">
+                              <option value="none">--None--</option>
+                              <option value="triangle">Triangle</option>
+                              <option value="rectangle">Rectangle</option>
+                              <option value="circle">Circle</option>
+                            </select>
+                            </td>
+                            </tr>
+                            <tr>
+                              <td>Radius Relative to:</td>
+                              <td>
+                                <select id="displayRadiusBasedOn">
+                                  <option value="Fixed">Fixed</option>
+                                  <option value="Incoming">Incoming</option>
+                                  <option value="Outgoing">Outgoing</option>
+                                  <option value="IncomingOutgoing">Incoming + Outgoing</option>
+                                  <option value="AtomType">AtomType</option>
+                                  <option value="Random">Random</option>
+                                  <option value="sti">sti</option>
+                                  <option value="lti">lti</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Radius Multiplier:</td>
+                              <td>
+                                <div id="displayRadiusMultiplier"></div>
+                              </td>
+                            </tr>
+                            <!--
+                            <tr>
+                              <td>Link Handle Shape</td>
+                              <td>
+                                 
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Link Handle Radius:</td>
+                              <td>
+                                <div id="displayRadiusMultiplier"></div>
+                              </td>
+                            </tr>
+                             <tr>
+                              <td>Link Width:</td>
+                              <td>
+                                <div id="displayLinkWidth"></div>
+                              </td>
+                            </tr>
+                          -->
+                          </table>
+
+                        </div>
+
+                        <div id="AppearanceInner-sigma">
+                          <button id="appearanceSigmaCircularView" class="btn btn-md btn-success">Circular View</button>
+                          <button id="appearanceSigmaGridView" class="btn btn-md btn-success">Grid View</button> 
+                          <button id="appearanceSigmaClusterView" class="btn btn-md btn-success">Cluster View</button> 
+                        </div>
+
+                        <div id="AppearanceInner-none" style="padding:10px">
+                          Please select a visualizing view such as D3 or Sigma.
+                        </div>
+                    <!-- END CONTENT -->
+                  </div>
+                </div>
+              </div>
+ 
+
+              <!-- COLORS -->
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#colorsPanel">
+                    <i class="fa fa-paint-brush"></i> Colors
+                  </a>
+                </div>
+                <div id="colorsPanel" class="accordion-body collapse">
+                  <div class="accordion-inner" style="padding:0">
+                    <!-- CONTENT -->
+                    <table class="table table-settings" id="colorOptionTable">
+                      <tr option="simple">
+                        <td>Background Color</td>
+                        <td> 
+                            <input type="color" id="ColorBackgroundColor" value=""  class="form-control" />
+                        </td>
+                      </tr>
+                      <tr id="option">
+                        <td width="30%">Coloring Method</td>
+                        <td>
+                          <select id="ColorColorMethod">
+                            <option value="simple">Simple</option>
+                            <option value="incoming">Incoming </option>
+                            <option value="outgoing">Outgoing </option>
+                            <option value="atomtype">By AtomType </option>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr option="simple">
+                        <td>Color</td>
+                        <td> 
+                            <input  type="color" id="ColorSimpleColor" value=""  class="form-control" />
+                        </td>
+                      </tr>
+                      <tr option="simple">
+                        <td>Transparency</td>
+                        <td><div id="colorSimpleTransparency"></div></td>
+                      </tr>
+                       <!--
+                      <tr option="incoming">
+                        <td>Range From:</td>
+                        <td> 
+                          <div class="input-group" id="ColorSimpleColor">
+                              <input type="text" value=""  class="form-control" />
+                              <span class="input-group-addon"><i></i></span>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr option="incoming">
+                        <td>Range To:</td>
+                        <td> 
+                          <div class="input-group" id="ColorSimpleColor">
+                              <input type="text" value=""  class="form-control" />
+                              <span class="input-group-addon"><i></i></span>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr option="atomtype">
+                        <td colspan=2><div id="colorsAtomTypeDiv">sdfsdf</div></td>
+                        
+                      </tr>
+                    -->
+                    </table>
+                    <!-- END CONTENT -->
+                  </div>
+                </div>
+              </div>
+
+
+                 <!-- TEXT -->
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#textPanel">
+                    <i class="fa fa-font"></i> Text
+                  </a>
+                </div>
+                <div id="textPanel" class="accordion-body collapse">
+                  <div class="accordion-inner" style="padding:0">
+                    <!-- CONTENT -->
+                    <table class="table table-settings">
+                      <tr>
+                        <td colspan=2>
+                          <button id="textFullTextsButton" class="btn btn-success">Show Full Texts</button>
+                          <button id="textAbbreviatedTextsButton" class="btn btn-success">Show AbbrevatedText Texts</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="30%">Abbreviation Style</td>
+                        <td>
+                          <select>
+                            <option> Coming Soon.... </option>
+                           
+                          </select>
+                      </tr>
+                    </table>
+                    <!-- END CONTENT -->
+                  </div>
+                </div>
+              </div>
+
+              
+
+              <!-- ANALYSE -->
+              <div class="accordion-group" style="display:none">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#analyzePanel">
+                    <i class="fa fa-bar-chart"></i> Analyse
+                  </a>
+                </div>
+                <div id="analyzePanel" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <!-- CONTENT -->
+                      To be implemented...
+                    <!-- END CONTENT -->
+                  </div>
+                </div>
+              </div>
+ 
+              <!-- SETTINGS -->
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#settingsPanel">
+                    <i class="fa fa-cog"></i> Settings
+                  </a>
+                </div>
+                <div id="settingsPanel" class="accordion-body collapse">
+                  <div class="accordion-inner" style="padding:10px;">
+                    <!-- CONTENT -->
+                    <button id="SettingsClearPreferences" class="btn btn-success">
+                        Clear Preferences
+                    </button>
+                    <button class="btn btn-danger" id="appearanceClearD3">
+                      Clear D3
+                    </button>           
+                    <!-- END CONTENT -->
+                  </div>
+                </div>
+              </div>
+
+              </div>
+   
+        </div>
+
+        <div class="col-sm-7" id="mainContent"> 
+        <!-- MAIN SCREENS -->
+
+            <div id="snapshotFlash">
+            </div>
+            
+            <div id="screen-d3">
+            </div>
+  
+            <div id="screen-3d">
+            </div>
+
+            <div id="screen-sigma">
+            </div>
+
+            <div id="screen-table">
+            </div>
+
+            <div id="screen-json">
+            </div>
+
+            <div id="screen-scheme">
+            </div>
+            
+            <div id="screen-statistics">
+            
+            </div>
+
+            <import-view ng-show="vm.showImport"></import-view>
+            <export-view ng-show="vm.showExport"></export-view>
+
+            <div id="screen-about">
+            <!-- CONTENT -->
+                <h1> OpenCog AtomViewer</h1>
+                <hr>
+                <p>OpenCog AtomSpace Visualization Tool</p>
+                <p>Version: 1.1</p>
+                <p>Copyright (C) 2015 OpenCog Foundation</p>
+                <p> GUI Development and partial Visualization Development by skoumas.</p>
+                <p><a href="http://www.skoumas.com">www.skoumas.com</a></p>
+                <hr>
+                <button id="AboutCloseButton" class="btn btn-success">Close</button>
+            <!-- END CONTENT -->
+            </div>
+
+            <div id="screen-help">
+            <!-- CONTENT -->
+            <h1>Help</h1>
+            <hr>
+            <h2>Terminal Commands </h2>
+            <table class="table">
+              <tr>
+                <th>Command</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>connect</td>
+                <td>Connects to the server</td>
+              </tr>
+               <tr>
+                <td>select [id]</td>
+                <td>Selects a node from the graph</td>
+              </tr>
+               <tr>
+                <td>zoom [id]</td>
+                <td>Zooms at a specific node</td>
+              </tr>
+              <tr>
+                <td>fixed [id]</td>
+                <td>Makes a specific node fixed.</td>
+              </tr>
+               <tr>
+                <td>unfixed [id]</td>
+                <td>Makes a specific node unfixed.</td>
+              </tr>
+              <tr>
+                <td>view [d3,json,table,scheme]</td>
+                <td>Sets a specific view</td>
+              </tr>    
+            </table>
+            <!-- END CONTENT -->
+            </div>
+        </div>
+
+
+
+         <div class="col-sm-2" id="rightMenu">
+
+           
+            
+          <!-- DETAILS -->
+           <div class="accordion-group" >
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#detailsPanel">
+                    <i class="fa fa-globe"></i> <span id="detailsPanelTitle"> Details </span>
+                  </a>
+                </div>
+                <div id="detailsPanel" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <!-- CONTENT -->
+                    <div id="detailsPanelNodeContent">
+                         <table class="table table-settings">
+                          <tr>
+                          <td>Handle</td>
+                          <td><input type="text" disabled="disabled" class="form-control atomDetailsForm input-sm" id="detailsAtomHandle" name="atomName"/> </td>
+                        </tr>
+                        <tr>
+                          <td>Type</td>
+                          <td>
+                          <select class="form-control atomDetailsForm input-sm" id="detailsAtomType">
+                          <option value="0" id="detailsAtomTypeNoneValue">--None--</option>
+                          </select></td>
+                        </tr>
+                        <tr>
+                          <td>Name</td>
+                          <td><input type="text" class="form-control atomDetailsForm input-sm" id="detailsAtomName" name="atomName"/></td>
+                        </tr>
+                        <tr>
+                          <td>LTI</td>
+                          <td><input type="text" class="form-control atomDetailsForm input-sm" id="detailsAtomLTI" name="detailsAtomLTI"/> </td>
+                        </tr>
+                        <tr>
+                          <td>STI</td>
+                          <td><input type="text" class="form-control atomDetailsForm input-sm" id="detailsAtomSTI" name="detailsAtomSTI"/>  </td>
+                        </tr>
+                        <tr>
+                          <td>VLTI</td>
+                          <td><input type="text" class="form-control atomDetailsForm input-sm" id="detailsAtomVLTI" name="detailsAtomVLTI"/></td>
+                        </tr>
+                        <tr>
+                          <td>Count</td>
+                          <td><input type="text" class="form-control atomDetailsForm input-sm" name="detailsAtomCount" id="detailsAtomCount" /></td>
+                        </tr>
+                        <tr>
+                          <td>Confidence</td>
+                          <td><input type="text" class="form-control atomDetailsForm input-sm" name="detailsAtomConfidence" id="detailsAtomConfidence"/></td>
+                        </tr>
+                        <tr>
+                          <td>Strength</td>
+                          <td><input type="text" class="form-control atomDetailsForm input-sm" name="detailAtomStrength" id="detailsAtomStrength"/> </td>
+                        </tr>
+                        <tr>
+                          <td>Fixed</td>
+                          <td><div id="atomDetailsFixed"></div></td>
+                        </tr>
+                        <tr>
+                          <td>VLTI</td>
+                          <td><input type="text" class="form-control atomDetailsForm input-sm" id="detailsAtomVLTI" name="detailsAtomVLTI"/></td>
+                        </tr>
+                         <tr>
+                          <td colspan="2">
+                            <button disabled="disabled" id="atomDetailsUpdate" class="btn btn-md btn-success">Update</button> 
+                            <button disabled="disabled" id="atomDetailsDelete" class="btn btn-md btn-danger">Delete</button>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div id="detailsPanelLinkContent">
+                    </div>
+                    <div id="detailsPanelMultipleContent">
+                    </div>
+                    <div id="detailsPanelContentNone">
+                      (Nothing is currently selected)
+                    </div>
+                    <!-- END CONTENT -->
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
