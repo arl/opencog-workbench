@@ -2,10 +2,6 @@
 
 
 **the doc is still in progress...**
-While you can find info here about how different ways to run the server, for example the server backend for the opencog workbench probably won't be a nodejs server
-
-
-
 
 ### Running the build environment
 Type ```gulp build```  to generate an optimized build.
