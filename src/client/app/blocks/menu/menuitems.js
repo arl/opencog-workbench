@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.layout.topnav')
+        .module('blocks.menu')
         .directive('checkboxMenuitem', checkboxMenuitem)
         .directive('radioMenuitem', radioMenuitem);
 
