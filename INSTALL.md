@@ -18,5 +18,6 @@
 
 Check README.md for info about how the various ways to serve the workbench with gulp
 
-By the way ```gulp serve-dev``` should be sufficient for use cases
-Please report any bugs
+By the way ```gulp serve-dev``` should be sufficient for most use cases
+
+Don't hesitate to report any bugs
