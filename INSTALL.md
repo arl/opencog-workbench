@@ -16,4 +16,6 @@
 - Open terminal
 - Type ```bower install```
 
-check README.md for info about how to run the node server
+Check README.md for info about how the various ways to serve the workbench with gulp
+By the way ```gulp serve-dev``` should be sufficient for use cases
+Please report any bugs
