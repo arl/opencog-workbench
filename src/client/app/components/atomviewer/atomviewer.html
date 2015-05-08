@@ -428,68 +428,14 @@
 
             <import-view ng-show="vm.showImport"></import-view>
             <export-view ng-show="vm.showExport"></export-view>
+            <about-view ng-show="vm.showAbout"></about-view>
+            <help-view ng-show="vm.showHelp"></help-view>
 
-            <div id="screen-about">
-            <!-- CONTENT -->
-                <h1> OpenCog AtomViewer</h1>
-                <hr>
-                <p>OpenCog AtomSpace Visualization Tool</p>
-                <p>Version: 1.1</p>
-                <p>Copyright (C) 2015 OpenCog Foundation</p>
-                <p> GUI Development and partial Visualization Development by skoumas.</p>
-                <p><a href="http://www.skoumas.com">www.skoumas.com</a></p>
-                <hr>
-                <button id="AboutCloseButton" class="btn btn-success">Close</button>
-            <!-- END CONTENT -->
-            </div>
-
-            <div id="screen-help">
-            <!-- CONTENT -->
-            <h1>Help</h1>
-            <hr>
-            <h2>Terminal Commands </h2>
-            <table class="table">
-              <tr>
-                <th>Command</th>
-                <th>Description</th>
-              </tr>
-              <tr>
-                <td>connect</td>
-                <td>Connects to the server</td>
-              </tr>
-               <tr>
-                <td>select [id]</td>
-                <td>Selects a node from the graph</td>
-              </tr>
-               <tr>
-                <td>zoom [id]</td>
-                <td>Zooms at a specific node</td>
-              </tr>
-              <tr>
-                <td>fixed [id]</td>
-                <td>Makes a specific node fixed.</td>
-              </tr>
-               <tr>
-                <td>unfixed [id]</td>
-                <td>Makes a specific node unfixed.</td>
-              </tr>
-              <tr>
-                <td>view [d3,json,table,scheme]</td>
-                <td>Sets a specific view</td>
-              </tr>    
-            </table>
-            <!-- END CONTENT -->
-            </div>
-        </div>
-
-
-
-         <div class="col-sm-2" id="rightMenu">
-
-           
+		</div>
+		<div class="col-sm-2" id="rightMenu">
             
           <!-- DETAILS -->
-           <div class="accordion-group" >
+			<div class="accordion-group" >
                 <div class="accordion-heading">
                   <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#detailsPanel">
                     <i class="fa fa-globe"></i> <span id="detailsPanelTitle"> Details </span>

@@ -18,6 +18,8 @@
         vm.infos = ['nothing for now..., click on a menu for example'];
         vm.showImport = false;
         vm.showExport = false;
+        vm.showAbout = false;
+        vm.showHelp = false;
 
         activate();
 
@@ -26,6 +28,7 @@
         function activate() {
 
             /* install menu handlers */
+
             // file menu
             menuhelper.setMenuHandler('/atomviewer/file/import', function() {
                 vm.showImport = !vm.showImport;
@@ -54,6 +57,15 @@
                 vm.infos.push('Terminal modal window is :' + (val ? 'shown' : 'hidden'));
             });          
 
+            // help menu
+            menuhelper.setMenuHandler('/atomviewer/help/howtouse', function() {
+                vm.showHelp = !vm.showHelp;
+            });
+            menuhelper.setMenuHandler('/atomviewer/help/about', function() {
+                vm.showAbout = !vm.showAbout;
+            });
+
+ 
             // unregister menu handlers
             $scope.$on('$destroy', function() {
 
