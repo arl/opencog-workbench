@@ -64,7 +64,6 @@
             menuhelper.setMenuHandler('/atomviewer/help/about', function() {
                 vm.showAbout = !vm.showAbout;
             });
-
  
             // unregister menu handlers
             $scope.$on('$destroy', function() {
