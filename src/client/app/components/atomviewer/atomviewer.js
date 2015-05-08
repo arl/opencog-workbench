@@ -39,19 +39,19 @@
                 vm.infos.push('Main view changed to :' + views[val]);
             });
             menuhelper.setMenuHandler('/atomviewer/view/left-sidebar', function(val) {
-                vm.infos.push('Left Sidebar is :' + (val?'shown':'hidden'));
+                vm.infos.push('Left Sidebar is :' + (val ? 'shown' : 'hidden'));
             });
             menuhelper.setMenuHandler('/atomviewer/view/right-sidebar', function(val) {
-                vm.infos.push('Right Sidebar is :' + (val?'shown':'hidden'));
+                vm.infos.push('Right Sidebar is :' + (val ? 'shown' : 'hidden'));
             });
             menuhelper.setMenuHandler('/atomviewer/view/atomdetails', function(val) {
-                vm.infos.push('Atom Details modal window is :' + (val?'shown':'hidden'));
+                vm.infos.push('Atom Details modal window is :' + (val ? 'shown' : 'hidden'));
             });          
             menuhelper.setMenuHandler('/atomviewer/view/toolbox', function(val) {
-                vm.infos.push('Toolbox modal window is :' + (val?'shown':'hidden'));
+                vm.infos.push('Toolbox modal window is :' + (val ? 'shown' : 'hidden'));
             });          
             menuhelper.setMenuHandler('/atomviewer/view/terminal', function(val) {
-                vm.infos.push('Terminal modal window is :' + (val?'shown':'hidden'));
+                vm.infos.push('Terminal modal window is :' + (val ? 'shown' : 'hidden'));
             });          
 
             // unregister menu handlers

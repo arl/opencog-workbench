@@ -55,7 +55,7 @@
             if (tab.closeEnabled) {
                 TabMgr.closeTab(tab);
             }
-        };
+        }
 
         /**
          * get main navigation routes (i.e workbench components main route)

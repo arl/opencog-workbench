@@ -72,7 +72,7 @@
                     _.each(menuitems, function(it) { 
                         if (it.handler) {
                             delete it.handler;
-                        };                    
+                        }                    
                     });
                 } else {
                     throw {message: 'couldn\'t get menu items from globbed path ' + menupath};
@@ -134,9 +134,9 @@
                     if (path[1] === '*') {
                         _.each(menu.items, function(item) {
                             items.push(item);
-                        });       
+                        });
                     } else if (path[2] === '*') {
-                        if (menu.id == path[1]) {
+                        if (menu.id === path[1]) {
                             _.each(menu.items, function(item) { items.push(item); });                            
                         }
                     }

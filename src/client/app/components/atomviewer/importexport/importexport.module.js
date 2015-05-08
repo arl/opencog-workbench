@@ -21,4 +21,4 @@
             templateUrl : 'app/components/atomviewer/importexport/export.html'
         };
     }
- })();
+})();
