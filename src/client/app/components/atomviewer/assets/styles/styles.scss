@@ -1,0 +1,100 @@
+/* LAYOUT */
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+#wrapper
+{
+   height:100%;  
+} 
+
+#leftMenu
+{   
+  background-color:#777;
+  padding:0;
+}
+#rightMenu
+{
+  padding:0;
+  background-color: #777;
+}
+
+#mainContent
+{
+    
+  padding:0;
+}
+
+#atomDetails
+{
+  background-color: #ddd;
+  border:2px solid #ddd;
+}
+
+
+
+/* ACCORDION */
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+.accordion-heading  
+{
+    padding:10px; 
+    border:1px solid #ddd;
+    border-top:none;
+}
+
+.accordion-heading:hover  
+{
+    background-color:#ccc;
+}
+
+.accordion-heading a:link  
+{
+    text-decoration: none;
+}
+
+.accordion-heading a:hover  
+{
+    text-decoration: none;
+}
+
+.accordion-inner  
+{
+    padding:10px;
+    padding-right:20px; 
+    background-color:#fff;
+}
+
+/* CONNECT PANEL */
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+#ConnectConnectButton, #ConnectRefreshButton
+{
+  cursor: pointer;
+}
+
+#ConnectConnectButton:hover, #ConnectRefreshButton:hover
+{
+  background-color:#5cb85c;
+  color:#fff;
+}
+
+#ConnectionStatus
+{
+   
+}
+
+
+
+ 
