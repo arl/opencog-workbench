@@ -5,6 +5,7 @@
 *.suo
 bin
 obj
+.*.swp
 /packages
 
 # Ignore Node & Bower
