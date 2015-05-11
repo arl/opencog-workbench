@@ -4,7 +4,7 @@ var browserSync = require('browser-sync');
 var del = require('del');
 var glob = require('glob');
 var karma = require('karma').server;
-var merge = require('merge-stream');
+var merge = require('merge2');
 var config = require('./gulp.config.js')();
 var plato = require('plato');
 var plug = require('gulp-load-plugins')();
@@ -13,7 +13,6 @@ var env = plug.util.env;
 var log = plug.util.log;
 var chalk = plug.util.colors;
 var port = process.env.PORT || 7203;
-
 
 // create 2 browser-sync instances
 var bsClient = browserSync.create("bsClient");
@@ -24,7 +23,6 @@ var bsKarmaRpt = browserSync.create("bsKarmaRpt");
  */
 gulp.task('help', plug.taskListing);
 gulp.task('default', ['welcome', 'help']);
-
 
 gulp.task('welcome', function() {
 
@@ -54,10 +52,9 @@ gulp.task('welcome', function() {
 
     // WELCOME MESSAGE
     log(chalk.blue.bold(ocLogo.join('\n')));
-    log(chalk.red.bold('Welcome to the ocWorkbench development server'));
+    log(chalk.red.bold('OpenCog Workbench'));
 
     // TODO
-    log(chalk.yellow('TODO'), 'gulpfile.js : add comments to the tasks');
     log(chalk.blue('TODO'), 'BOWER : js libs in src/app/content/js can ALSO be managed with bower, see http://bower.io/');
 
     // IDEA
@@ -131,7 +128,6 @@ gulp.task('vendorjs', function() {
         .pipe(gulp.dest(config.build + 'js/'));
 });
 
-
 /**
  * Watch SCSS
  * @return {Stream}
@@ -140,9 +136,8 @@ gulp.task('scss-watcher', function() {
     log('Watching for SCSS file changes');
 
     // watch and compile into css
-    gulp.watch([config.scss.files], ['scss']);
+    gulp.watch([config.scss.files, config.components.styles], ['scss']);
 });
-
 
 /**
  * Compile SCSS into CSS
@@ -151,23 +146,29 @@ gulp.task('scss-watcher', function() {
 gulp.task('scss', function() {
     log('Compiling SCSS --> CSS');
 
-    return gulp
-        .src(config.scss.entrypoint)
-        .pipe(plug.plumber()) // exit gracefully if something fails after this
-        .pipe(plug.sass())
-        .on('error', errorLogger) // more verbose and dupe output. requires emit.
-        .pipe(plug.autoprefixer({browsers: ['last 2 version', '> 5%']}))
-        .pipe(plug.rename('all.css'))
-        .pipe(gulp.dest(config.tmpcss))
-
-        .pipe(plug.autoprefixer('last 2 version', '> 5%'))
-        .pipe(plug.bytediff.start())
-        .pipe(plug.minifyCss({}))
-        .pipe(plug.bytediff.stop(bytediffFormatter))
-        .pipe(plug.rename('all.min.css'))
-        .pipe(gulp.dest(config.build + 'css/'));    
+	return merge(
+		// first sass-compile workbench scss files
+		gulp.src(config.scss.entrypoint)
+			.pipe(plug.plumber())
+			.pipe(plug.sass())
+			.on('error', errorLogger),
+		// then the components scss	
+		gulp.src(config.components.styles)
+			.pipe(plug.plumber())
+			.pipe(plug.sass())
+			.on('error', errorLogger)
+    )
+	// merge them into one file
+	.pipe(plug.concat('all.css'))
+	.pipe(gulp.dest(config.tmpcss))
+		.pipe(plug.autoprefixer('last 2 version', '> 5%'))
+		.pipe(plug.bytediff.start())
+		.pipe(plug.minifyCss({}))
+		.pipe(plug.bytediff.stop(bytediffFormatter))
+		.pipe(plug.rename('all.min.css'))
+	// output an optimized file for build mode
+	.pipe(gulp.dest(config.build + 'css/'));
 });
-
 
 /**
  * Remove all styles from the build and temp folders
@@ -180,7 +181,6 @@ gulp.task('clean-styles', function(done) {
     );
     clean(files, done);
 });
-
 
 /**
  * Minify and bundle the Vendor CSS
@@ -253,19 +253,33 @@ gulp.task('inject', ['js', 'vendorjs', 'scss', 'vendorcss'], function() {
  * @return {Stream}
  */
 gulp.task('fonts', function() {
-    var dest = config.build + 'fonts/';
     log('Copying fonts');
 
+    var dest = config.build + 'fonts/';
     return gulp
         .src(config.fonts)
         .pipe(gulp.dest(dest));
 });
 
 /**
+ * Gather components images into main content folder
+ * they will be served from here in serve-dev mode
+ * they will copied from here for build
+ * @return {Stream}
+ */
+gulp.task('components', function() {
+    log('Gathering components assets into one folder');
+	var files = glob.sync(config.components.images);
+    return gulp
+        .src(files)
+        .pipe(gulp.dest(config.imagesDir));
+});
+
+/**
  * Compress images
  * @return {Stream}
  */
-gulp.task('images', function() {
+gulp.task('images', ['components'], function() {
     var dest = config.build + 'images/';
 
     log('Compressing, caching, and copying images');
@@ -372,7 +386,7 @@ gulp.task('autotest', function(done) {
  * serve the dev environment, with debug,
  * and with node inspector
  */
-gulp.task('serve-dev-debug', ['scss', 'scss-watcher'], function() {
+gulp.task('serve-dev-debug', ['scss', 'scss-watcher', 'components'], function() {
     serve({
         mode: 'dev',
         debug: '--debug'
@@ -383,7 +397,7 @@ gulp.task('serve-dev-debug', ['scss', 'scss-watcher'], function() {
  * serve the dev environment, with debug-brk,
  * and with node inspector
  */
-gulp.task('serve-dev-debug-brk', ['scss', 'scss-watcher'], function() {
+gulp.task('serve-dev-debug-brk', ['scss', 'scss-watcher', 'components'], function() {
     serve({
         mode: 'dev',
         debug: '--debug-brk'
@@ -394,7 +408,7 @@ gulp.task('serve-dev-debug-brk', ['scss', 'scss-watcher'], function() {
  * serve the dev environment,
  * compile scss and watch them
  */
-gulp.task('serve-dev', ['scss', 'scss-watcher'], function() {
+gulp.task('serve-dev', ['scss', 'scss-watcher', 'components'], function() {
     serve({
         mode: 'dev'
     });
@@ -479,7 +493,7 @@ function startBrowserSync(isDev) {
         
         gulp.watch(
             // watch everything that could change in the dev part
-            [config.scss.files, config.js, config.html],
+            [config.scss.files, config.components.styles, config.js, config.html],
 
             // => trigger the whole min/inject process on change
             ['inject',
@@ -497,6 +511,7 @@ function startBrowserSync(isDev) {
             config.client + '**/*.*',
             config.tmpcss + '*.css',
             '!' + config.scss.files,
+            '!' + config.scss.components,
             '!' + config.test + '**/*.*'
         ] : [config.build + '**/*.*'],
         ghostMode: { // these are the defaults t,f,t,t
