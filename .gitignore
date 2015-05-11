@@ -16,6 +16,7 @@ node_modules
 bower_components
 **/test/coverage
 /reports
+/report
 
 
 # mongo db
@@ -38,8 +39,7 @@ journal
 *.exe
 *.o
 *.so
-report/
-
+#
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -71,6 +71,7 @@ Icon?
 Thumbs.db
 packages
 
+# Project specific ignores #
+############################
 build
-work
-terminal.glue
+src/client/content/.tmpcss/
