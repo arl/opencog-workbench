@@ -511,7 +511,7 @@ function startBrowserSync(isDev) {
             config.client + '**/*.*',
             config.tmpcss + '*.css',
             '!' + config.scss.files,
-            '!' + config.scss.components,
+            '!' + config.components.styles,
             '!' + config.test + '**/*.*'
         ] : [config.build + '**/*.*'],
         ghostMode: { // these are the defaults t,f,t,t
