@@ -2,60 +2,46 @@
     <div class="row" id="wrapper">
         <div class="col-xs-3" id="leftMenu">
             <div id="leftMenuInner">
-            <!-- CONNECT -->
-              <div class="accordion-group">
-                <div class="accordion-heading">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#connectPanel">
-                    <i class="fa fa-globe"></i> Connect
-                  </a>
-                </div>
-                <div id="connectPanel" class="accordion-body collapse">
-                  <div class="accordion-inner">
-                    <!-- CONTENT -->
-                     <table class="table table-settings">
-                        <tr>
-                          <td width="30%">Server</td>
-                          <td>
-                          <div class="input-group">
-                           <input type="text" class="form-control" id="ConnectCogServer" placeholder="http://localhost:5000/">
-                           <span class="input-group-btn">
-                              <button id="ConnectSaveCogServerModalButton" class="btn btn-default" type="button"><i class="fa fa-floppy-o"></i></button>
-                              <button id="ConnectListCogServerModalButton" class="btn btn-default" type="button">...</button>
-                           </span>
-                        </div>
-                          </td>
-                        </tr>
-                         <tr>
-                          <td width="30%">Status</td>
-                          <td><span id="ConnectionStatus">Not connected yet.</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Autoconnect</td>
-                          <td><div id="ConnectAutoConnect"></div></td>
-                        </tr>
-                        <tr>
-                          <td colspan="2" align="right"  >
-                          <button class="btn btn-info" id="ConnectGetAtomTypesButton"><i class="fa fa-plug"></i> Get Atom Types</button>
-                          <button class="btn btn-success" id="ConnectConnectButton"><i class="fa fa-plug"></i> Connect</button>
-                          </td>   
-                        </tr>
-                      </table>
-                    <!-- END CONTENT -->
-                  </div>
-                </div>
-              </div>
 
-              <!-- FILTER -->
-              <div class="accordion-group">
-                <div class="accordion-heading">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#filterPanel">
-                    <i class="fa fa-filter"></i> Filter
-                  </a>
-                </div>
-                <div id="filterPanel" class="accordion-body collapse">
-                  <div class="accordion-inner">
-                    <!-- CONTENT -->
+            <!-- CONNECT -->
+			<accordion>
+                <accordion-group>
+                    <accordion-heading><i class="fa fa-globe"></i> Connect</accordion-heading>
+					<table class="table table-settings">
+						<tr>
+							<td width="30%">Server</td>
+							<td>
+								<div class="input-group">
+									<input type="text" class="form-control" id="ConnectCogServer" placeholder="http://localhost:5000/">
+									<span class="input-group-btn">
+										<button id="ConnectSaveCogServerModalButton" class="btn btn-default" type="button"><i class="fa fa-floppy-o"></i></button>
+										<button id="ConnectListCogServerModalButton" class="btn btn-default" type="button">...</button>
+									</span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td width="30%">Status</td>
+							<td><span id="ConnectionStatus">Not connected yet.</span></td>
+						</tr>
+						<tr>
+							<td>Autoconnect</td>
+							<td><div id="ConnectAutoConnect"></div></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="right">
+								<button class="btn btn-info" id="ConnectGetAtomTypesButton"><i class="fa fa-plug"></i> Get Atom Types</button>
+								<button class="btn btn-success" id="ConnectConnectButton"><i class="fa fa-plug"></i> Connect</button>
+							</td>   
+						</tr>
+					</table>
+				</accordion-group>
+			</accordion>
+
+			<!-- FILTER -->
+			<accordion>
+				<accordion-group>
+					<accordion-heading><i class="fa fa-filter"></i> Filter</accordion-heading>
                      <table class="table table-settings">
                         <tr>
                           <td width="40%">Attentional Focus Only</td>
@@ -107,10 +93,8 @@
                         </td>
                         </tr>
                     </table>
-                    <!-- END CONTENT -->
-                  </div>
-                </div>
-              </div>
+				</accordion-group>
+			</accordion>
 
               <!-- ADVANCED FILTER -->
               <div class="accordion-group" style="display:none">
