@@ -3,24 +3,27 @@
 
 **the doc is still in progress...**
 
-### Running the build environment
+## Install dependencies
+refer to [INSTALL.md](./INSTALL.md) 
+
+## How to run OpenCog Workbench?
 Type ```gulp build```  to generate an optimized build.
 Then ```gulp serve-build``` and browse to http://localhost:7200
+
+## How to hack OpenCog Workbench?
 
 ### Running the development environment
 Type `gulp serve-dev` and browse to `http://localhost:7200`
 
-## Structure
+### Application Structure
 	/build	(created on the fly with gulp build)
 	/src
 		/client
 			/app
+			    /components	 (location of workbench modules)
 			/content
 			/test
-		/server
-			/data
-			/routes
- 	/report		(various reports
+ 	/report		(various reports)
 	
 
 ### Dev Builds
@@ -51,20 +54,12 @@ The optimizations are performed by the gulp tasks and include the following list
 - index.html injection for scripts and links
 - deploying all js, css, images, fonts, and index.html
 
-## Testing
-Type `gulp test` to run the tests once. 
-`gulp autotest` creates a watch on the files, running the tests on each save
-
-Testing uses karma, mocha, chai, sinon, ngMidwayTester libraries.
-
 ## How It Works
-The app is quite simple and has 2 main routes:
-- dashboard
-- avengers list
+Every component in ```src/client/app/components``` add its own route and set of menus to the workbench
+
 
 ### The Modules
 The app has 4 feature modules and depends on a series of external modules and custom but cross-app modules
-
 
 
 ## core Module
@@ -86,44 +81,11 @@ It depends on the `blocks.logger` module, because the implementation logs the ex
 ### blocks.router Module
 The `blocks.router` module contains a routing helper module that assists in adding routes to the $routeProvider.
 
-## node-inspector
+### Testing
+Type `gulp test` to run the tests once. 
+`gulp autotest` creates a watch on the files, running the tests on each save
 
-### Quick Start
-1. Install globally
-    `npm install -g node-inspector`
-    
-2. Run server, load it in the browser
-    `node-debug server/server.js`
-    
-    This loads http://localhost:8080/debug?port-5858 with the node code in the Chrome debugger
-
-### Manually Run in One Terminal Tab
-Run the server with options, and debug
-    
-`node --debug=5858 server/server.js & node-inspector`    
-
-Or
-
-`node-inspector & node --debug server/server.js`
-
- - Note: Debug defaults to 5858
-
-### Manual Run and Break on First Line
-Run the server and have it break on the first line of code 
-    `node-inspector & node --debug-brk server/server.js`
-
-### Run in its own Tab
-Or run node-inspector in a separate Terminal tab. You can keep it running and just serve and shutdown your site as needed
-
-### node-inspector with Gulp
-Alternative to running node-inspector in its own tab is to use `gulp-shell`
-
-```javascript
-gulp.src('', {read: false})
-    .pipe(plug.shell(['node-inspector']));
-```
-Run `gulp serve-dev-debug` or `gulp serve-dev-debug-brk` to debug node via the Gulp tasks in this project.
+Testing uses karma, mocha, chai, sinon, ngMidwayTester libraries.
 
 ### Issues 
-
 

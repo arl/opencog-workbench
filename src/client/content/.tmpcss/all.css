@@ -12,6 +12,7 @@
   /*font-weight: 400;*/ }
 
 .btn, .badge, .modal, .modal-dialog, .modal-content, input, select {
+  -ms-border-radius: 0 !important;
   border-radius: 0 !important; }
 
 input, select {
@@ -365,6 +366,7 @@ form {
 
 .dropdown-menu {
   background: #fff;
+  -ms-border-radius: 0;
   border-radius: 0;
   border: 1px solid #ddd;
   border-bottom: 1px solid #ddd; }
@@ -377,12 +379,10 @@ form {
       line-height: 23px !important; }
       .dropdown-menu li > a:hover {
         background: #f9f9f9 !important;
-        -webkit-filter: none;
-                filter: none;
+        filter: none;
         color: #888; }
   .dropdown-menu a:hover, .dropdown-menu a:focus {
-    -webkit-filter: none !important;
-            filter: none !important;
+    filter: none !important;
     background: #fff !important; }
   .dropdown-menu::after, .dropdown-menu::before {
     border: none !important; }
@@ -468,21 +468,39 @@ form {
     color: #fff; }
   .sidebar .navi > li.nlightblue > a:hover, .sidebar .navi > li.open.nlightblue > a, .sidebar .navi > li.current.nlightblue > a {
     background: #52b9e9 !important;
+    -webkit-transition: background 0.5s ease;
+    -moz-transition: background 0.5s ease;
+    -o-transition: background 0.5s ease;
     transition: background 0.5s ease; }
   .sidebar .navi > li.nblue > a:hover, .sidebar .navi > li.open.nblue > a, .sidebar .navi > li.current.nblue > a {
     background: #1171a3 !important;
+    -webkit-transition: background 0.5s ease;
+    -moz-transition: background 0.5s ease;
+    -o-transition: background 0.5s ease;
     transition: background 0.5s ease; }
   .sidebar .navi > li.ngreen > a:hover, .sidebar .navi > li.open.ngreen > a, .sidebar .navi > li.current.ngreen > a {
     background: #43c83c !important;
+    -webkit-transition: background 0.5s ease;
+    -moz-transition: background 0.5s ease;
+    -o-transition: background 0.5s ease;
     transition: background 0.5s ease; }
   .sidebar .navi > li.norange > a:hover, .sidebar .navi > li.open.norange > a, .sidebar .navi > li.current.norange > a {
     background: #f88529 !important;
+    -webkit-transition: background 0.5s ease;
+    -moz-transition: background 0.5s ease;
+    -o-transition: background 0.5s ease;
     transition: background 0.5s ease; }
   .sidebar .navi > li.nred > a:hover, .sidebar .navi > li.open.nred > a, .sidebar .navi > li.current.nred > a {
     background: #fa3031 !important;
+    -webkit-transition: background 0.5s ease;
+    -moz-transition: background 0.5s ease;
+    -o-transition: background 0.5s ease;
     transition: background 0.5s ease; }
   .sidebar .navi > li.nviolet > a:hover, .sidebar .navi > li.open.nviolet > a, .sidebar .navi > li.current.nviolet > a {
     background: #932ab6 !important;
+    -webkit-transition: background 0.5s ease;
+    -moz-transition: background 0.5s ease;
+    -o-transition: background 0.5s ease;
     transition: background 0.5s ease; }
   .sidebar .sidebar-dropdown {
     display: none; }
@@ -859,8 +877,6 @@ form {
   padding-top: 0px;
   padding-bottom: 0px; }
   .navbar-brand div {
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex; }
     .navbar-brand div img {
       display: block;
@@ -896,6 +912,8 @@ form {
 .nav > li > a:hover, .nav > li > a:focus {
   background-color: #8C97A0; }
 
+/* TO BE REMOVED, and done in gulpfile directly with the help of globbing */
+/* import component styles */
 /*#region Override background color theme */
 /*For Bootstrap 3*/
 .nav, .pagination, .carousel, .panel-title a {
@@ -1094,9 +1112,13 @@ small {
   opacity: .9;
   pointer-events: auto;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   -ms-backface-visibility: hidden;
   -o-backface-visibility: hidden;
   backface-visibility: hidden;
+  -webkit-transition: opacity 0.3s linear;
+  -moz-transition: opacity 0.3s linear;
+  -o-transition: opacity 0.3s linear;
   transition: opacity 0.3s linear; }
 
 .page-splash-message {
@@ -1201,18 +1223,6 @@ a {
   cursor: pointer; }
 
 /* #endregion */
-.avenger-name {
-  font-size: 1.2em; }
-
-.avenger-thumb {
-  margin: 0.1em !important;
-  padding: 0.1em; }
-
-.avenger-logo {
-  height: 75px;
-  width: 80px;
-  background: url(../images/avengersicon-xs.png) no-repeat left top !important; }
-
 /*#region wrapper for angular ng-include and ng-view animations*/
 .view-container {
   position: relative;
@@ -1224,6 +1234,9 @@ a {
   position: relative; }
 
 .shuffle-animation.ng-enter {
+  -moz-transition: ease-out all 0.3s 0.4s;
+  -o-transition: ease-out all 0.3s 0.4s;
+  -webkit-transition: ease-out all 0.3s 0.4s;
   transition: ease-out all 0.3s 0.4s;
   left: 2em;
   opacity: 0; }
@@ -1233,6 +1246,9 @@ a {
   opacity: 1; }
 
 .shuffle-animation.ng-leave {
+  -moz-transition: 0.3s ease-out all;
+  -o-transition: 0.3s ease-out all;
+  -webkit-transition: 0.3s ease-out all;
   transition: 0.3s ease-out all;
   left: 0;
   opacity: 1; }
@@ -1247,6 +1263,9 @@ a {
   position: relative; }
 
 .fader-animation.ng-enter, .fader-animation.ng-leave {
+  -webkit-transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) all 0.5s;
+  -moz-transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) all 0.5s;
+  -o-transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) all 0.5s;
   transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) all 0.5s;
   opacity: 1; }
 
@@ -1267,6 +1286,9 @@ a {
 .dissolve-animation.ng-hide-remove, .dissolve-animation.ng-hide-add {
   position: fixed !important;
   display: inline !important;
+  -webkit-transition: 0.5s linear all;
+  -moz-transition: 0.5s linear all;
+  -o-transition: 0.5s linear all;
   transition: 0.5s linear all; }
 
 .dissolve-animation.ng-hide-remove.ng-hide-remove-active, .dissolve-animation.ng-hide-add {
@@ -1358,3 +1380,14 @@ a {
     line-height: 1.2em !important; } }
 
 /*#endregion */
+.avenger-name {
+  font-size: 1.2em; }
+
+.avenger-thumb {
+  margin: 0.1em !important;
+  padding: 0.1em; }
+
+.avenger-logo {
+  height: 75px;
+  width: 80px;
+  background: url(../images/avengersicon-xs.png) no-repeat left top !important; }
