@@ -60,10 +60,22 @@
   border: none;
 }
 
+.panel-title {
+  line-height: 20px;
+  padding: 0px!important;
+}
+
+.panel-body {
+  padding: 0px;
+  background-color: #efefef;
+}
 
 a.accordion-toggle {
   color: #fff!important;
   font-size: 14px;
+  &:hover, &:visited, &:link {
+    text-decoration: none;
+  }
 }
 
 .panel-heading {
@@ -74,39 +86,36 @@ a.accordion-toggle {
   }
 }
 
-.panel-title {
-  line-height: 20px;
-  padding: 0px!important;
-}
 
-accordion-heading  
-{
-    padding:10px; 
-    border:1px solid #ddd;
-    border-top:none;
-}
 
-accordion-heading:hover  
-{
-    background-color:#ccc;
-}
+// accordion-heading  
+// {
+//     padding:10px; 
+//     border:1px solid #ddd;
+//     border-top:none;
+// }
 
-accordion-heading a:link  
-{
-    text-decoration: none;
-}
+// accordion-heading:hover  
+// {
+//     background-color:#ccc;
+// }
 
-accordion-heading a:hover  
-{
-    text-decoration: none;
-}
+// accordion-heading a:link  
+// {
+//     text-decoration: none;
+// }
 
-.accordion-inner  
-{
-    padding:10px;
-    padding-right:20px; 
-    background-color:#fff;
-}
+// accordion-heading a:hover  
+// {
+//     text-decoration: none;
+// }
+
+// .accordion-inner  
+// {
+//     padding:10px;
+//     padding-right:20px; 
+//     background-color:#fff;
+// }
 
 /* CONNECT PANEL */
 /*-----------------*/
@@ -132,5 +141,20 @@ accordion-heading a:hover
 }
 
 
-
+/* DISPLAY */
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+.table-settings
+{
+  border:1px solid #ddd;
+  margin:0px!important;
+}
+.table-settings td
+{
+  border:1px solid #ddd;
+}
  

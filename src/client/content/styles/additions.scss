@@ -5,6 +5,12 @@ $navbar-height: 24px;
   min-height: $navbar-height;
 }
 
+body {
+    padding-top: $navbar-height * 2;
+    overflow: hidden;
+
+}
+
 // added now
 #mainnav {
   margin-bottom: 0px;
