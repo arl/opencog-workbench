@@ -177,7 +177,8 @@ a.accordion-toggle {
   top: 50px;
   background-color: #ddd;
   border: 1px solid #fff;
-  overflow: hidden;
+  overflow: visible;
+  padding: 0px;
 }
 #terminalBar 
 {
