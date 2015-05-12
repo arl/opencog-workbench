@@ -75,10 +75,10 @@
             $scope.$on('$destroy', function() {
 
                 // delete menu item handlers one by one
-                menuhelper.resetMenuHandler('/atomviewer/filemenu/import');
+                // menuhelper.resetMenuHandler('/atomviewer/filemenu/import');
 
                 // or all menu handlers in a dropdown
-                menuhelper.resetMenuHandler('/atomviewer/filemenu/*');
+                // menuhelper.resetMenuHandler('/atomviewer/filemenu/*');
 
                 // or all menu handlers in a component
                 menuhelper.resetMenuHandler('/atomviewer/*');
