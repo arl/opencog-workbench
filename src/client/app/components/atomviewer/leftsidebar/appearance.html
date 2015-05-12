@@ -1,0 +1,98 @@
+<div id="AppearanceInner-d3" style="padding:0px">
+	<table class="table table-settings">
+		<tr>
+			<td width="30%">Show Text?</td>
+			<td><div id="AppearanceShowText"></div></td>
+		</tr>
+		<tr>
+			<td>Show Links?</td>
+			<td><div id="AppearanceShowLinks"></div></td>
+		</tr>
+		<tr> 
+			<td>Show Link Handles:</td>
+			<td>
+				<div id="displayShowLinkHandles"></div>  
+			</td>
+		</tr>
+		<tr>
+			<td>Charge</td>
+			<td><div id="appearanceCharge"></div></td>
+		</tr>
+		<tr>
+			<td>Friction</td>
+			<td><div id="appearanceFriction"></div></td>
+		</tr>
+		<tr>
+			<td>Link Strength</td>
+			<td><div id="appearanceLinkStrength"></div></td>
+		</tr>
+		<tr>
+			<td>Link Distance</td>
+			<td><div id="appearanceLinkDistance"></div></td>
+		</tr>
+		<tr>
+			<td>Nodes Shape
+			</td>
+			<td>
+				<select id="displayNodeShape">
+					<option value="none">--None--</option>
+					<option value="triangle">Triangle</option>
+					<option value="rectangle">Rectangle</option>
+					<option value="circle">Circle</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Radius Relative to:</td>
+			<td>
+				<select id="displayRadiusBasedOn">
+					<option value="Fixed">Fixed</option>
+					<option value="Incoming">Incoming</option>
+					<option value="Outgoing">Outgoing</option>
+					<option value="IncomingOutgoing">Incoming + Outgoing</option>
+					<option value="AtomType">AtomType</option>
+					<option value="Random">Random</option>
+					<option value="sti">sti</option>
+					<option value="lti">lti</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Radius Multiplier:</td>
+			<td>
+				<div id="displayRadiusMultiplier"></div>
+			</td>
+		</tr>
+
+		<tr>
+			<td>Link Handle Shape</td>
+			<td>
+<!-- 
+			</td>
+		</tr>
+		<tr>
+			<td>Link Handle Radius:</td>
+			<td>
+				<div id="displayRadiusMultiplier"></div>
+			</td>
+		</tr>
+		<tr>
+			<td>Link Width:</td>
+			<td>
+				<div id="displayLinkWidth"></div>
+			</td>
+		</tr>
+ -->
+</table>
+
+</div>
+
+<div id="AppearanceInner-sigma">
+	<button id="appearanceSigmaCircularView" class="btn btn-md btn-success">Circular View</button>
+	<button id="appearanceSigmaGridView" class="btn btn-md btn-success">Grid View</button> 
+	<button id="appearanceSigmaClusterView" class="btn btn-md btn-success">Cluster View</button> 
+</div>
+
+<div id="AppearanceInner-none" style="padding:10px">
+	Please select a visualizing view such as D3 or Sigma.
+</div>

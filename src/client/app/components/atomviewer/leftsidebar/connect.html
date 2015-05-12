@@ -1,0 +1,28 @@
+<table class="table table-settings">
+	<tr>
+		<td width="30%">Server</td>
+		<td>
+			<div class="input-group">
+				<input type="text" class="form-control" id="ConnectCogServer" placeholder="http://localhost:5000/">
+				<span class="input-group-btn">
+					<button id="ConnectSaveCogServerModalButton" class="btn btn-default" type="button"><i class="fa fa-floppy-o"></i></button>
+					<button id="ConnectListCogServerModalButton" class="btn btn-default" type="button">...</button>
+				</span>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td width="30%">Status</td>
+		<td><span id="ConnectionStatus">Not connected yet.</span></td>
+	</tr>
+	<tr>
+		<td>Autoconnect</td>
+		<td><div id="ConnectAutoConnect"></div></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="right">
+			<button class="btn btn-info" id="ConnectGetAtomTypesButton"><i class="fa fa-plug"></i> Get Atom Types</button>
+			<button class="btn btn-success" id="ConnectConnectButton"><i class="fa fa-plug"></i> Connect</button>
+		</td>   
+	</tr>
+</table>

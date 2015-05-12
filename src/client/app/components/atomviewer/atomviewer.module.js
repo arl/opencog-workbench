@@ -3,7 +3,8 @@
 
     angular
         .module('components.atomviewer', [
-			'components.atomviewer.importexport',
+            'components.atomviewer.leftsidebar',
+            'components.atomviewer.importexport',
 			'components.atomviewer.help'
         ])
         .constant('atomviewerConstants', {
