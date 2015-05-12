@@ -1,27 +1,25 @@
 ﻿<div data-ng-controller="Shell as shVm">
-    <div id="splash-page" data-ng-show="shVm.showSplash" class="dissolve-animation">
-        <div class="page-splash">
-            <div class="page-splash-message">
-                OpenCog Workbench
-            </div>
-        </div>
-    </div>
-
-    <header class="clearfix">
-        <div data-ng-include="'app/layout/topnav/topnav.html'"></div>
-    </header>
-    <section id="content" class="container-fluid">
-       
-      <!-- here comes the root state view ('tab') --> 
-      <div ui-view></div> 
-
-      <div ngplus-overlay
-           ngplus-overlay-delay-in="50"
-           ngplus-overlay-delay-out="700"
-           ngplus-overlay-animation="dissolve-animation">
-          <img class="busy-overlay">
-
-          <div class="page-spinner-message overlay-message">{{shVm.busyMessage}}</div>
+  <div id="splash-page" data-ng-show="shVm.showSplash" class="dissolve-animation">
+    <div class="page-splash">
+      <div class="page-splash-message">
+        OpenCog Workbench
       </div>
-    </section>
+    </div>
+  </div>
+
+  <header class="clearfix">
+    <div data-ng-include="'app/layout/topnav/topnav.html'"></div>
+  </header>
+
+  <!-- here comes the root state view ('tab') --> 
+  <div ui-view></div> 
+
+  <!-- busy spinner overlay-->
+  <div ngplus-overlay
+  ngplus-overlay-delay-in="50"
+  ngplus-overlay-delay-out="700"
+  ngplus-overlay-animation="dissolve-animation">
+    <img class="busy-overlay" />
+    <div class="page-spinner-message overlay-message">{{shVm.busyMessage}}</div>
+  </div>
 </div>

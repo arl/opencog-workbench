@@ -26,7 +26,7 @@
 
                 // generate the series of ui-view div's from the main routes
                 return new Array(
-                    '<div class="container shuffle-animation" ',
+                    '<div class="shuffle-animation" ',
                     'ui-view="', route.url, '" ',
                     'ng-show="$state.includes(\'', route.name, '\')">',
                     '</div>'
