@@ -1,6 +1,5 @@
 #OpenCog Workbench
 
-
 **the doc is still in progress...**
 
 ## Install dependencies
