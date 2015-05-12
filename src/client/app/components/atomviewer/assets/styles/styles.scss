@@ -34,7 +34,16 @@
   border:2px solid #ddd;
 }
 
+/*THIS IS TO ADD SOMEWHERE :
 
+.panel-group {
+  margin-bottom: 0px;
+}
+
+.panel-body {
+  padding: 0px;
+  background-color: #efefef;
+}
 
 /* ACCORDION */
 /*-----------------*/
@@ -43,24 +52,47 @@
 /*-----------------*/
 /*-----------------*/
 /*-----------------*/
-.accordion-heading  
+
+.panel-group {
+  margin-bottom: 0px;
+}
+.panel-default {
+  border: none;
+}
+
+
+a.accordion-toggle {
+  color: #fff!important;
+  font-size: 14px;
+}
+
+.panel-heading {
+  background-color: #777!important;
+  border: none;
+  &:hover {
+    background-color: #333!important;    
+  }
+}
+
+
+accordion-heading  
 {
     padding:10px; 
     border:1px solid #ddd;
     border-top:none;
 }
 
-.accordion-heading:hover  
+accordion-heading:hover  
 {
     background-color:#ccc;
 }
 
-.accordion-heading a:link  
+accordion-heading a:link  
 {
     text-decoration: none;
 }
 
-.accordion-heading a:hover  
+accordion-heading a:hover  
 {
     text-decoration: none;
 }
