@@ -25,6 +25,7 @@ module.exports = function() {
 		/* javascript */
 		vendorjs: [
 		  bower.dir + "jquery/dist/jquery.min.js",
+		  bower.dir + "jquery/jquery-ui.min.js",
 		  bower.dir + "angular/angular.min.js",
 		  bower.dir + "angular-animate/angular-animate.min.js",
 		  bower.dir + "angular-sanitize/angular-sanitize.min.js",
@@ -35,11 +36,13 @@ module.exports = function() {
 		  bower.dir + "moment/min/moment.min.js",
 		  bower.dir + "extras.angular.plus/ngplus-overlay.js",
 		  bower.dir + "underscore/underscore-min.js",
+		  bower.dir + "angular-dragdrop/src/angular-dragdrop.min.js",
+		  bower.dir + "jquery.terminal/js/jquery.terminal-min.js",		  
 		  clientContent + "lib/js/ui-bootstrap-tpls-0.12.1.min.js",
 		  clientContent + "lib/js/angular-underscore.js"
 		],
 		js: [
-		  // TODO : this dosen't really seem necessary, it's included by the next rule no?
+		  // TODO : this doesn't really seem necessary, it's included by the next rule no?
 		  clientApp + "**/*module*.js",
 		  clientApp + "**/*.js"
 		],
@@ -49,7 +52,8 @@ module.exports = function() {
 		vendorcss: [
 		  bower.dir + "bootstrap/dist/css/bootstrap.min.css",
 		  bower.dir + "font-awesome/css/font-awesome.min.css",
-		  bower.dir + "toastr/toastr.css"
+		  bower.dir + "toastr/toastr.css",
+		  bower.dir + "jquery.terminal/css/jquery.terminal.css"
 		],
 		tmpcss: clientContent + ".tmpcss/",
 		scss: {

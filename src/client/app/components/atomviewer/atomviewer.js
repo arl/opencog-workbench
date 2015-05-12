@@ -21,6 +21,12 @@
         vm.showAbout = false;
         vm.showHelp = false;
 
+
+        // draggable windows visible
+        vm.showAtomDetails = false;
+        vm.showToolbox = false;
+        vm.showTerminal = false;
+
         activate();
 
         //////////////
@@ -48,13 +54,13 @@
                 vm.infos.push('Right Sidebar is :' + (val ? 'shown' : 'hidden'));
             });
             menuhelper.setMenuHandler('/atomviewer/view/atomdetails', function(val) {
-                vm.infos.push('Atom Details modal window is :' + (val ? 'shown' : 'hidden'));
+                vm.showAtomDetails = !vm.showAtomDetails;
             });          
             menuhelper.setMenuHandler('/atomviewer/view/toolbox', function(val) {
-                vm.infos.push('Toolbox modal window is :' + (val ? 'shown' : 'hidden'));
+                vm.showToolbox = !vm.showToolbox;
             });          
             menuhelper.setMenuHandler('/atomviewer/view/terminal', function(val) {
-                vm.infos.push('Terminal modal window is :' + (val ? 'shown' : 'hidden'));
+                vm.showTerminal = !vm.showTerminal;
             });          
 
             // help menu

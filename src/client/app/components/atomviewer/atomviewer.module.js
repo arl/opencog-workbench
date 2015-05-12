@@ -5,7 +5,8 @@
         .module('components.atomviewer', [
             'components.atomviewer.leftsidebar',
             'components.atomviewer.importexport',
-			'components.atomviewer.help'
+            'components.atomviewer.help',
+            'components.atomviewer.terminal'
         ])
         .constant('atomviewerConstants', {
             'name': 'Atomspace Viewer',
