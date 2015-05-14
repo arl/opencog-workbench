@@ -6,7 +6,7 @@
         .controller('Atomviewer', Atomviewer);
 
     /* @ngInject  */
-    function Atomviewer($scope, atomviewerConstants, menuhelper) {
+    function Atomviewer($scope, atomviewerConstants, menuhelper, appState) {
 
         /*jshint validthis: true */
         var vm = this;
@@ -16,11 +16,17 @@
         // exports into view
         vm.title = atomviewerConstants.name;
         vm.infos = ['nothing for now..., click on a menu for example'];
+
+        vm.appState = appState;
+
         vm.showImport = false;
         vm.showExport = false;
         vm.showAbout = false;
         vm.showHelp = false;
 
+        // side menus
+        // vm.showLeftSidebar = appState.isLeftSidebarShown;
+        vm.showRightMenu = true;
 
         // draggable windows visible
         vm.showAtomDetails = false;
@@ -49,6 +55,7 @@
             });
             menuhelper.setMenuHandler('/atomviewer/view/left-sidebar', function(val) {
                 vm.infos.push('Left Sidebar is :' + (val ? 'shown' : 'hidden'));
+                // vm.showLeftSidebar = val;
             });
             menuhelper.setMenuHandler('/atomviewer/view/right-sidebar', function(val) {
                 vm.infos.push('Right Sidebar is :' + (val ? 'shown' : 'hidden'));

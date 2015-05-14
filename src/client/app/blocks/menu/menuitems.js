@@ -12,9 +12,10 @@
             restrict: 'A',
             replace: true,
             scope : {
-                'model': '=',
-                'content': '=',
-                'handler': '='
+                'menu' : '='
+                // 'model': '=',
+                // 'content': '=',
+                // 'handler': '='
             },
             template : getTemplate(),
             link: link
@@ -24,21 +25,21 @@
         function getTemplate() {
             return new Array(
                 '<a data-ng-click="onClick()">',
-                '<i data-ng-class="model?',
+                '<i data-ng-class="menu.model?',
                 '\'fa fa-check-square-o\'', ':', '\'fa fa-square-o\'',
                 '"></i>',
-                ' {{content}}</a>'
+                ' {{menu.content}}</a>'
                 ).join('');
         }
 
         function link($scope, $element, $attrs) {
             $scope.onClick = function () {
                 // toggle checkbox state
-                $scope.model = !$scope.model;
+                $scope.menu.model = !$scope.menu.model;
 
                 // call handler if any
-                if ($scope.handler) {
-                    $scope.handler($scope.model);
+                if ($scope.menu.handler) {
+                    $scope.menu.handler($scope.menu.model);
                 }
             };
         }

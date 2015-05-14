@@ -6,7 +6,7 @@
         .run(appRun);
 
     /* @ngInject */
-    function appRun(menuhelper, atomviewerConstants) {
+    function appRun(menuhelper, atomviewerConstants, appState) {
         var moduleConstants = atomviewerConstants;
 
         // define our component menus
@@ -49,10 +49,20 @@
                         type: 'header',
                         content: 'Sidebars'
                     },
-                    {
+                    { // https://gist.github.com/CMCDragonkai/6282750
+                        //http://codepen.io/panty/pen/PqNRrB?editors=101
+                        //http://jsfiddle.net/terebentina/9mFpp/
                         id: 'left-sidebar',
                         type: 'checkbox',
-                        content: 'Left Sidebar'
+                        content: 'Left Sidebar',
+                        model: appState.showLeftSidebar PEUT ETRE METTRE ICI 'appState.showLeftSidebar' et parser en suite,
+                        dans ce cas les modifs faites dans menuitems ne sont pas nécessaires, bien qu'elles ne dérangent pas!
+													voir http://stackoverflow.com/questions/14050195/what-is-the-difference-between-and-in-directive-scope
+
+JE PENSE QUE TOUT LE SYSTEME DE MENU DEVRAIT ETRE REMPLACE PAR $scope.$watch()
+
+FAIRE UN PROTO DANS UNE BRANCHE
+
                     },
                     {
                         id: 'right-sidebar',

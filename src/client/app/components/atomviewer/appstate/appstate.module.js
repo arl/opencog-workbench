@@ -10,8 +10,13 @@
 
         var allMenus = [];
 
+        // TODO : this is the default value, but this has to be saved somewhere
+        var showLeftSidebar = true;
+
         var service = {
             showScreen : showScreen,
+            // test
+            showLeftSidebar : showLeftSidebar,
             hideScreen : hideScreen
         };
 
