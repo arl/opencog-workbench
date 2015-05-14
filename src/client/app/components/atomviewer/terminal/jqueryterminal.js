@@ -7,7 +7,7 @@
 
 
         /* @ngInject */
-        function jqueryTerminal() {
+        function jqueryTerminal(appState) {
 
             return {
                 restrict: 'E',
@@ -32,6 +32,15 @@
                 if (command.toUpperCase()=="CONNECT") {
                     retrieveAtomTypes();
                 }
+
+                // TEST COMMAND TO TOGGLE THE LEFT BAR
+                else if (command.toUpperCase()=="LEFT") {
+                    angular.element(term).scope().$apply(function() {
+                        appState.setLeftSideBarVisible(!appState.getLeftSideBarVisible());                        
+                    });
+                }
+
+
                 else if (command.toUpperCase()=="HELP") {
                     showScreen("help");
                 }

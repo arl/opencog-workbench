@@ -16,7 +16,9 @@
         var service = {
             showScreen : showScreen,
             // test
-            showLeftSidebar : showLeftSidebar,
+            // showLeftSidebar : showLeftSidebar,
+            setLeftSideBarVisible: function(visible) { showLeftSidebar = visible; },
+            getLeftSideBarVisible: function() { return showLeftSidebar; },
             hideScreen : hideScreen
         };
 

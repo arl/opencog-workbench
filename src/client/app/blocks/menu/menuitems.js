@@ -12,10 +12,7 @@
             restrict: 'A',
             replace: true,
             scope : {
-                'menu' : '='
-                // 'model': '=',
-                // 'content': '=',
-                // 'handler': '='
+                'subm' : '='
             },
             template : getTemplate(),
             link: link
@@ -25,21 +22,22 @@
         function getTemplate() {
             return new Array(
                 '<a data-ng-click="onClick()">',
-                '<i data-ng-class="menu.model?',
+                '<i data-ng-class="subm.model?',
                 '\'fa fa-check-square-o\'', ':', '\'fa fa-square-o\'',
                 '"></i>',
-                ' {{menu.content}}</a>'
+                ' {{subm.content}}</a>'
                 ).join('');
         }
 
-        function link($scope, $element, $attrs) {
-            $scope.onClick = function () {
+        function link(scope, element, attrs) {
+
+            scope.onClick = function () {
                 // toggle checkbox state
-                $scope.menu.model = !$scope.menu.model;
+                scope.subm.model = !scope.subm.model;
 
                 // call handler if any
-                if ($scope.menu.handler) {
-                    $scope.menu.handler($scope.menu.model);
+                if (scope.subm.handler) {
+                    scope.subm.handler(scope.subm.model);
                 }
             };
         }
@@ -72,30 +70,30 @@
                 ).join('');
         }
 
-        function link($scope, $element, $attrs) {
+        function link(scope, element, attrs) {
 
             // create the selection model in directive parent scope...
-            if (!$scope.$parent.$parent.$parent.selModel) {
-                $scope.$parent.$parent.$parent.selModel = [];
+            if (!scope.$parent.$parent.$parent.selModel) {
+                scope.$parent.$parent.$parent.selModel = [];
             }
             // ...keep a reference in directive scope
-            $scope.selModel = $scope.$parent.$parent.$parent.selModel;
+            scope.selModel = scope.$parent.$parent.$parent.selModel;
             // reference radio element index in scope
-            $scope.index = $scope.$parent.$parent.$index;
+            scope.index = scope.$parent.$parent.$index;
             // add default state
-            $scope.selModel.push($scope.model());
+            scope.selModel.push(scope.model());
 
-            $scope.onClick = function () {
+            scope.onClick = function () {
 
                 // reset each element of the model
-                $scope.selModel.forEach(function(val, idx, arr) {
+                scope.selModel.forEach(function(val, idx, arr) {
                     arr[idx] = false;
                 });
                 // set the one corresponding to current directive
-                $scope.selModel[$scope.index] = true;
+                scope.selModel[$scope.index] = true;
                 // call handler if any
-                if ($scope.handler) {
-                    $scope.handler($scope.index);
+                if (scope.handler) {
+                    scope.handler(scope.index);
                 }
             };
         }

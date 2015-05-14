@@ -14,6 +14,7 @@
             configureMenus: configureMenus,
             getAllMenus: getAllMenus,
             setMenuHandler: setMenuHandler,
+            setMenuModel: setMenuModel,
             resetMenuHandler: resetMenuHandler
         };
 
@@ -53,6 +54,25 @@
                 } else {
                     // set handler
                     menuitem.handler = handler;
+                }
+            } else {
+                throw {message: 'couldn\'t find menu item ' + menupath};
+            }
+        }
+
+        /**
+         * set model of a menu item like checkbox, radio
+         * @param {String} menupath     menu item path,
+         *                              in the form (ex: /componentid/menuid/menuitemid)
+         * @param {Object} newval    new value to assign to the corresponding model
+         */
+        function setMenuModel(menupath, newval) {
+            var menuitem = getMenuItem(menupath);
+            if (menuitem) {
+                if (angular.isDefined(menuitem.model)) {
+                    menuitem.model = newval;
+                } else {
+                    throw {message: 'can\'t set undefined model for menu item ' + menupath};
                 }
             } else {
                 throw {message: 'couldn\'t find menu item ' + menupath};
