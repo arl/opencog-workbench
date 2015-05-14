@@ -35,12 +35,11 @@
 
                 // TEST COMMAND TO TOGGLE THE LEFT BAR
                 else if (command.toUpperCase()=="LEFT") {
-                    angular.element(term).scope().$apply(function() {
-                        appState.setLeftSideBarVisible(!appState.getLeftSideBarVisible());                        
-                    });
+                    appState.setLeftSideBarVisible(!appState.getLeftSideBarVisible());
+                    
+                    // this is done here for the test, but it has to be located after all the else-if blocks
+                    angular.element(term).scope().$apply();
                 }
-
-
                 else if (command.toUpperCase()=="HELP") {
                     showScreen("help");
                 }
