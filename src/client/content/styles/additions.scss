@@ -9,7 +9,10 @@ body {
   padding-top: $navbar-height * 2;
 }
 
-// added now
+/**************/
+/*   topnav   */
+/**************/
+
 #mainnav {
   margin-bottom: 0px;
   border-bottom-width: 0px;
@@ -21,7 +24,7 @@ body {
   padding-bottom: 0px;
   line-height: $navbar-height;
 }
-/* branding */
+
 .navbar-brand {
   margin-left: -50px !important;
   min-height: $navbar-height;
@@ -47,6 +50,13 @@ body {
   }
 }
 
+.dropdown-menu .divider {
+  padding: 1px 0px 0px 0px;
+}
+
+.dropdown-header {
+  color: #777 !important;
+}
 /**************/
 /*    tabs    */
 /**************/
@@ -75,3 +85,4 @@ body {
     background-color: #8C97A0;  
   }
 }
+

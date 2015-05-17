@@ -46,6 +46,9 @@
                         model: 0    // default selection : D3
                     },
                     {
+                        type: 'divider'
+                    },                    
+                    {
                         type: 'header',
                         content: 'Sidebars'
                     },
@@ -60,6 +63,9 @@
                         type: 'checkbox',
                         content: 'Right Sidebar'
                     },
+                    {
+                        type: 'divider'
+                    },                    
                     {
                         type: 'header',
                         content: 'Windows'

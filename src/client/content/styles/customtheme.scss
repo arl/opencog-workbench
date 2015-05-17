@@ -1,37 +1,3 @@
-
-/* Dropdown menu */
-
-.dropdown-menu {
-  background: #fff;
-  -ms-border-radius: 0;
-  border-radius: 0;
-  border: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  li {
-    color: #777;
-    font-size: 13px;
-    line-height: 18px;
-    > a {
-      color: #555;
-      line-height: 23px !important;
-      &:hover {
-        background: #f9f9f9 !important;
-        filter: none;
-        color: #888;
-      }
-    }
-  }
-  a {
-    &:hover, &:focus {
-      filter: none !important;
-      background: #fff !important;
-    }
-  }
-  &::after, &::before {
-    border: none !important;
-  }
-}
-
 /* Navbar */
 
 .navbar {

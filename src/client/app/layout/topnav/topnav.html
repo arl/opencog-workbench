@@ -43,8 +43,11 @@
             <ul class="dropdown-menu" role="menu">
               <li data-ng-repeat="subm in menu.items">
 
-                <!-- menu header item -->
+                <!-- menu item header -->
                 <a data-ng-if="subm.type === 'header'" class="dropdown-header" data-ng-bind-html="subm.content"></a>
+
+                <!-- menu item divider -->
+                <a data-ng-if="subm.type === 'divider'" class="divider"></a>
 
                 <!-- simple menu item -->
                 <a data-ng-if="!subm.type || subm.type === 'simple'" data-ng-click="subm.handler()" data-ng-bind-html="subm.content"></a>
