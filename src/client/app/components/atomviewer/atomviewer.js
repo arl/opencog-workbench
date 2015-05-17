@@ -25,11 +25,15 @@
         copied into the menu declaration (subm.model)
         */
 
+        // array of deregistration functions returned by $watch
+        var arrDeregister = [];
+        var dereg = null;
         // bind appState values to corresponding menu items
-        $scope.$watch(vm.appState.getLeftSideBarVisible, function(newval) {
+        dereg = $scope.$watch(vm.appState.getLeftSideBarVisible, function(newval) {
             menuhelper.setMenuModel('/atomviewer/view/left-sidebar', newval);
         });
-
+        arrDeregister.push(dereg);
+        
         vm.showImport = false;
         vm.showExport = false;
         vm.showAbout = false;
@@ -78,7 +82,7 @@
             });          
             menuhelper.setMenuHandler('/atomviewer/view/terminal', function(val) {
                 vm.showTerminal = !vm.showTerminal;
-            });          
+            });
 
             // help menu
             menuhelper.setMenuHandler('/atomviewer/help/howtouse', function() {
@@ -99,6 +103,12 @@
 
                 // or all menu handlers in a component
                 menuhelper.resetMenuHandler('/atomviewer/*');
+
+                // unregister from all $watch listeners
+                angular.forEach(arrDeregister, function(fun) {
+                    debugger;
+                    fun();
+                });
             });
         }
     }

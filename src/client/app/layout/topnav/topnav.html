@@ -14,7 +14,7 @@
         <a class="navbar-brand">
           <div>
             <img alt="OpenCog Workbench">
-            <span>OpenCog<br>Workbench</span>
+            <span>OpenCog<br>Workbench {{tnVm.version}}</span>
           </div>
         </a>
       </div>
@@ -49,11 +49,10 @@
                 <!-- simple menu item -->
                 <a data-ng-if="!subm.type || subm.type === 'simple'" data-ng-click="subm.handler()" data-ng-bind-html="subm.content"></a>
 
-                <!-- checkbox menu item (using directive)-->
-                <!-- <a data-ng-if="subm.type === 'checkbox'" data-checkbox-menuitem model="subm.model" content="subm.content" handler="subm.handler"></a> -->
+                <!-- checkbox menu item -->
                 <a data-ng-if="subm.type === 'checkbox'" data-checkbox-menuitem subm="subm"></a>
-                <!-- radio menu item (using directive)-->
-                <a data-ng-repeat="item in subm.content track by $index" data-radio-menuitem data-ng-if="subm.type === 'radio'" model="subm.model == $index" content="subm.content[$index]" handler="subm.handler"></a>
+                <!-- radio menu item -->
+                <a data-ng-repeat="item in subm.content track by $index" data-radio-menuitem data-ng-if="subm.type === 'radio'" subm="subm"></a>
               </li>
             </ul>
           </li>
