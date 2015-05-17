@@ -9,12 +9,11 @@
         /*
          * Angular UI modules
          */
-        
         'ui.router', 'ui.bootstrap',
         /*
          * Our reusable cross app code modules
          */
-        'blocks.exception', 'blocks.logger', 'blocks.router',
+        'blocks.exception', 'blocks.logger', 'blocks.router', 'blocks.storage',
         /*
          * 3rd Party modules
          */

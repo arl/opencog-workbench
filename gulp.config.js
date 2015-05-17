@@ -37,7 +37,8 @@ module.exports = function() {
 		  bower.dir + "extras.angular.plus/ngplus-overlay.js",
 		  bower.dir + "underscore/underscore-min.js",
 		  bower.dir + "angular-dragdrop/src/angular-dragdrop.min.js",
-		  bower.dir + "jquery.terminal/js/jquery.terminal-min.js",		  
+		  bower.dir + "ngstorage/ngStorage.min.js",
+		  bower.dir + "jquery.terminal/js/jquery.terminal-min.js",            
 		  clientContent + "lib/js/ui-bootstrap-tpls-0.12.1.min.js",
 		  clientContent + "lib/js/angular-underscore.js"
 		],
