@@ -7,7 +7,7 @@
 
 
         /* @ngInject */
-        function jqueryTerminal(appState) {
+        function jqueryTerminal(atomviewerStorage) {
 
             return {
                 restrict: 'E',
@@ -35,7 +35,7 @@
 
                 // TEST COMMAND TO TOGGLE THE LEFT BAR
                 else if (command.toUpperCase()=="LEFT") {
-                    appState.setLeftSideBarVisible(!appState.getLeftSideBarVisible());
+                    atomviewerStorage.setValue('showLeftSidebar', !atomviewerStorage.getValue('showLeftSidebar'));
                     
                     // this is done here for the test, but it has to be located after all the else-if blocks
                     angular.element(term).scope().$apply();

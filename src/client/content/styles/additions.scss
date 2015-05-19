@@ -12,7 +12,6 @@ body {
 /**************/
 /*   topnav   */
 /**************/
-
 #mainnav {
   margin-bottom: 0px;
   border-bottom-width: 0px;
@@ -57,6 +56,7 @@ body {
 .dropdown-header {
   color: #777 !important;
 }
+
 /**************/
 /*    tabs    */
 /**************/
@@ -76,13 +76,21 @@ body {
   margin-top: 4px;
 }
 
-.not-allowed {
-  cursor: not-allowed;
-}
-
 .nav > li > a {
   &:hover, &:focus {
     background-color: #8C97A0;  
   }
 }
+
+/* tab close button */
+tab-heading a {
+  color: rgb(255, 112, 112);
+  &:hover {
+    color: rgb(247, 5, 5);
+  }
+}
+.not-allowed {
+  cursor: not-allowed;
+}
+
 

@@ -6,8 +6,9 @@
         .run(appRun);
 
     /* @ngInject */
-    function appRun(menuhelper, atomviewerConstants, appState) {
+    function appRun(menuhelper, atomviewerConstants, atomviewerStorage) {
         var moduleConstants = atomviewerConstants;
+        var componentStorage = atomviewerStorage;
 
         // define our component menus
         var menus = [
@@ -56,12 +57,13 @@
                         id: 'left-sidebar',
                         type: 'checkbox',
                         content: 'Left Sidebar',
-                        model: appState.getLeftSideBarVisible()
+                        model: componentStorage.getValue('showLeftSidebar')
                     },
                     {
                         id: 'right-sidebar',
                         type: 'checkbox',
-                        content: 'Right Sidebar'
+                        content: 'Right Sidebar',
+                        model: componentStorage.getValue('showRightSidebar')                        
                     },
                     {
                         type: 'divider'

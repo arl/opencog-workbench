@@ -12,12 +12,12 @@
             'name': 'Dummy',
             'id': 'dummy',
             'faIcon': 'fa-wrench'            
-        })
-        .config(moduleConfig);
+        });
+        // .config(moduleConfig);
 
         /* @ngInject */
-        function moduleConfig(componentStorageProvider, moduleConstants) {
-            componentStorageProvider.setComponent(moduleConstants.name);
-        };
+        // function moduleConfig(componentStorageProvider, moduleConstants) {
+        //     componentStorageProvider.setComponent(moduleConstants.name);
+        // };
 
 })();

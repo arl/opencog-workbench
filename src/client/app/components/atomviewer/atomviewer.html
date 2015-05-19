@@ -2,7 +2,7 @@
   <div class="row" id="wrapper">
 
     <!-- LEFT MENU -->
-    <div class="col-xs-3" id="leftMenu" ng-show="vm.appState.getLeftSideBarVisible()">
+    <div class="col-xs-3" id="leftMenu" ng-show="vm.storage.getValue('showLeftSidebar')">
       <div id="leftMenuInner">
 
         <!-- CONNECT -->
@@ -112,7 +112,7 @@
     </div><!-- !#mainContent -->
 
     <!-- RIGHT MENU -->
-    <div class="col-sm-2" id="rightMenu">
+    <div class="col-sm-2" id="rightMenu" ng-show="vm.storage.getValue('showRightSidebar')">
 
       <!-- DETAILS -->
       <div class="accordion-group" >

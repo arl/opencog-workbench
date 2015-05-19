@@ -6,7 +6,7 @@
         .controller('Atomviewer', Atomviewer);
 
     /* @ngInject  */
-    function Atomviewer($scope, atomviewerConstants, menuhelper, appState) {
+    function Atomviewer($scope, menuhelper, atomviewerConstants, atomviewerStorage) {
 
         /*jshint validthis: true */
         var vm = this;
@@ -17,23 +17,25 @@
         vm.title = atomviewerConstants.name;
         vm.infos = ['nothing for now..., click on a menu for example'];
 
-        // get the appstate service
-        vm.appState = appState;
-
-        /* 
-        orignal val coming from appState
-        copied into the menu declaration (subm.model)
-        */
+        // get the component storage
+        vm.storage = atomviewerStorage;
 
         // array of deregistration functions returned by $watch
         var arrDeregister = [];
         var dereg = null;
-        // bind appState values to corresponding menu items
-        dereg = $scope.$watch(vm.appState.getLeftSideBarVisible, function(newval) {
-            menuhelper.setMenuModel('/atomviewer/view/left-sidebar', newval);
-        });
+
+        // bind menu items to stored values
+        ///////////////////////////////////
+        dereg = $scope.$watch(
+            function() { return atomviewerStorage.getValue('showLeftSidebar'); },
+            function(newval) { menuhelper.setMenuModel('/atomviewer/view/left-sidebar', newval); });
         arrDeregister.push(dereg);
-        
+
+        dereg = $scope.$watch(
+            function() { return atomviewerStorage.getValue('showRightSidebar'); },
+            function(newval) { menuhelper.setMenuModel('/atomviewer/view/right-sidebar', newval); });
+        arrDeregister.push(dereg);
+
         vm.showImport = false;
         vm.showExport = false;
         vm.showAbout = false;
@@ -68,11 +70,10 @@
                 vm.infos.push('Main view changed to :' + views[val]);
             });
             menuhelper.setMenuHandler('/atomviewer/view/left-sidebar', function(newval) {
-                appState.setLeftSideBarVisible(newval);
+                atomviewerStorage.setValue('showLeftSidebar', newval);
             });
             menuhelper.setMenuHandler('/atomviewer/view/right-sidebar', function(newval) {
-                vm.infos.push('Right Sidebar is :' + (newval ? 'shown' : 'hidden'));
-                // menuhelper.setMenuModel('/atomviewer/view/left-sidebar', newval);
+                atomviewerStorage.setValue('showRightSidebar', newval);
             });
             menuhelper.setMenuHandler('/atomviewer/view/atomdetails', function(val) {
                 vm.showAtomDetails = !vm.showAtomDetails;
@@ -106,7 +107,6 @@
 
                 // unregister from all $watch listeners
                 angular.forEach(arrDeregister, function(fun) {
-                    debugger;
                     fun();
                 });
             });
