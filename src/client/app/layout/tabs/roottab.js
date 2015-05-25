@@ -17,11 +17,6 @@
 
         function activate() {
 
-            // // redirect to dashboard if trying to load root url
-            // if ($state.current.name === 'tab') {
-            //     $state.go('.dashboard');
-            // }
-
             // monitor state changes to update tabs
             $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
                 if (!!$state.current.sticky) {
