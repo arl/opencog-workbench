@@ -48,8 +48,7 @@
         ///////////////
 
         /**
-         * reset (clear) state
-         *
+         * reset/clear state
          * @param  {String} stateName name of state to reset
          */
         function resetState(stateName) {
@@ -57,9 +56,9 @@
         }
 
         /**
-         * [getMainRoutes return the 'main navigation' states, i.e the workbench module states]
-         *
-         * @return {[type]} [description]
+         * return the 'main navigation' routes, that are also the main app states,
+         *     i.e the workbench components states
+         * @return {Array} [description]
          */
         function getMainRoutes() {
 
@@ -80,6 +79,13 @@
             return mainRoutes;
         }
 
+        /**
+         * configure routes for a workbench component
+         *
+         * each component should register its routes by calling routehelper.configureRoutes
+         * a good moment to do so is to do it in the component's module run function
+         * @param  {Array} routes component routes to configure
+         */
         function configureRoutes(routes) {
             routes.forEach(function(route) {
                 route.config.resolve =

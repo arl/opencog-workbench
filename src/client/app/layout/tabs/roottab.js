@@ -8,6 +8,16 @@
     /**
      * controller of our root state ('tab' state : '/')
      */
+
+    
+
+/**
+ * @ngdoc controller
+ * @name app.RootTab
+ * @description
+ * This is a sample function
+ * @param {number} x - any number, don't matter which
+ */
     /* @ngInject */
     function RootTab($scope, $state, TabMgr) {
         /*jshint validthis: true */

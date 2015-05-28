@@ -75,3 +75,4 @@ packages
 ############################
 build
 src/client/content/.tmpcss/
+doc

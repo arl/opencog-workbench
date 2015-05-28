@@ -6,12 +6,7 @@
         .constant('dummyConstants', {
             'name': 'Dummy',
             'id': 'dummy',
-            'faIcon': 'fa-wrench'            
-        })
-        .constant('moduleConstants', {
-            'name': 'Dummy',
-            'id': 'dummy',
-            'faIcon': 'fa-wrench'            
+            'faIcon': 'fa-wrench'
         });
         // .config(moduleConfig);
 

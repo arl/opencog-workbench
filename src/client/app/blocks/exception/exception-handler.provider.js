@@ -1,5 +1,4 @@
 // Include in index.html so that app level exceptions are handled.
-// Exclude from testRunner.html which should run exactly what it wants to run
 (function() {
     'use strict';
 
@@ -8,9 +7,8 @@
         .provider('exceptionHandler', exceptionHandlerProvider)
         .config(config);
 
-    /**
-     * Must configure the exception handling
-     * @return {[type]}
+    /**1
+     * configure exception handling output
      */
     function exceptionHandlerProvider() {
         /* jshint validthis:true */
@@ -27,15 +25,14 @@
         };
     }
 
-    config.$inject = ['$provide'];
+    // config.$inject = ['$provide'];
 
     /**
      * Configure by setting an optional string value for appErrorPrefix.
      * Accessible via config.appErrorPrefix (via config value).
-     * @param  {[type]} $provide
-     * @return {[type]}
-     * @ngInject
+     * @param  {Object} $provide
      */
+    /* @ngInject */
     function config($provide) {
         $provide.decorator('$exceptionHandler', extendExceptionHandler);
     }

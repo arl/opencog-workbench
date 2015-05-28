@@ -1,0 +1,9 @@
+@ngdoc overview
+@name Overview
+@description
+
+# This documentation is divided in 2 sections : 
+## [Workbench API documentation](./workbench/)
+This section documents the workbench API itself
+## Example module documentation
+

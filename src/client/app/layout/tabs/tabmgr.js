@@ -50,9 +50,10 @@
          */
         function openTab(state) {
             if (isTabPresent(state)) {
+                // as tab exists already, we just activate its tab
                 setActiveTab(state);
             } else {
-                // as we now have more than one tab, anyone can be closed
+                // add a nwe tab
                 tabs.push({'state' : state, 'active' : true});
                 updateTabClosing();
             }

@@ -30,6 +30,11 @@
                         model: true // checkbox default value
                     },
 
+                    // divider menu item
+                    {
+                        type: 'divider'
+                    },
+
                     // header menu item
                     {
                         type: 'header',

@@ -5,6 +5,13 @@
         .module('blocks.menu')
         .factory('menuhelper', menuhelper);
 
+    /**
+     * @ngdoc service
+     * @name workbench.menu:menuhelper
+     * @description
+     * Helper service for component menu creation and handling
+     */
+
     /* @ngInject */
     function menuhelper(_) {
 
@@ -22,11 +29,66 @@
         ///////////////
 
         /**
-         * configure Menus for a workbench component
-         * @param  {String} component component which menu is being configured
-         *                            (should be the same as title of the title element set in config.route.js
-         * @param  {Array} menus      menu description
-         */
+         * @ngdoc method
+         * @name configureMenus
+         * @methodOf workbench.menu:menuhelper
+         * @kind function
+         *
+         * @description
+         * Describe the menus for a workbench component
+         *
+         * ## Syntax highlighting
+         * When combined with [highlight.js][] this starts looking as a kind of IDE :-)
+         * HTML:
+         * <pre>
+        // define our component menus
+        var menus = [
+            {
+                id: 'examplemenu',
+                title: 'Example Items',
+                items: [
+                    // simple menu item with handler
+                    {   
+                        id: 'simpleitem',
+                        type: 'simple',
+                        content: 'Dummy'
+                    },
+
+                    //  checkbox menu item
+                    {
+                        id: 'checkboxitem',
+                        type: 'checkbox',
+                        content: 'Dummy Check',
+                        model: true // checkbox default value
+                    },
+
+                    // divider menu item
+                    {
+                        type: 'divider'
+                    },
+
+                    // header menu item
+                    {
+                        type: 'header',
+                        content: 'Radio'
+                    },
+
+                    // radio menu item
+                    {
+                        id: 'radioitem',
+                        type: 'radio',
+                        content: [
+                            'Item 0', 'Item 1', 'Item 2', 'Item 3'
+                        ],
+                        model: 2 // default selection : content[2] -> 'Item 2'
+                    }
+                ]
+            }
+        ];
+         * </pre>
+         * @param {string} component name of the component to which menus will be linked
+         * @param {Array} menus menu configuration array
+         */        
         function configureMenus(component, menus) {
             allMenus.push({'component':component, 'menus': menus});
         }

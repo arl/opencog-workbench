@@ -5,7 +5,7 @@ module.exports = function() {
     var client = './src/client/';
     var clientApp = client + 'app/';
     var clientContent = client + 'content/';
-	var imagesDir = clientContent + "images/";
+		var imagesDir = clientContent + "images/";
 
     var report = './report/';
     var build = './build/';
@@ -25,7 +25,7 @@ module.exports = function() {
 		/* javascript */
 		vendorjs: [
 		  bower.dir + "jquery/dist/jquery.min.js",
-		  bower.dir + "jquery/jquery-ui.min.js",
+		  bower.dir + "jquery-ui/jquery-ui.min.js",
 		  bower.dir + "angular/angular.min.js",
 		  bower.dir + "angular-animate/angular-animate.min.js",
 		  bower.dir + "angular-sanitize/angular-sanitize.min.js",
@@ -43,7 +43,6 @@ module.exports = function() {
 		  clientContent + "lib/js/angular-underscore.js"
 		],
 		js: [
-		  // TODO : this doesn't really seem necessary, it's included by the next rule no?
 		  clientApp + "**/*module*.js",
 		  clientApp + "**/*.js"
 		],
@@ -75,7 +74,39 @@ module.exports = function() {
 		images: imagesDir + "**/*",
 		imagesDir : imagesDir,
 		report: report,
-		build: build
+		build: build,
+
+		/* doc generation */
+		doc: {
+			output: './doc',
+			title: 'Workbench Doc',
+			startPage: '/overview',
+			sections : {
+				'overview' : {
+					title: 'Overview', 
+					api: false,
+					glob: [
+						client + 'app/*.ngdoc'
+					]
+				},
+				'workbench': {
+					title: 'API Documentation',
+					api: true,
+					glob: [
+						clientApp + '**/*.js',
+						clientApp + "**/*module*.js",
+						'!' + clientApp + 'components/**/*.*'
+						]
+				},				
+				'exampleComponent' : {
+					title: 'Example Component', 
+					api: false,
+					glob: [
+						clientApp + 'components/dummy/**/*.*'
+					]
+				}
+			}
+		}
   }
 
   return config;
